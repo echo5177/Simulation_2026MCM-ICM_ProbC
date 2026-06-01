@@ -24,18 +24,31 @@
 \usepackage{subcaption}
 \usepackage{enumitem}
 \usepackage{tabularx}
+\usepackage{etoolbox}
+\usepackage{titlesec}
 \usepackage[hidelinks]{hyperref}
 
 \lhead{Team \Team}
 \rhead{}
 \cfoot{}
 \setlength{\headheight}{14.5pt}
-\setlength{\parskip}{0.35em}
+\setlength{\parskip}{0.18em}
 \setlength{\parindent}{1.2em}
 \setlist[itemize]{leftmargin=1.5em,itemsep=0.1em,topsep=0.2em}
 \setlist[enumerate]{leftmargin=1.7em,itemsep=0.1em,topsep=0.2em}
+\setlength{\textfloatsep}{0.55em plus 0.2em minus 0.2em}
+\setlength{\floatsep}{0.45em plus 0.2em minus 0.2em}
+\setlength{\intextsep}{0.45em plus 0.2em minus 0.2em}
+\setlength{\abovecaptionskip}{2pt}
+\setlength{\belowcaptionskip}{0pt}
+\renewcommand{\arraystretch}{0.9}
+\AtBeginEnvironment{tabular}{\small}
+\AtBeginEnvironment{tabularx}{\small}
 
-\captionsetup{font=small,labelfont=bf}
+\captionsetup{font=footnotesize,labelfont=bf,skip=2pt}
+\titlespacing*{\section}{0pt}{0.8ex plus 0.2ex minus 0.1ex}{0.4ex}
+\titlespacing*{\subsection}{0pt}{0.6ex plus 0.2ex minus 0.1ex}{0.25ex}
+\titlespacing*{\subsubsection}{0pt}{0.45ex plus 0.1ex minus 0.1ex}{0.2ex}
 
 \newtheorem{definition}{Definition}
 \newtheorem{assumption}{Assumption}
@@ -58,6 +71,10 @@
 \Large \textbf{Data With the Stars: Inferring Hidden Fan Support Under Voting-Rule Constraints}
 \end{center}
 
+\begin{center}
+\large \textbf{Summary}
+\end{center}
+
 \noindent
 Dancing with the Stars combines expert evaluation with audience voting, but the fan-vote component is secret. This makes Problem C fundamentally different from a direct prediction problem: the observed eliminations do not reveal a unique set of fan votes. Our solution therefore treats fan support as a latent variable. Instead of pretending to know exact vote totals, we reconstruct weekly competitions, translate observed eliminations into feasible fan-support constraints, estimate maximum-entropy fan-share distributions, and use those estimates to compare voting rules and propose a producer-facing rule.
 
@@ -68,13 +85,22 @@ Using the official data set of 421 contestants across 34 seasons, we rebuilt 2,7
 Our counterfactual simulation shows that rank and percent rules disagree in 26.4\% of modeled elimination weeks, while estimated fan support changes the judge-only bottom set in 63.6\% of modeled weeks. We also examine controversial contestants, professional-dancer and celebrity-category effects, and the institutional role of bottom-two judge saves. These results support a hybrid recommendation: use a percent-based combined score for transparency, but introduce a gray-zone judge save when the bottom-two combined margin is small. In our simulation, the gray-zone trigger activates in 61.7\% of modeled elimination weeks, making close calls explicit rather than hiding them inside opaque vote totals.
 
 \noindent
-For producers, the recommendation is simple: keep fan influence visible, avoid overclaiming exact fan support, and reserve judge discretion for statistically fragile bottom-two cases. The proposed system is more explainable than a pure rank system and more stable than treating a tiny combined-score gap as decisive.
+The baseline tests make the institutional stakes clearer. A judge-only rule matches the observed eliminated set in only 36.4\% of modeled weeks, while a rank-rule counterfactual using the same inferred fan support matches 73.6\%. The largest fan-rescue gaps reach 15 rank positions, showing that viewer support can dramatically offset weak judge placement. We also find that many controversial outcomes are not random noise: they arise when expert rank and feasible audience rank point in opposite directions for several consecutive weeks.
+
+\noindent
+For producers, the recommendation is simple: keep fan influence visible, avoid overclaiming exact fan support, and reserve judge discretion for statistically fragile bottom-two cases. The proposed system is more explainable than a pure rank system and more stable than treating a tiny combined-score gap as decisive. It also creates a public narrative that can be defended: ordinary weeks are decided by transparent percentages, while close calls are explicitly labeled as close calls and resolved by a limited judge-save procedure.
+
+\noindent
+The paper's broader lesson is that hidden public votes should be modeled as constraints, not guessed labels. This preserves mathematical honesty, gives producers actionable diagnostics, and avoids recommending a voting system that looks precise only because it ignores the uncertainty in the fan-vote component.
 
 \clearpage
 \pagestyle{fancy}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \rhead{Page \thepage\ }
+
+\tableofcontents
+\clearpage
 
 \section{Introduction}
 
@@ -103,9 +129,9 @@ we use the estimated support profiles for counterfactual simulations and a
 producer-facing voting recommendation. Figure~\ref{fig:workflow} summarizes the
 complete workflow.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{fig_1_overall_research_workflow.png}
+  \includegraphics[width=0.76\linewidth]{fig_1_overall_research_workflow.png}
   \caption{Overall research workflow. Fan support is treated as a hidden
   variable constrained by observed eliminations rather than as an observed
   training label.}
@@ -141,9 +167,36 @@ a consistency check, but the design decision for producers depends on how rules
 behave when the bottom-two margin is small and hidden fan support is
 non-identifiable.
 
+\subsection{Evaluation criteria}
+
+Because the problem is about voting-system design rather than only historical
+prediction, we evaluate candidate rules with four criteria. These criteria
+also guide the recommendation section, where mathematical performance must be
+translated into a rule that producers can explain on air.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Voting-system design criteria used throughout the paper.}
+  \label{tab:criteria}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Criterion & Mathematical meaning & Producer-facing meaning \\
+    \midrule
+    Reconstructability & The rule can be simulated from official judge scores and
+    a feasible fan-support set. & The outcome can be audited after the show. \\
+    Transparency & Judge and fan components are measured on comparable scales. &
+    Viewers can understand why a contestant is at risk. \\
+    Fan influence & The public component can change the judge-only bottom set. &
+    Voting feels meaningful rather than symbolic. \\
+    Close-call stability & Tiny bottom-two gaps are not treated as certain. &
+    Controversial eliminations have a defensible procedure. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
 \section{Notation and Assumptions}
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Core notation used in the modeling workflow.}
   \label{tab:notation}
@@ -215,7 +268,29 @@ competition should not be interpreted as poor performance by an active
 contestant. This distinction is important because the fan-vote constraints are
 constructed week by week from the active set.
 
-\begin{table}[H]
+\begin{table}[!htbp]
+  \centering
+  \caption{Data-processing decisions used before modeling.}
+  \label{tab:data-decisions}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Issue & Treatment & Reason \\
+    \midrule
+    Wide weekly score columns & Convert to season-week-contestant panel. &
+    Voting rules operate on weekly active sets, not full-season rows. \\
+    Missing fourth-judge cells & Use available judge scores only. & Some weeks
+    have fewer judges; treating missing cells as zero would bias scores. \\
+    Post-elimination zeros & Exclude from active set. & A zero after exit is
+    absence from the contest, not a low performance score. \\
+    Multi-elimination weeks & Keep all eliminated contestants in $E_{s,t}$. &
+    These weeks impose multiple eliminated-survivor inequalities. \\
+    No-elimination weeks & Use for audit, not fan inference. & They do not
+    identify a bottom set. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
   \centering
   \caption{Core data audit metrics used by the modeling workflow.}
   \label{tab:data-audit-core}
@@ -254,7 +329,7 @@ no-elimination week. This reconstruction produced 2,777 active
 contestant-week rows and 261 modeled elimination weeks used by the fan-support
 inference model.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
   \begin{subfigure}{0.49\linewidth}
     \centering
@@ -284,9 +359,9 @@ irregularities in Figure~\ref{fig:active-heatmap}. The heatmap shows the
 expected staircase pattern: seasons begin with larger casts and contract over
 time, while a small number of weeks remain flat because no elimination occurs.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.74\linewidth]{fig_13_active_set_heatmap.png}
+  \includegraphics[width=0.58\linewidth]{fig_13_active_set_heatmap.png}
   \caption{Reconstructed active contestants by season and week. The heatmap
   verifies that the panel transformation preserves the shrinking competition
   structure needed for week-level voting analysis.}
@@ -306,9 +381,9 @@ formalize three mechanisms: a rank rule, a percent rule, and a bottom-two
 judge-save rule. Figure~\ref{fig:voting-mechanism} gives the conceptual
 comparison.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{fig_2_voting_rule_mechanism.png}
+  \includegraphics[width=0.72\linewidth]{fig_2_voting_rule_mechanism.png}
   \caption{Mechanism comparison for rank, percent, and bottom-two judge-save
   systems. The fan component is hidden and must be inferred from constraints.}
   \label{fig:voting-mechanism}
@@ -339,6 +414,23 @@ combined score no larger than every survivor:
   \qquad e\in E_{s,t},\; j\in S_{s,t}.
 \]
 These inequalities define a feasible fan-support polytope.
+Equivalently, for each eliminated-survivor pair $m=(e,j)$,
+\[
+  F_e-F_j \le P^J_j-P^J_e .
+\]
+Stacking all such pairwise constraints gives
+\[
+  AF\le b,\qquad \mathbf{1}^{\top}F=1,\qquad F\ge 0,
+\]
+where one row of $A$ has a $+1$ in the eliminated contestant's column and a
+$-1$ in the survivor's column. Thus the inverse voting problem is a convex
+feasibility problem. For a week with $n$ active contestants and $k$
+eliminations, the number of pairwise rule constraints is
+\[
+  k(n-k).
+\]
+This is why multi-elimination weeks carry more information than a single
+elimination with the same active set.
 
 Under a rank rule, the judge score and fan support are converted into ranks:
 \[
@@ -355,7 +447,7 @@ choose which contestant to save. Because detailed judge-save votes are not
 fully observed in the data, we use it as a policy simulation rather than a
 direct historical reconstruction.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Voting-rule formalization used in the simulations.}
   \label{tab:voting-rules}
@@ -387,17 +479,41 @@ For each modeled elimination week, we build the percent-rule linear constraints
 from the observed eliminated set. We then solve two linear programs for each
 contestant $i$:
 \[
-  \min F_i \quad\text{and}\quad \max F_i
+  \underline F_i=
+  \min_{F}\{F_i:AF\le b,\ \mathbf{1}^{\top}F=1,\ F\ge0\},
+  \qquad
+  \overline F_i=
+  \max_{F}\{F_i:AF\le b,\ \mathbf{1}^{\top}F=1,\ F\ge0\}
 \]
-subject to the simplex constraints and the elimination inequalities above. The
-result is an interval $[\underline F_i,\overline F_i]$ that describes how much
-fan support contestant $i$ could have had while still being consistent with the
-observed elimination. We used SciPy's linear programming solver for this step
-\cite{scipy2020}.
+The result is an interval $[\underline F_i,\overline F_i]$ that describes how
+much fan support contestant $i$ could have had while still being consistent
+with the observed elimination. We used SciPy's linear programming solver for
+this step \cite{scipy2020}. Across the 261 modeled weeks, the workflow solves
+2,252 pairwise elimination constraints, with a maximum of 30 constraints in a
+single week.
 
-\begin{figure}[H]
+\begin{table}[!htbp]
   \centering
-  \includegraphics[width=0.85\linewidth]{fig_5_fan_vote_feasible_intervals.png}
+  \caption{Constraint-system diagnostics for the fan-support inverse problem.}
+  \label{tab:constraint-summary}
+  \begin{tabular}{lrl}
+    \toprule
+    Diagnostic & Value & Unit \\
+    \midrule
+    Modeled elimination weeks & 261 & season-week events \\
+    Mean active contestants & 8.62 & contestants \\
+    Median active contestants & 9.00 & contestants \\
+    Total linear inequalities & 2,252 & constraints \\
+    Mean inequalities per week & 8.63 & constraints \\
+    Maximum inequalities in a week & 30 & constraints \\
+    Median bottom-two margin & $7.53\times10^{-6}$ & combined share \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.58\linewidth]{fig_5_fan_vote_feasible_intervals.png}
   \caption{Example of feasible fan-support intervals for a high-uncertainty
   season-week. The red points show maximum-entropy estimates inside wide
   feasible intervals.}
@@ -418,7 +534,22 @@ elimination constraints require one. This follows the maximum-entropy principle
 introduced by Shannon \cite{shannon1948} and is implemented as a convex
 optimization problem using CVXPY \cite{diamond2016}.
 
-\begin{table}[H]
+The Lagrangian form also shows why the estimate is conservative. With
+nonnegative multipliers $\mu$ for $AF\le b$ and scalar $\lambda$ for
+$\mathbf{1}^{\top}F=1$, the stationarity condition is
+\[
+  -\log F_i-1-\lambda-\sum_m \mu_m A_{m,i}=0,
+\]
+so any interior solution has
+\[
+  F_i=\exp\!\left(-1-\lambda-\sum_m \mu_m A_{m,i}\right).
+\]
+Only active elimination constraints tilt the profile away from a nearly
+uniform distribution. When the observed outcome imposes weak restrictions, the
+maximum-entropy solution stays diffuse rather than inventing unsupported
+public-vote spikes.
+
+\begin{table}[!htbp]
   \centering
   \caption{Fan-support inference algorithm used for each modeled elimination week.}
   \label{tab:algorithm}
@@ -455,9 +586,9 @@ uncertainty is itself a substantive result. It warns against overinterpreting
 any one estimated fan-support profile and motivates a voting rule that handles
 close bottom-two cases explicitly.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.82\linewidth]{fig_6_fan_vote_uncertainty_heatmap.png}
+  \includegraphics[width=0.52\linewidth]{fig_6_fan_vote_uncertainty_heatmap.png}
   \caption{Fan-support uncertainty by season and week. Wide feasible intervals
   indicate that many latent fan-vote profiles can produce the same observed
   elimination.}
@@ -474,7 +605,7 @@ constraints? The answer is yes for all 261 modeled elimination weeks. This
 is a consistency check showing that the reconstructed data, constraints, and
 optimization pipeline agree with the observed historical record.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Validation and uncertainty metrics.}
   \label{tab:validation}
@@ -497,9 +628,9 @@ elimination may be consistent with a wide range of public-vote configurations.
 This strengthens the case for comparing voting systems through robust
 counterfactual behavior rather than through a single supposed true vote count.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{fig_7_validation_dashboard.png}
+  \includegraphics[width=0.64\linewidth]{fig_7_validation_dashboard.png}
   \caption{Validation dashboard. The model reproduces the observed modeled
   eliminations, while the margin and interval-width panels show that close and
   uncertain weeks are common.}
@@ -515,7 +646,7 @@ than predictive accuracy. We therefore compare it with three simpler baselines:
 a rank-rule counterfactual using the same inferred fan support, a judge-only
 bottom set, and a fan-only bottom set.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Baseline and counterfactual rule comparison over 261 modeled weeks.}
   \label{tab:baseline}
@@ -539,14 +670,58 @@ support is not a small perturbation around the judge leaderboard. The
 rank-rule counterfactual matches 73.6\% of historical eliminated sets, leaving
 more than one quarter of weeks where the aggregation rule itself matters.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.74\linewidth]{fig_14_baseline_comparison.png}
+  \includegraphics[width=0.58\linewidth]{fig_14_baseline_comparison.png}
   \caption{Baseline and counterfactual exact-match rates. The percent model is
   a reconstruction benchmark, while the other bars show how much is lost when
   the same data are forced through simpler voting assumptions.}
   \label{fig:baseline}
 \end{figure}
+
+For a candidate rule $r$, we compute exact-set match and observed-set overlap as
+\[
+  M_r=\frac{1}{T}\sum_{t=1}^{T}\mathbf{1}\{\widehat E_{r,t}=E_t\},
+  \qquad
+  O_r=\frac{1}{T}\sum_{t=1}^{T}\frac{|\widehat E_{r,t}\cap E_t|}{|E_t|}.
+\]
+The overlap score is useful for multi-elimination weeks, where a rule can get
+one eliminated contestant right but not the full eliminated set.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Rule diagnostics by elimination-event type.}
+  \label{tab:event-type}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Event type & Weeks & Mean active & Constraints & Rule diff. & Fan override \\
+    \midrule
+    Single elimination & 221 & 8.50 & 7.50 & 25.3\% & 60.2\% \\
+    Multi elimination & 40 & 9.33 & 14.88 & 32.5\% & 82.5\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Multi-elimination weeks are more informative because each eliminated
+contestant is compared with every survivor. They also show stronger fan
+override behavior, suggesting that group-elimination weeks are particularly
+sensitive to the hidden audience component.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Rule diagnostics by season era.}
+  \label{tab:era-summary}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Era & Weeks & Mean active & Rule diff. & Fan override & Mean width \\
+    \midrule
+    S1--S10 & 78 & 7.74 & 26.9\% & 57.7\% & 0.858 \\
+    S11--S20 & 81 & 8.37 & 22.2\% & 61.7\% & 0.869 \\
+    S21--S30 & 70 & 9.21 & 34.3\% & 67.1\% & 0.853 \\
+    S31--S34 & 32 & 10.12 & 18.8\% & 75.0\% & 0.877 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \section{Rank vs. Percent Counterfactual Analysis}
 
@@ -562,7 +737,7 @@ interpretations. The first measures institutional sensitivity to rule choice.
 The second measures how often the public component is strong enough to change
 what would have happened under judges alone.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Counterfactual rule-comparison metrics.}
   \label{tab:rule-comparison}
@@ -584,9 +759,9 @@ which means that voting-rule design is not a minor technicality. A rule change
 can alter which contestants are at risk even when the same hidden support
 estimate is used.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.76\linewidth]{fig_8_rank_percent_difference_heatmap.png}
+  \includegraphics[width=0.60\linewidth]{fig_8_rank_percent_difference_heatmap.png}
   \caption{Season-week map of rank-versus-percent differences. Dark cells mark
   modeled weeks where the two rules select different eliminated sets.}
   \label{fig:rank-percent}
@@ -602,7 +777,7 @@ diagnostic because it is a multi-elimination week: the percent rule reproduces
 Ashley Hamiliton and Macy Gray as the eliminated pair, while the rank rule
 would instead place Chuck Liddell and Debi Mazar at the bottom.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Representative rank-versus-percent switch cases.}
   \label{tab:switch-cases}
@@ -635,7 +810,7 @@ well with the inferred audience profile. The largest estimated rescue case is
 Vinny Guadagnino in Season 31, Week 1, whose judge rank was 16 while his
 maximum-entropy fan rank was 1.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Largest estimated fan-rescue contestant-weeks.}
   \label{tab:fan-rescue}
@@ -652,13 +827,38 @@ maximum-entropy fan rank was 1.
   \end{tabular}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.76\linewidth]{fig_15_fan_rescue_cases.png}
+  \includegraphics[width=0.58\linewidth]{fig_15_fan_rescue_cases.png}
   \caption{Largest estimated fan-rescue gaps. Positive gaps show weeks where
   inferred audience support substantially offset weak judge ranking.}
   \label{fig:fan-rescue}
 \end{figure}
+
+\subsection{Case interpretation}
+
+The case tables are not decorative; they identify the weeks where a rule
+change would be visible to viewers. Season 9, Week 1 is the cleanest
+rank-versus-percent example. The percent reconstruction puts Ashley Hamiliton
+and Macy Gray at the bottom, matching the observed multi-elimination. The rank
+counterfactual instead moves Chuck Liddell and Debi Mazar into the eliminated
+set. Since the same judge scores and inferred fan profile are used, the
+difference comes from rank aggregation compressing score magnitudes into
+ordinal positions.
+
+The fan-rescue table shows the opposite phenomenon: audience support can
+protect contestants who are weak on the judge leaderboard. Vinny Guadagnino's
+Season 31 trajectory is a strong example. In Week 1 he is last by judge rank
+but first by the maximum-entropy fan estimate, a 15-rank gap; he remains active
+until Week 8. Cody Rigsby's Season 30 run is also revealing because a large
+rescue gap occurs early, yet the contestant ultimately reaches 3rd Place. These
+cases support a rule design in which the fan vote is not merely a tie-breaker.
+
+Finally, Joanna Krupa's Season 9 pattern shows that controversy can run in the
+other direction. Strong judge ranks combined with weaker estimated fan support
+create a risk of elimination that judges alone would not predict. A producer
+who wants to defend the show needs both types of diagnostics: fan-rescue cases
+and judge-favored but audience-weaker cases.
 
 \section{Controversial Contestants}
 
@@ -671,7 +871,7 @@ Billy Ray Cyrus, Bristol Palin, and Bobby Bones using a controversy index,
 where $R^J$ is judge rank and $R^F$ is the estimated fan rank. Large values
 indicate a large gap between expert evaluation and inferred public support.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Summary of selected controversial contestants.}
   \label{tab:controversy}
@@ -695,9 +895,9 @@ it does quantify the direction of the conflict: these contestants survived
 longer than judge rank alone would suggest because the feasible fan-support
 estimates consistently place them higher with viewers.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.86\linewidth]{fig_9_controversial_trajectories.png}
+  \includegraphics[width=0.66\linewidth]{fig_9_controversial_trajectories.png}
   \caption{Judge rank versus estimated fan rank for selected controversial
   contestants. Lower rank values are better.}
   \label{fig:controversy}
@@ -711,7 +911,7 @@ Table~\ref{tab:instability} ranks contestants by the maximum weekly gap between
 judge rank and estimated fan rank, requiring at least three modeled weeks so
 that a single anomalous week does not dominate the list.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Contestants with the largest judge-fan instability.}
   \label{tab:instability}
@@ -736,9 +936,9 @@ opposite pattern: strong judge ranks combined with weaker inferred fan support.
 Both patterns are important to producers because viewer complaints can arise
 from either side of the judge-audience divide.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.76\linewidth]{fig_16_contestant_instability.png}
+  \includegraphics[width=0.58\linewidth]{fig_16_contestant_instability.png}
   \caption{Contestants with the highest maximum judge-fan rank gap among those
   with at least three modeled weeks.}
   \label{fig:instability}
@@ -765,9 +965,27 @@ social media personalities and TV personalities have lower estimated fan-share
 coefficients in the fan-support model. These findings should be interpreted as
 association patterns, not as causal claims.
 
-\begin{figure}[H]
+\begin{table}[!htbp]
   \centering
-  \includegraphics[width=0.78\linewidth]{fig_11_effects_forest.png}
+  \caption{Selected exploratory effect estimates.}
+  \label{tab:selected-effects}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Effect & Estimate & Low & High & $p$-value \\
+    \midrule
+    Judge score: age & -0.0455 & -0.0497 & -0.0413 & $1.5\times10^{-91}$ \\
+    Fan support: age & -0.00051 & -0.00066 & -0.00036 & $3.0\times10^{-11}$ \\
+    Survival hazard: age & 0.0327 & 0.0244 & 0.0409 & $7.0\times10^{-15}$ \\
+    Judge score: athlete & -0.333 & -0.472 & -0.195 & $2.5\times10^{-6}$ \\
+    Judge score: model & -0.868 & -1.184 & -0.552 & $7.6\times10^{-8}$ \\
+    Fan support: TV personality & -0.0096 & -0.0149 & -0.0043 & $3.7\times10^{-4}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.62\linewidth]{fig_11_effects_forest.png}
   \caption{Largest coefficients from the exploratory judge-score, fan-support,
   and survival models. Coefficients summarize associations, not causal effects.}
   \label{fig:effects}
@@ -787,10 +1005,28 @@ than a threshold $\tau$, the lowest combined score is eliminated. If the margin
 is at or below $\tau$, the bottom two enter a judge-save decision. In our
 simulation, $\tau$ is set to 0.00354, the 25th percentile of positive modeled
 bottom-two combined-score margins.
+For quantile level $q$, the general threshold is
+\[
+  \tau_q=Q_q\{C^{\mathrm{pct}}_{(2),t}-C^{\mathrm{pct}}_{(1),t}:
+  C^{\mathrm{pct}}_{(2),t}>C^{\mathrm{pct}}_{(1),t}\},
+\]
+where $C^{\mathrm{pct}}_{(1),t}$ and $C^{\mathrm{pct}}_{(2),t}$ are the lowest
+and second-lowest combined percent scores in week $t$. The proposed decision
+rule is
+\[
+  \widehat E_t=
+  \begin{cases}
+    \arg\min_i C^{\mathrm{pct}}_{i,t}, & C^{\mathrm{pct}}_{(2),t}-C^{\mathrm{pct}}_{(1),t}>\tau_q,\\
+    \arg\min_{i\in B_t}J_{i,t}, & C^{\mathrm{pct}}_{(2),t}-C^{\mathrm{pct}}_{(1),t}\le\tau_q,
+  \end{cases}
+\]
+where $B_t$ is the bottom-two set. The second line approximates a judge save by
+keeping the stronger judge-scored contestant when the combined margin is too
+small to treat as decisive.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.82\linewidth]{fig_10_proposed_system_flowchart.png}
+  \includegraphics[width=0.68\linewidth]{fig_10_proposed_system_flowchart.png}
   \caption{Proposed Percent + Gray-Zone Judge Save system. The judge save is
   activated only when the bottom-two combined-score margin is small.}
   \label{fig:proposed-flow}
@@ -804,7 +1040,29 @@ Third, judge discretion is limited to close bottom-two cases, which preserves
 fan influence while giving producers a defensible way to manage fragile
 eliminations.
 
-\begin{table}[H]
+\begin{table}[!htbp]
+  \centering
+  \caption{Operational protocol for the proposed voting system.}
+  \label{tab:implementation}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Stage & Rule action & Audit output \\
+    \midrule
+    Score normalization & Convert judges' totals and fan votes to percentage
+    shares. & Published judge share and fan share after the voting window. \\
+    Combined ranking & Compute $C_i^{\mathrm{pct}}=P_i^J+F_i$. & Public bottom
+    two and combined percent margin. \\
+    Gray-zone test & Compare the bottom-two gap with $\tau_q$. & ``Clear
+    decision'' or ``close-call judge save'' label. \\
+    Judge save & If triggered, judges save one contestant from the bottom two. &
+    Recorded judge-save decision and reason. \\
+    Post-show audit & Archive scores, threshold, and decision path. & A
+    reproducible elimination record for producers. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
   \centering
   \caption{Simulation summary for the proposed gray-zone system.}
   \label{tab:proposed}
@@ -820,9 +1078,9 @@ eliminations.
   \end{tabular}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.72\linewidth]{fig_12_new_system_dashboard.png}
+  \includegraphics[width=0.56\linewidth]{fig_12_new_system_dashboard.png}
   \caption{Simulation dashboard for the proposed gray-zone system.}
   \label{fig:system-dashboard}
 \end{figure}
@@ -836,7 +1094,7 @@ Table~\ref{tab:threshold-sensitivity} is the pure percent reconstruction. It
 matches the historical modeled eliminations by construction, but it offers no
 special treatment for statistically fragile close calls.
 
-\begin{table}[H]
+\begin{table}[!htbp]
   \centering
   \caption{Sensitivity of the proposed system to the gray-zone threshold.}
   \label{tab:threshold-sensitivity}
@@ -864,9 +1122,9 @@ judge-weaker bottom-two contestant is already the percent-rule loser. We use
 the 25th percentile threshold as a middle setting: it captures close calls
 without turning the judge save into the default elimination mechanism.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.76\linewidth]{fig_17_threshold_sensitivity.png}
+  \includegraphics[width=0.60\linewidth]{fig_17_threshold_sensitivity.png}
   \caption{Gray-zone threshold sensitivity. The 25th percentile setting gives
   a moderate trigger rate while preserving a stable set of proposed changes
   relative to pure percent aggregation.}
@@ -907,9 +1165,9 @@ Percent + Gray-Zone Judge Save system.
   not as a replacement for fan influence.
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.44\linewidth]{memo_producer_decision_card.png}
+  \includegraphics[width=0.32\linewidth]{memo_producer_decision_card.png}
   \caption{Producer decision card summarizing the recommended voting system.}
   \label{fig:memo-card}
 \end{figure}
