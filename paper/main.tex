@@ -77,11 +77,258 @@ For producers, the recommendation is simple: keep fan influence visible, avoid o
 
 \section{Introduction}
 
+Dancing with the Stars (DWTS) is a useful voting-system case study because it
+combines two sources of evaluation that are deliberately different: judges
+score dance quality, while the public votes for contestants. The official
+Problem C data set reports contestant information, final outcomes, placements,
+and weekly judges' scores, but it does not reveal the fan votes. The hidden
+vote component creates the central modeling difficulty: a contestant can be
+eliminated under many different fan-vote profiles, and the same public outcome
+does not identify a unique distribution of fan support.
+
+This observation changes the problem from a direct prediction task into an
+inverse problem. A supervised model that ``predicts'' fan votes would be
+unverifiable because no fan-vote labels exist in the data. Instead, we use the
+known voting systems as constraints. For each week, the observed elimination is
+treated as evidence that the true fan support must have belonged to a feasible
+set. We then estimate a conservative point inside that set and use the
+uncertainty itself as part of the answer.
+
+Our approach has four linked layers. First, we reconstruct each weekly
+competition from the wide official data. Second, we formalize the rank,
+percent, and bottom-two judge-save mechanisms. Third, we estimate latent fan
+support using feasible-set constraints and a maximum-entropy principle. Fourth,
+we use the estimated support profiles for counterfactual simulations and a
+producer-facing voting recommendation. Figure~\ref{fig:workflow} summarizes the
+complete workflow.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{fig_1_overall_research_workflow.png}
+  \caption{Overall research workflow. Fan support is treated as a hidden
+  variable constrained by observed eliminations rather than as an observed
+  training label.}
+  \label{fig:workflow}
+\end{figure}
+
+The main contribution of the paper is not a claim that exact fan votes can be
+recovered. Rather, we show how to quantify what can be inferred from the
+publicly observable record, how different voting rules behave under the same
+latent support estimates, and how producers can design a rule that remains
+transparent when the bottom of the leaderboard is statistically fragile.
+
 \section{Data Audit and Preprocessing}
+
+\subsection{Raw data audit}
+
+The official CSV contains 421 contestant records, 53 columns, and 34 seasons.
+For each contestant, the data include identity variables, celebrity industry,
+home location, age during season, final result, placement, and four possible
+judge-score columns for each week from Week 1 to Week 11. The raw file is a wide
+table: one row is one contestant, while weekly scores appear in repeated
+columns. This layout is convenient for storage but not for modeling a weekly
+elimination system.
+
+We therefore first audited the data before fitting any model. Missing score
+cells can have several meanings: a fourth judge may not exist in a given week,
+a season may not include that week, or a contestant may already have been
+eliminated. In contrast, explicit zeros after a contestant leaves the
+competition should not be interpreted as poor performance by an active
+contestant. This distinction is important because the fan-vote constraints are
+constructed week by week from the active set.
+
+\begin{table}[H]
+  \centering
+  \caption{Core data audit metrics used by the modeling workflow.}
+  \label{tab:data-audit-core}
+  \begin{tabular}{lr}
+    \toprule
+    Metric & Value \\
+    \midrule
+    Contestant records & 421 \\
+    Raw columns & 53 \\
+    Seasons & 34 \\
+    Reconstructed panel rows & 4,631 \\
+    Active contestant-week rows & 2,777 \\
+    Reconstructed elimination-event rows & 343 \\
+    Single-elimination rows & 221 \\
+    Multi-elimination rows & 82 \\
+    No-elimination rows & 40 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Panel reconstruction}
+
+We converted the wide table into a long panel indexed by season, week, and
+contestant. For each contestant-week we computed the available judge count,
+judge total, judge mean, and an active-status flag. A contestant is active in a
+week if at least one judge score is present and the weekly judge total is
+positive. This rule avoids treating post-elimination zeros as active
+competition records.
+
+Next, we reconstructed the weekly active sets and observed elimination events.
+Let $A_{s,t}$ be the active set in season $s$ and week $t$. A contestant in
+$A_{s,t}\setminus A_{s,t+1}$ is recorded as eliminated after week $t$. If this
+set contains multiple contestants, the week is marked as a multi-elimination
+event. If the active set does not shrink, the week is marked as a
+no-elimination week. This reconstruction produced 2,777 active
+contestant-week rows and 261 modeled elimination weeks used by the fan-support
+inference model.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.88\linewidth]{fig_3_season_structure.png}
+  \caption{Contestants per season in the reconstructed data set. Season sizes
+  and valid competition weeks vary substantially, so all modeling is done on
+  reconstructed season-week active sets.}
+  \label{fig:season-structure}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\linewidth]{fig_4_judge_score_distribution.png}
+  \caption{Distribution of active weekly judge totals. These observed scores
+  provide the judge component of each voting rule.}
+  \label{fig:judge-distribution}
+\end{figure}
 
 \section{Voting Rule Formalization}
 
+The contest history involves several ways of combining judges and viewers. We
+formalize three mechanisms: a rank rule, a percent rule, and a bottom-two
+judge-save rule. Figure~\ref{fig:voting-mechanism} gives the conceptual
+comparison.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{fig_2_voting_rule_mechanism.png}
+  \caption{Mechanism comparison for rank, percent, and bottom-two judge-save
+  systems. The fan component is hidden and must be inferred from constraints.}
+  \label{fig:voting-mechanism}
+\end{figure}
+
+For season $s$, week $t$, and active contestant $i\in A_{s,t}$, let $J_i$ be
+the observed total judge score and let $F_i$ be the unknown fan-share variable.
+We normalize fan shares so that
+\[
+  F_i \ge 0,\qquad \sum_{i\in A_{s,t}}F_i=1.
+\]
+
+Under a percent rule, judge scores and fan shares are both expressed as shares.
+The normalized judge share is
+\[
+  P^J_i = \frac{J_i}{\sum_{k\in A_{s,t}}J_k},
+\]
+and the combined score is
+\[
+  C^{\mathrm{pct}}_i = P^J_i + F_i.
+\]
+The lowest combined score is eliminated. If the observed eliminated set for a
+week is $E_{s,t}$ and the survivors are
+$S_{s,t}=A_{s,t}\setminus E_{s,t}$, then every eliminated contestant must have
+combined score no larger than every survivor:
+\[
+  P^J_e+F_e \le P^J_j+F_j,
+  \qquad e\in E_{s,t},\; j\in S_{s,t}.
+\]
+These inequalities define a feasible fan-support polytope.
+
+Under a rank rule, the judge score and fan support are converted into ranks:
+\[
+  C^{\mathrm{rank}}_i = R^J_i + R^F_i,
+\]
+where larger $C^{\mathrm{rank}}_i$ means a worse combined rank. The contestant
+or contestants with the worst combined rank are eliminated. We use the
+maximum-entropy fan-share estimate to induce fan ranks for rank-rule
+counterfactuals.
+
+The bottom-two judge-save mechanism is represented as a two-stage process.
+First, a combined score identifies the bottom two contestants. Second, judges
+choose which contestant to save. Because detailed judge-save votes are not
+fully observed in the data, we use it as a policy simulation rather than a
+direct historical reconstruction.
+
+\begin{table}[H]
+  \centering
+  \caption{Voting-rule formalization used in the simulations.}
+  \label{tab:voting-rules}
+  \begin{tabular}{lll}
+    \toprule
+    Rule & Score & Elimination decision \\
+    \midrule
+    Percent & judge share + fan share & lowest combined percent \\
+    Rank & judge rank + fan rank & worst combined rank \\
+    Bottom-two judge save & combined score, then judge decision & judge save among bottom two \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Fan Vote Estimation}
+
+\subsection{Why fan votes are not directly predictable}
+
+The fan vote is hidden and non-identifiable from the observed data alone. If a
+contestant is eliminated, we learn that the combined judge-fan result placed
+that contestant at or near the bottom under the relevant rule. We do not learn
+the exact vote total, the absolute number of votes, or the unique share of each
+contestant. This is why our model estimates feasible support rather than exact
+votes.
+
+\subsection{Feasible fan-support intervals}
+
+For each modeled elimination week, we build the percent-rule linear constraints
+from the observed eliminated set. We then solve two linear programs for each
+contestant $i$:
+\[
+  \min F_i \quad\text{and}\quad \max F_i
+\]
+subject to the simplex constraints and the elimination inequalities above. The
+result is an interval $[\underline F_i,\overline F_i]$ that describes how much
+fan support contestant $i$ could have had while still being consistent with the
+observed elimination. We used SciPy's linear programming solver for this step
+\cite{scipy2020}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig_5_fan_vote_feasible_intervals.png}
+  \caption{Example of feasible fan-support intervals for a high-uncertainty
+  season-week. The red points show maximum-entropy estimates inside wide
+  feasible intervals.}
+  \label{fig:fan-intervals}
+\end{figure}
+
+\subsection{Maximum-entropy point estimate}
+
+Intervals are useful for uncertainty, but counterfactual simulations also need
+a single support profile. We choose the maximum-entropy feasible profile:
+\[
+  \max_{F}\; -\sum_{i\in A_{s,t}}F_i\log F_i
+\]
+subject to the feasible-set constraints. The entropy objective selects the
+least concentrated fan-support vector consistent with the observed outcome. It
+therefore avoids arbitrarily inventing a dramatic fan favorite unless the
+elimination constraints require one. This follows the maximum-entropy principle
+introduced by Shannon \cite{shannon1948} and is implemented as a convex
+optimization problem using CVXPY \cite{diamond2016}.
+
+\subsection{Uncertainty as a model output}
+
+The average feasible interval width across modeled weeks is 0.862, which is
+large on the $[0,1]$ fan-share scale. This does not mean the model is weak; it
+means the historical outcomes do not uniquely identify fan votes. That
+uncertainty is itself a substantive result. It warns against overinterpreting
+any one estimated fan-support profile and motivates a voting rule that handles
+close bottom-two cases explicitly.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\linewidth]{fig_6_fan_vote_uncertainty_heatmap.png}
+  \caption{Fan-support uncertainty by season and week. Wide feasible intervals
+  indicate that many latent fan-vote profiles can produce the same observed
+  elimination.}
+  \label{fig:uncertainty}
+\end{figure}
 
 \section{Model Validation and Consistency}
 
