@@ -1,0 +1,344 @@
+season,week,next_week,event_type,celebrity_name,active_count,next_active_count,eliminated_count,added_count
+1,1,2,no_elimination,,6,6,0,0
+1,2,3,single_elimination,Trista Sutter,6,5,1,0
+1,3,4,single_elimination,Evander Holyfield,5,4,1,0
+1,4,5,single_elimination,Rachel Hunter,4,3,1,0
+1,5,6,single_elimination,Joey McIntyre,3,2,1,0
+2,1,2,single_elimination,Kenny Mayne,10,9,1,0
+2,2,3,single_elimination,Tatum O'Neal,9,8,1,0
+2,3,4,single_elimination,Giselle Fernandez,8,7,1,0
+2,4,5,single_elimination,Master P,7,6,1,0
+2,5,6,single_elimination,Tia Carrere,6,5,1,0
+2,6,7,single_elimination,George Hamilton,5,4,1,0
+2,7,8,single_elimination,Lisa Rinna,4,3,1,0
+3,1,2,single_elimination,Tucker Carlson,11,10,1,0
+3,2,3,single_elimination,Shanna Moakler,10,9,1,0
+3,3,4,single_elimination,Harry Hamlin,9,8,1,0
+3,4,5,single_elimination,Vivica A. Fox,8,7,1,0
+3,5,6,multi_elimination,Sara Evans,7,5,2,0
+3,5,6,multi_elimination,Willa Ford,7,5,2,0
+3,6,7,no_elimination,,5,5,0,0
+3,7,8,single_elimination,Jerry Springer,5,4,1,0
+3,8,9,single_elimination,Monique Coleman,4,3,1,0
+3,9,10,single_elimination,Joey Lawrence,3,2,1,0
+4,1,2,no_elimination,,11,11,0,0
+4,2,3,single_elimination,Paulina Porizkova,11,10,1,0
+4,3,4,single_elimination,Shandi Finnessey,10,9,1,0
+4,4,5,single_elimination,Leeza Gibbons,9,8,1,0
+4,5,6,single_elimination,Clyde Drexler,8,7,1,0
+4,6,7,single_elimination,Heather Mills,7,6,1,0
+4,7,8,single_elimination,John Ratzenberger,6,5,1,0
+4,8,9,single_elimination,Billy Ray Cyrus,5,4,1,0
+4,9,10,single_elimination,Ian Ziering,4,3,1,0
+5,1,2,single_elimination,Josie Maran,12,11,1,0
+5,2,3,single_elimination,Albert Reed,11,10,1,0
+5,3,4,single_elimination,Wayne Newton,10,9,1,0
+5,4,5,single_elimination,Floyd Mayweather Jr. ,9,8,1,0
+5,5,6,single_elimination,Mark Cuban,8,7,1,0
+5,6,7,single_elimination,Sabrina Bryan,7,6,1,0
+5,7,8,single_elimination,Jane Seymour,6,5,1,0
+5,8,9,single_elimination,Cameron Mathison,5,4,1,0
+5,9,10,single_elimination,Jennie Garth,4,3,1,0
+6,1,2,no_elimination,,12,12,0,0
+6,2,3,multi_elimination,Monica Seles,12,10,2,0
+6,2,3,multi_elimination,Penn Jillette,12,10,2,0
+6,3,4,single_elimination,Steve Guttenberg,10,9,1,0
+6,4,5,single_elimination,Adam Carolla,9,8,1,0
+6,5,6,single_elimination,Priscilla Presley,8,7,1,0
+6,6,7,single_elimination,Marlee Matlin,7,6,1,0
+6,7,8,single_elimination,Shannon Elizabeth,6,5,1,0
+6,8,9,single_elimination,Mario,5,4,1,0
+6,9,10,single_elimination,Marissa Jaret Winokur,4,3,1,0
+7,1,2,multi_elimination,Jeffrey Ross,13,11,2,0
+7,1,2,multi_elimination,Ted McGinley,13,11,2,0
+7,2,3,multi_elimination,Kim Kardashian,11,9,2,0
+7,2,3,multi_elimination,Misty May-Treanor,11,9,2,0
+7,3,4,no_elimination,,9,9,0,0
+7,4,5,single_elimination,Rocco DiSpirito,9,8,1,0
+7,5,6,single_elimination,Toni Braxton,8,7,1,0
+7,6,7,single_elimination,Cloris Leachman,7,6,1,0
+7,7,8,single_elimination,Susan Lucci,6,5,1,0
+7,8,9,single_elimination,Maurice Greene,5,4,1,0
+7,9,10,single_elimination,Cody Linley,4,3,1,0
+8,1,2,no_elimination,,13,13,0,0
+8,2,3,single_elimination,Belinda Carlisle,13,12,1,0
+8,3,4,single_elimination,Denise Richards,12,11,1,0
+8,4,5,multi_elimination,Holly Madison,11,9,2,0
+8,4,5,multi_elimination,Steve Wozniak,11,9,2,0
+8,5,6,single_elimination,David Alan Grier,9,8,1,0
+8,6,7,single_elimination,Steve-O,8,7,1,0
+8,7,8,single_elimination,Lawrence Taylor,7,6,1,0
+8,8,9,single_elimination,Chuck Wicks,6,5,1,0
+8,9,10,single_elimination,Lil' Kim,5,4,1,0
+8,10,11,single_elimination,Ty Murray,4,3,1,0
+9,1,2,multi_elimination,Ashley Hamiliton,16,14,2,0
+9,1,2,multi_elimination,Macy Gray,16,14,2,0
+9,2,3,single_elimination,Kathy Ireland,14,13,1,0
+9,3,4,multi_elimination,Debi Mazar,13,11,2,0
+9,3,4,multi_elimination,Tom DeLay,13,11,2,0
+9,4,5,single_elimination,Chuck Liddell,11,10,1,0
+9,5,6,single_elimination,Natalie Coughlin,10,9,1,0
+9,6,7,multi_elimination,Louie Vito,9,7,2,0
+9,6,7,multi_elimination,Melissa Joan Hart,9,7,2,0
+9,7,8,multi_elimination,Mark Dacascos,7,5,2,0
+9,7,8,multi_elimination,Michael Irvin,7,5,2,0
+9,8,9,single_elimination,Aaron Carter,5,4,1,0
+9,9,10,single_elimination,Joanna Krupa,4,3,1,0
+10,1,2,no_elimination,,11,11,0,0
+10,2,3,single_elimination,Shannen Doherty,11,10,1,0
+10,3,4,single_elimination,Buzz Aldrin,10,9,1,0
+10,4,5,single_elimination,Aiden Turner,9,8,1,0
+10,5,6,single_elimination,Kate Gosselin,8,7,1,0
+10,6,7,single_elimination,Jake Pavelka,7,6,1,0
+10,7,8,single_elimination,Pamela Anderson,6,5,1,0
+10,8,9,single_elimination,Niecy Nash,5,4,1,0
+10,9,10,single_elimination,Chad Ochocinco,4,3,1,0
+11,1,2,single_elimination,David Hasselhoff,12,11,1,0
+11,2,3,single_elimination,Michael Bolton,11,10,1,0
+11,3,4,single_elimination,Margaret Cho,10,9,1,0
+11,4,5,single_elimination,The Situation,9,8,1,0
+11,5,6,single_elimination,Florence Henderson,8,7,1,0
+11,6,7,single_elimination,Audrina Patridge,7,6,1,0
+11,7,8,single_elimination,Rick Fox,6,5,1,0
+11,8,9,single_elimination,Kurt Warner,5,4,1,0
+11,9,10,single_elimination,Brandy,4,3,1,0
+12,1,2,no_elimination,,11,11,0,0
+12,2,3,single_elimination,Mike Catherwood,11,10,1,0
+12,3,4,single_elimination,Wendy Williams,10,9,1,0
+12,4,5,single_elimination,Sugar Ray Leonard,9,8,1,0
+12,5,6,single_elimination,Petra Nemcova,8,7,1,0
+12,6,7,single_elimination,Chris Jericho,7,6,1,0
+12,7,8,single_elimination,Kendra Wilkinson,6,5,1,0
+12,8,9,single_elimination,Romeo,5,4,1,0
+12,9,10,single_elimination,Ralph Macchio,4,3,1,0
+13,1,2,single_elimination,Metta World Peace (Ron),12,11,1,0
+13,2,3,single_elimination,Elisabetta Canalis,11,10,1,0
+13,3,4,single_elimination,Kristin Cavallari,10,9,1,0
+13,4,5,single_elimination,Chynna Phillips,9,8,1,0
+13,5,6,single_elimination,Carson Kressley,8,7,1,0
+13,6,7,single_elimination,Chaz Bono,7,6,1,0
+13,7,8,single_elimination,David Arquette,6,5,1,0
+13,8,9,single_elimination,Nancy Grace,5,4,1,0
+13,9,10,single_elimination,Hope Solo,4,3,1,0
+14,1,2,no_elimination,,12,12,0,0
+14,2,3,single_elimination,Martina Navratilova,12,11,1,0
+14,3,4,single_elimination,Jack Wagner,11,10,1,0
+14,4,5,single_elimination,Sherri Sheperd,10,9,1,0
+14,5,6,single_elimination,Gavin DeGraw,9,8,1,0
+14,6,7,single_elimination,Gladys Knight,8,7,1,0
+14,7,8,single_elimination,Jaleel White,7,6,1,0
+14,8,9,multi_elimination,Melissa Gilbert,6,4,2,0
+14,8,9,multi_elimination,Roshon Fegan,6,4,2,0
+14,9,10,single_elimination,Maria Menounos,4,3,1,0
+15,1,2,single_elimination,Pamela Anderson,13,12,1,0
+15,2,3,single_elimination,Joey Fatone,12,11,1,0
+15,3,4,multi_elimination,Drew Lachey,11,9,2,0
+15,3,4,multi_elimination,Helio Castroneves,11,9,2,0
+15,4,5,single_elimination,Bristol Palin,9,8,1,0
+15,5,6,no_elimination,,8,8,0,0
+15,6,7,single_elimination,Sabrina Bryan,8,7,1,0
+15,7,8,no_elimination,,7,7,0,0
+15,8,9,multi_elimination,Gilles Marini,7,5,2,0
+15,8,9,multi_elimination,Kirstie Alley,7,5,2,0
+15,9,10,multi_elimination,Apolo Anton Ohno,5,3,2,0
+15,9,10,multi_elimination,Emmitt Smith,5,3,2,0
+16,1,2,no_elimination,,12,12,0,0
+16,2,3,single_elimination,Dorothy Hamill,12,11,1,0
+16,3,4,single_elimination,Wynonna Judd,11,10,1,0
+16,4,5,single_elimination,Lisa Vanderpump,10,9,1,0
+16,5,6,single_elimination,D. L. Hughley,9,8,1,0
+16,6,7,single_elimination,Victor Ortiz,8,7,1,0
+16,7,8,single_elimination,Andy Dick,7,6,1,0
+16,8,9,single_elimination,Sean Lowe,6,5,1,0
+16,9,10,single_elimination,Ingo Rademacher,5,4,1,0
+17,1,2,no_elimination,,12,12,0,0
+17,2,3,single_elimination,Keyshawn Johnson,12,11,1,0
+17,3,4,single_elimination,Bill Nye,11,10,1,0
+17,4,5,single_elimination,Valerie Harper,10,9,1,0
+17,5,6,single_elimination,Christina Milian,9,8,1,0
+17,6,7,no_elimination,,8,8,0,0
+17,7,8,single_elimination,"Nicole ""Snooki"" Polizzi",8,7,1,0
+17,8,9,single_elimination,Brant Daugherty,7,6,1,0
+17,9,10,single_elimination,Elizabeth Berkley Lauren,6,5,1,0
+17,10,11,single_elimination,Leah Remini,5,4,1,0
+18,1,2,single_elimination,Diana Nyad,12,11,1,0
+18,2,3,multi_elimination,Billy Dee Williams,11,9,2,0
+18,2,3,multi_elimination,Sean Avery,11,9,2,0
+18,3,4,no_elimination,,9,9,0,0
+18,4,5,no_elimination,,9,9,0,0
+18,5,6,single_elimination,Cody Simpson,9,8,1,0
+18,6,7,single_elimination,Drew Carey,8,7,1,0
+18,7,8,single_elimination,NeNe Leakes,7,6,1,0
+18,8,9,single_elimination,Danica McKellar,6,5,1,0
+18,9,10,single_elimination,Charlie White,5,4,1,0
+19,1,2,single_elimination,Lolo Jones,13,12,1,0
+19,2,3,single_elimination,Tavis Smiley,12,11,1,0
+19,3,4,single_elimination,Randy Couture,11,10,1,0
+19,4,5,single_elimination,Betsey Johnson,10,9,1,0
+19,5,6,no_elimination,,9,9,0,0
+19,6,7,single_elimination,Jonathan Bennett,9,8,1,0
+19,7,8,single_elimination,Antonio Sabato Jr.,8,7,1,0
+19,8,9,single_elimination,Michael Waltrip,7,6,1,0
+19,9,10,single_elimination,Lea Thompson,6,5,1,0
+19,10,11,single_elimination,Tommy Chong,5,4,1,0
+20,1,2,no_elimination,,12,12,0,0
+20,2,3,single_elimination,Redfoo,12,11,1,0
+20,3,4,single_elimination,Charlotte McKinney,11,10,1,0
+20,4,5,single_elimination,Michael Sam,10,9,1,0
+20,5,6,single_elimination,Suzanne Somers,9,8,1,0
+20,6,7,single_elimination,Patti LaBelle,8,7,1,0
+20,7,8,single_elimination,Willow Shields,7,6,1,0
+20,8,9,multi_elimination,Chris Soules,6,4,2,0
+20,8,9,multi_elimination,Robert Herjavec,6,4,2,0
+20,9,10,single_elimination,Nastia Liukin,4,3,1,0
+21,1,2,no_elimination,,13,13,0,0
+21,2,3,multi_elimination,Chaka Khan,13,10,3,0
+21,2,3,multi_elimination,Kim Zolciak-Biermann,13,10,3,0
+21,2,3,multi_elimination,Victor Espinoza,13,10,3,0
+21,3,4,no_elimination,,10,10,0,0
+21,4,5,single_elimination,Gary Busey,10,9,1,0
+21,5,6,no_elimination,,9,9,0,0
+21,6,7,single_elimination,Paula Deen,9,8,1,0
+21,7,8,single_elimination,Hayes Grier,8,7,1,0
+21,8,9,single_elimination,Andy Grammer,7,6,1,0
+21,9,10,multi_elimination,Alexa PenaVega,6,4,2,0
+21,9,10,multi_elimination,Tamar Braxton,6,4,2,0
+21,10,11,no_elimination,,4,4,0,0
+22,1,2,no_elimination,,12,12,0,0
+22,2,3,single_elimination,Geraldo Rivera,12,11,1,0
+22,3,4,single_elimination,Mischa Barton,11,10,1,0
+22,4,5,single_elimination,Marla Maples,10,9,1,0
+22,5,6,no_elimination,,9,9,0,0
+22,6,7,single_elimination,Doug Flutie,9,8,1,0
+22,7,8,multi_elimination,Kim Fields,8,6,2,0
+22,7,8,multi_elimination,Von Miller,8,6,2,0
+22,8,9,single_elimination,Jodie Sweetin,6,5,1,0
+22,9,10,multi_elimination,Antonio Brown,5,3,2,0
+22,9,10,multi_elimination,Wanya Morris,5,3,2,0
+23,1,2,no_elimination,,13,13,0,0
+23,2,3,single_elimination,Jake T. Austin,13,12,1,0
+23,3,4,single_elimination,Rick Perry,12,11,1,0
+23,4,5,multi_elimination,Babyface,11,9,2,0
+23,4,5,multi_elimination,Vanilla Ice,11,9,2,0
+23,5,6,no_elimination,,9,9,0,0
+23,6,7,single_elimination,Amber Rose,9,8,1,0
+23,7,8,single_elimination,Maureen McCormick,8,7,1,0
+23,8,9,single_elimination,Ryan Lochte,7,6,1,0
+23,9,10,single_elimination,Marilu Henner,6,5,1,0
+23,10,11,single_elimination,Terra Jole,5,4,1,0
+24,1,2,no_elimination,,12,12,0,0
+24,2,3,single_elimination,Chris Kattan,12,11,1,0
+24,3,4,single_elimination,Charo,11,10,1,0
+24,4,5,single_elimination,Mr. T,10,9,1,0
+24,5,6,single_elimination,Erika Jayne,9,8,1,0
+24,6,7,single_elimination,Heather Morris,8,7,1,0
+24,7,8,multi_elimination,Nancy Kerrigan,7,5,2,0
+24,7,8,multi_elimination,Nick Viall,7,5,2,0
+24,8,9,single_elimination,Bonner Bolton,5,4,1,0
+24,9,10,single_elimination,Simone Biles,4,3,1,0
+25,1,2,no_elimination,,13,13,0,0
+25,2,3,multi_elimination,Barbara Corcoran,13,11,2,0
+25,2,3,multi_elimination,Debbie Gibson,13,11,2,0
+25,3,4,no_elimination,,11,11,0,0
+25,4,5,single_elimination,Derek Fisher,11,10,1,0
+25,5,6,single_elimination,Sasha Pieterse,10,9,1,0
+25,6,7,single_elimination,Nick Lachey,9,8,1,0
+25,7,8,multi_elimination,Nikki Bella,8,6,2,0
+25,7,8,multi_elimination,Vanessa Lachey,8,6,2,0
+25,8,9,single_elimination,Terrell Owens,6,5,1,0
+25,9,10,single_elimination,Victoria Arlen,5,4,1,0
+26,1,2,multi_elimination,Jamie Anderson,10,8,2,0
+26,1,2,multi_elimination,Johnny Damon,10,8,2,0
+26,2,3,multi_elimination,Arike Ogunbowale,8,6,2,0
+26,2,3,multi_elimination,Kareem Abdul-Jabbar,8,6,2,0
+26,3,4,multi_elimination,Chris Mazdzer,6,3,3,0
+26,3,4,multi_elimination,Jennie Finch Daigle,6,3,3,0
+26,3,4,multi_elimination,Mirai Nagasu,6,3,3,0
+27,1,2,single_elimination,Nikki Glaser,13,12,1,0
+27,2,3,single_elimination,Danelle Umstead,12,11,1,0
+27,3,4,single_elimination,Nancy McKeon,11,10,1,0
+27,4,5,single_elimination,Tinashe,10,9,1,0
+27,5,6,no_elimination,,9,9,0,0
+27,6,7,single_elimination,Mary Lou Retton,9,8,1,0
+27,7,8,multi_elimination,DeMarcus Ware,8,6,2,0
+27,7,8,multi_elimination,John Schneider,8,6,2,0
+27,8,9,multi_elimination,Joe Amabile,6,4,2,0
+27,8,9,multi_elimination,Juan Pablo Di Pace,6,4,2,0
+28,1,2,no_elimination,,12,12,0,0
+28,2,3,multi_elimination,Mary Wilson,12,10,2,0
+28,2,3,multi_elimination,Ray Lewis,12,10,2,0
+28,3,4,no_elimination,,10,10,0,0
+28,4,5,single_elimination,Lamar Odom,10,9,1,0
+28,5,6,no_elimination,,9,9,0,0
+28,6,7,single_elimination,Sailor Brinkley-Cook,9,8,1,0
+28,7,8,single_elimination,Karamo Brown,8,7,1,0
+28,8,9,single_elimination,Kate Flannery,7,6,1,0
+28,9,10,single_elimination,Sean Spicer,6,5,1,0
+28,10,11,single_elimination,James Van Der Beek,5,4,1,0
+29,1,2,no_elimination,,15,15,0,0
+29,2,3,single_elimination,Charles Oakley,15,14,1,0
+29,3,4,single_elimination,Carole Baskin,14,13,1,0
+29,4,5,single_elimination,Anne Heche,13,12,1,0
+29,5,6,single_elimination,Jesse Metcalfe,12,11,1,0
+29,6,7,single_elimination,Veron Davis,11,10,1,0
+29,7,8,multi_elimination,Jeannie Mai,10,8,2,0
+29,7,8,multi_elimination,Monica Aldama,10,8,2,0
+29,8,9,single_elimination,Chrishell Stause,8,7,1,0
+29,9,10,single_elimination,AJ McLean,7,6,1,0
+29,10,11,multi_elimination,Johnny Weir,6,4,2,0
+29,10,11,multi_elimination,Skai Jackson,6,4,2,0
+30,1,2,no_elimination,,15,15,0,0
+30,2,3,single_elimination,Martin Kove,15,14,1,0
+30,3,4,single_elimination,Christine Chiu,14,13,1,0
+30,4,5,multi_elimination,Brian Austin Green,13,11,2,0
+30,4,5,multi_elimination,Matt James,13,11,2,0
+30,5,6,single_elimination,Melanie C,11,10,1,0
+30,6,7,single_elimination,Kenya Moore,10,9,1,0
+30,7,8,single_elimination,"Mike ""The Miz"" Mizanin",9,8,1,0
+30,8,9,multi_elimination,Jimmie Allen,8,6,2,0
+30,8,9,multi_elimination,Olivia Jade,8,6,2,0
+30,9,10,multi_elimination,Melora Hardin,6,4,2,0
+30,9,10,multi_elimination,Suni Lee,6,4,2,0
+31,1,2,single_elimination,Jason Lewis,16,15,1,0
+31,2,3,single_elimination,Teresa Giudice,15,14,1,0
+31,3,4,single_elimination,Cheryl Ladd,14,13,1,0
+31,4,5,single_elimination,Sam Champion,13,12,1,0
+31,5,6,multi_elimination,Joseph Baena,12,10,2,0
+31,5,6,multi_elimination,Selma Blair,12,10,2,0
+31,6,7,single_elimination,Jessie James Decker,10,9,1,0
+31,7,8,single_elimination,Jordin Sparks,9,8,1,0
+31,8,9,multi_elimination,Heidi D'Amelio,8,6,2,0
+31,8,9,multi_elimination,Vinny Guadagnino,8,6,2,0
+31,9,10,multi_elimination,Daniel Durant,6,4,2,0
+31,9,10,multi_elimination,Trevor Donovan,6,4,2,0
+32,1,2,single_elimination,Matt Walsh,14,13,1,0
+32,2,3,single_elimination,Jamie Lynn Spears,13,12,1,0
+32,3,4,single_elimination,Tyson Beckford,12,11,1,0
+32,4,5,single_elimination,Adrian Peterson,11,10,1,0
+32,5,6,single_elimination,Mira Sorvino,10,9,1,0
+32,6,7,single_elimination,Mauricio Umansky,9,8,1,0
+32,7,8,single_elimination,Lele Pons,8,7,1,0
+32,8,9,single_elimination,Barry Williams,7,6,1,0
+32,9,10,single_elimination,Harry Jowsey,6,5,1,0
+32,10,11,no_elimination,,5,5,0,0
+33,1,2,no_elimination,,13,13,0,0
+33,2,3,multi_elimination,Anna Delvey,13,11,2,0
+33,2,3,multi_elimination,Tori Spelling,13,11,2,0
+33,3,4,multi_elimination,Eric Roberts,11,9,2,0
+33,3,4,multi_elimination,Reginald VelJohnson,11,9,2,0
+33,4,5,single_elimination,Brooks Nader,9,8,1,0
+33,5,6,single_elimination,Phaedra Parks,8,7,1,0
+33,6,7,single_elimination,Jenn Tran,7,6,1,0
+33,7,8,single_elimination,Dwight Howard ,6,5,1,0
+33,8,9,no_elimination,,5,5,0,0
+34,1,2,no_elimination,,14,14,0,0
+34,2,3,multi_elimination,Baron Davis,14,12,2,0
+34,2,3,multi_elimination,Corey Feldman,14,12,2,0
+34,3,4,single_elimination,Lauren Jauregui,12,11,1,0
+34,4,5,single_elimination,Hilaria Baldwin,11,10,1,0
+34,5,6,no_elimination,,10,10,0,0
+34,6,7,single_elimination,Scott Hoying,10,9,1,0
+34,7,8,single_elimination,Jen Affleck,9,8,1,0
+34,8,9,single_elimination,Danielle Fishel,8,7,1,0
+34,9,10,single_elimination,Andy Richter,7,6,1,0
+34,10,11,single_elimination,Whitney Leavitt,6,5,1,0

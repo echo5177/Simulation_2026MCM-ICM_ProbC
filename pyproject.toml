@@ -1,0 +1,23 @@
+[project]
+name = "mcm-c-dwts"
+version = "0.1.0"
+description = "Toolkit scaffold for 2026 MCM/ICM Problem C"
+requires-python = ">=3.10"
+dependencies = [
+  "cvxpy",
+  "lifelines",
+  "matplotlib",
+  "networkx",
+  "numpy",
+  "openpyxl",
+  "pandas",
+  "pytest",
+  "scikit-learn",
+  "scipy",
+  "seaborn",
+  "statsmodels",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
