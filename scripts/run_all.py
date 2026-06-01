@@ -22,18 +22,30 @@ from mcm_c_dwts.config import (
 from mcm_c_dwts.build_panel import build_long_panel
 from mcm_c_dwts.data_audit import build_season_audit, write_data_audit_report
 from mcm_c_dwts.data_loader import load_raw_data
+from mcm_c_dwts.diagnostics import (
+    build_baseline_comparison,
+    build_contestant_instability,
+    build_fan_rescue_cases,
+    build_rule_switch_cases,
+    build_threshold_sensitivity,
+)
 from mcm_c_dwts.controversy import build_controversy_cases
 from mcm_c_dwts.effects import build_effect_model_results
 from mcm_c_dwts.export_tables import export_latex_table
 from mcm_c_dwts.model_outputs import build_rule_summary, infer_fan_support_outputs
 from mcm_c_dwts.plots import (
+    plot_active_set_heatmap,
+    plot_baseline_comparison,
+    plot_contestant_instability,
     plot_controversy_cases,
     plot_effects_forest,
     plot_fan_intervals,
+    plot_fan_rescue_cases,
     plot_judge_score_distribution,
     plot_rule_comparison_heatmap,
     plot_season_structure,
     plot_system_comparison,
+    plot_threshold_sensitivity,
     plot_uncertainty_heatmap,
     plot_validation_dashboard,
 )
@@ -81,6 +93,11 @@ def main() -> None:
         fan_estimates,
         validation,
     )
+    baseline_comparison = build_baseline_comparison(counterfactuals, validation)
+    rule_switch_cases = build_rule_switch_cases(counterfactuals, validation)
+    fan_rescue_cases = build_fan_rescue_cases(fan_estimates)
+    contestant_instability = build_contestant_instability(fan_estimates)
+    threshold_sensitivity = build_threshold_sensitivity(fan_estimates, validation)
 
     panel.to_csv(INTERIM_DIR / "long_panel.csv", index=False)
     active_set.to_csv(INTERIM_DIR / "active_set_by_week.csv", index=False)
@@ -96,6 +113,11 @@ def main() -> None:
     effects.to_csv(PROCESSED_DIR / "effects_model_results.csv", index=False)
     proposed_simulation.to_csv(PROCESSED_DIR / "new_system_simulation.csv", index=False)
     proposed_summary.to_csv(PROCESSED_DIR / "new_system_summary.csv", index=False)
+    baseline_comparison.to_csv(PROCESSED_DIR / "baseline_comparison.csv", index=False)
+    rule_switch_cases.to_csv(PROCESSED_DIR / "top_rule_switch_cases.csv", index=False)
+    fan_rescue_cases.to_csv(PROCESSED_DIR / "top_fan_rescue_cases.csv", index=False)
+    contestant_instability.to_csv(PROCESSED_DIR / "contestant_instability.csv", index=False)
+    threshold_sensitivity.to_csv(PROCESSED_DIR / "threshold_sensitivity.csv", index=False)
     inference.model_issue_log.to_csv(PROCESSED_DIR / "model_issue_log.csv", index=False)
 
     export_latex_table(
@@ -152,6 +174,64 @@ def main() -> None:
         TABLES_DIR / "table_7_producer_recommendation.tex",
         caption="Proposed voting system simulation summary.",
     )
+    export_latex_table(
+        baseline_comparison,
+        TABLES_DIR / "table_8_baseline_comparison.tex",
+        caption="Baseline and counterfactual rule comparison.",
+    )
+    export_latex_table(
+        rule_switch_cases[
+            [
+                "season",
+                "week",
+                "observed_eliminated",
+                "percent_eliminated",
+                "rank_eliminated",
+                "judge_only_bottom",
+                "mean_fan_share_width",
+                "bottom_two_margin",
+            ]
+        ],
+        TABLES_DIR / "table_9_rule_switch_cases.tex",
+        caption="Largest rank-versus-percent switch cases.",
+    )
+    export_latex_table(
+        fan_rescue_cases[
+            [
+                "season",
+                "week",
+                "celebrity_name",
+                "judge_rank",
+                "fan_rank_est",
+                "fan_rescue_gap",
+                "fan_share_est",
+                "results",
+            ]
+        ],
+        TABLES_DIR / "table_10_fan_rescue_cases.tex",
+        caption="Largest estimated fan-rescue cases.",
+    )
+    export_latex_table(
+        contestant_instability[
+            [
+                "celebrity_name",
+                "season",
+                "modeled_weeks",
+                "mean_judge_rank",
+                "mean_fan_rank",
+                "mean_fan_rescue_gap",
+                "max_controversy_index",
+                "results",
+            ]
+        ],
+        TABLES_DIR / "table_11_contestant_instability.tex",
+        caption="Contestants with largest judge-fan instability.",
+    )
+    export_latex_table(
+        threshold_sensitivity,
+        TABLES_DIR / "table_12_threshold_sensitivity.tex",
+        caption="Gray-zone threshold sensitivity.",
+    )
     write_data_audit_report(
         raw,
         panel,
@@ -169,6 +249,11 @@ def main() -> None:
     controversy_fig = GENERATED_FIGURES_DIR / "fig_9_controversial_trajectories.png"
     effects_fig = GENERATED_FIGURES_DIR / "fig_11_effects_forest.png"
     system_fig = GENERATED_FIGURES_DIR / "fig_12_new_system_dashboard.png"
+    active_heatmap_fig = GENERATED_FIGURES_DIR / "fig_13_active_set_heatmap.png"
+    baseline_fig = GENERATED_FIGURES_DIR / "fig_14_baseline_comparison.png"
+    fan_rescue_fig = GENERATED_FIGURES_DIR / "fig_15_fan_rescue_cases.png"
+    instability_fig = GENERATED_FIGURES_DIR / "fig_16_contestant_instability.png"
+    sensitivity_fig = GENERATED_FIGURES_DIR / "fig_17_threshold_sensitivity.png"
     plot_season_structure(season_audit, season_fig)
     plot_judge_score_distribution(panel, score_fig)
     plot_fan_intervals(fan_estimates, interval_fig)
@@ -178,6 +263,11 @@ def main() -> None:
     plot_controversy_cases(controversy_trajectory, controversy_fig)
     plot_effects_forest(effects, effects_fig)
     plot_system_comparison(proposed_summary, system_fig)
+    plot_active_set_heatmap(active_set, active_heatmap_fig)
+    plot_baseline_comparison(baseline_comparison, baseline_fig)
+    plot_fan_rescue_cases(fan_rescue_cases, fan_rescue_fig)
+    plot_contestant_instability(contestant_instability, instability_fig)
+    plot_threshold_sensitivity(threshold_sensitivity, sensitivity_fig)
 
     metrics = {
         "raw_rows": len(raw),
@@ -197,6 +287,28 @@ def main() -> None:
         "fan_override_rate": counterfactuals["fan_override_judges"].mean(),
         "gray_zone_tau": float(proposed_summary.loc[proposed_summary["metric"] == "gray_zone_tau", "value"].iloc[0]),
         "gray_zone_trigger_rate": float(proposed_summary.loc[proposed_summary["metric"] == "gray_zone_trigger_rate", "value"].iloc[0]),
+        "rank_rule_exact_match_rate": float(
+            baseline_comparison.loc[
+                baseline_comparison["candidate_rule"] == "Rank + inferred fan",
+                "exact_match_rate",
+            ].iloc[0]
+        ),
+        "judge_only_exact_match_rate": float(
+            baseline_comparison.loc[
+                baseline_comparison["candidate_rule"] == "Judge-only bottom",
+                "exact_match_rate",
+            ].iloc[0]
+        ),
+        "top_fan_rescue_gap": float(fan_rescue_cases["fan_rescue_gap"].max()),
+        "max_controversy_index": float(
+            contestant_instability["max_controversy_index"].max()
+        ),
+        "gray_zone_90pct_trigger_rate": float(
+            threshold_sensitivity.loc[
+                threshold_sensitivity["threshold_label"] == "90th pct.",
+                "gray_zone_trigger_rate",
+            ].iloc[0]
+        ),
     }
 
     key_results = pd.DataFrame(
@@ -234,6 +346,11 @@ def main() -> None:
             ),
             ("Fig. 11", rel(effects_fig), "scripts/run_all.py", "8. Effects Model"),
             ("Fig. 12", rel(system_fig), "scripts/run_all.py", "9. Proposed System"),
+            ("Fig. 13", rel(active_heatmap_fig), "scripts/run_all.py", "2. Data Audit"),
+            ("Fig. 14", rel(baseline_fig), "scripts/run_all.py", "5. Baselines"),
+            ("Fig. 15", rel(fan_rescue_fig), "scripts/run_all.py", "6. Fan Rescue Cases"),
+            ("Fig. 16", rel(instability_fig), "scripts/run_all.py", "7. Controversy"),
+            ("Fig. 17", rel(sensitivity_fig), "scripts/run_all.py", "10. Sensitivity"),
             (
                 "Memo Card",
                 "figures/concept/memo_producer_decision_card.png",

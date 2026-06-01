@@ -1,0 +1,13 @@
+season,week,next_week,event_type,active_count,eliminated_count,observed_eliminated,percent_eliminated,rank_eliminated,judge_only_bottom,fan_only_bottom,rank_percent_different,fan_override_judges,rank_overlap_with_percent,bottom_two_margin,mean_fan_share_width,max_fan_share_width,switch_severity
+9,1,2,multi_elimination,16,2,Ashley Hamiliton;Macy Gray,Macy Gray;Ashley Hamiliton,Chuck Liddell;Debi Mazar,Ashley Hamiliton;Macy Gray,Joanna Krupa;Chuck Liddell,True,False,0,1.256579021197135e-06,0.885426937643104,1.0,2
+30,2,3,single_elimination,15,1,Martin Kove,Martin Kove,Matt James,Martin Kove,Matt James,True,False,0,0.01818121421496864,0.9396248196248196,1.0,1
+29,3,4,single_elimination,14,1,Carole Baskin,Carole Baskin,Justina Machado,Carole Baskin,Justina Machado,True,False,0,0.010682625069665982,0.935725179751616,1.0,1
+32,1,2,single_elimination,14,1,Matt Walsh,Matt Walsh,Alyson Hannigan,Harry Jowsey,Alyson Hannigan,True,True,0,9.958712828730953e-06,0.9350649350649352,1.0,1
+15,1,2,single_elimination,13,1,Pamela Anderson,Pamela Anderson,Kirstie Alley,Pamela Anderson,Sabrina Bryan,True,False,0,0.007221596943812247,0.9301817948361278,1.0,1
+22,2,3,single_elimination,12,1,Geraldo Rivera,Geraldo Rivera,Doug Flutie,Geraldo Rivera,Doug Flutie,True,False,0,0.008472860586648173,0.9259651600753296,1.0,1
+16,2,3,single_elimination,12,1,Dorothy Hamill,Dorothy Hamill,D. L. Hughley,Dorothy Hamill,Andy Dick,True,False,0,0.0040833527493173705,0.9254326047358834,1.0,1
+32,3,4,single_elimination,12,1,Tyson Beckford,Tyson Beckford,Mauricio Umansky,Tyson Beckford,Mauricio Umansky,True,False,0,0.006193354877942592,0.9253955968352253,1.0,1
+5,1,2,single_elimination,12,1,Josie Maran,Josie Maran,Floyd Mayweather Jr. ,Josie Maran,Floyd Mayweather Jr. ,True,False,0,0.0077656383429184905,0.9253674881106787,1.0,1
+14,2,3,single_elimination,12,1,Martina Navratilova,Martina Navratilova,Melissa Gilbert,Martina Navratilova,Melissa Gilbert,True,False,0,0.007435487207104907,0.9252891367203634,1.0,1
+16,3,4,single_elimination,11,1,Wynonna Judd,Wynonna Judd,Andy Dick,Wynonna Judd,Andy Dick,True,False,0,0.00425234046482964,0.9198171169034098,1.0,1
+22,3,4,single_elimination,11,1,Mischa Barton,Mischa Barton,Antonio Brown,Mischa Barton,Antonio Brown,True,False,0,0.008433064000257201,0.9187153467935976,1.0,1

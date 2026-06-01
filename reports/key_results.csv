@@ -16,3 +16,8 @@ outcome_difference_rate,0.26436781609195403
 fan_override_rate,0.6360153256704981
 gray_zone_tau,0.003539060107463035
 gray_zone_trigger_rate,0.6168582375478927
+rank_rule_exact_match_rate,0.735632183908046
+judge_only_exact_match_rate,0.36398467432950193
+top_fan_rescue_gap,15.0
+max_controversy_index,15.0
+gray_zone_90pct_trigger_rate,0.946360153256705

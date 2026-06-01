@@ -1,0 +1,13 @@
+case_id,season,week,celebrity_name,judge_rank,fan_rank_est,fan_rescue_gap,fan_share_est,combined_percent,observed_eliminated,results
+S31 W1 Vinny Guadagnino,31,1,Vinny Guadagnino,16.0,1.0,15.0,0.06382310668044126,0.10832572448148839,False,Eliminated Week 8
+S31 W2 Cheryl Ladd,31,2,Cheryl Ladd,15.0,1.0,14.0,0.06914030587032413,0.1201111796567319,False,Eliminated Week 3
+S30 W3 Cody Rigsby,30,3,Cody Rigsby,14.0,1.0,13.0,0.07569447999188013,0.13609716455563853,False,3rd Place
+S31 W3 Vinny Guadagnino,31,3,Vinny Guadagnino,14.0,1.0,13.0,0.0726799577454002,0.12975191804316694,False,Eliminated Week 8
+S9 W1 Michael Irvin,9,1,Michael Irvin,14.0,1.0,13.0,0.06250570536634607,0.10930391934945538,False,Eliminated Week 7
+S32 W2 Mauricio Umansky,32,2,Mauricio Umansky,13.0,1.0,12.0,0.08571502314647625,0.13613519121370316,False,Eliminated Week 6
+S8 W2 Steve-O,8,2,Steve-O,13.0,1.0,12.0,0.08478357472190841,0.1376137634011537,False,Eliminated Week 6
+S27 W1 Joe Amabile,27,1,Joe Amabile,13.0,1.0,12.0,0.08404358032800355,0.13894554111231727,False,Eliminated Week 8
+S9 W3 Michael Irvin,9,3,Michael Irvin,13.0,1.0,12.0,0.08292000429368154,0.13718357018515442,False,Eliminated Week 7
+S23 W2 Rick Perry,23,2,Rick Perry,13.0,1.0,12.0,0.07980748503606015,0.14230748503606017,False,Eliminated Week 3
+S19 W1 Betsey Johnson,19,1,Betsey Johnson,13.0,1.0,12.0,0.0796476224348618,0.13341106329507685,False,Eliminated Week 4
+S15 W1 Pamela Anderson,15,1,Pamela Anderson,13.0,1.0,12.0,0.07692936694553339,0.13841218792202525,True,Eliminated Week 1

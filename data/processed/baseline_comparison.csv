@@ -1,0 +1,5 @@
+candidate_rule,exact_match_rate,mean_observed_overlap,modeled_weeks,interpretation
+Percent + inferred fan,1.0,1.0,261,Constraint-consistent reconstruction
+Rank + inferred fan,0.735632183908046,0.759897828863346,261,Rule-change counterfactual
+Judge-only bottom,0.36398467432950193,0.4163473818646232,261,No fan vote baseline
+Fan-only bottom,0.6245210727969349,0.681353767560664,261,Estimated audience-only baseline

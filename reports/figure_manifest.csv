@@ -11,4 +11,9 @@ Fig. 9,figures/generated/fig_9_controversial_trajectories.png,scripts/run_all.py
 Fig. 10,figures/concept/fig_10_proposed_system_flowchart.png,AI-generated concept figure,9. Proposed System
 Fig. 11,figures/generated/fig_11_effects_forest.png,scripts/run_all.py,8. Effects Model
 Fig. 12,figures/generated/fig_12_new_system_dashboard.png,scripts/run_all.py,9. Proposed System
+Fig. 13,figures/generated/fig_13_active_set_heatmap.png,scripts/run_all.py,2. Data Audit
+Fig. 14,figures/generated/fig_14_baseline_comparison.png,scripts/run_all.py,5. Baselines
+Fig. 15,figures/generated/fig_15_fan_rescue_cases.png,scripts/run_all.py,6. Fan Rescue Cases
+Fig. 16,figures/generated/fig_16_contestant_instability.png,scripts/run_all.py,7. Controversy
+Fig. 17,figures/generated/fig_17_threshold_sensitivity.png,scripts/run_all.py,10. Sensitivity
 Memo Card,figures/concept/memo_producer_decision_card.png,AI-generated concept figure,Memo to Producers

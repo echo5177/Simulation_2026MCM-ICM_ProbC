@@ -188,3 +188,93 @@ def plot_system_comparison(simulation_summary: pd.DataFrame, path: str | Path) -
     fig.tight_layout()
     fig.savefig(path, dpi=300)
     plt.close(fig)
+
+
+def plot_active_set_heatmap(active_set: pd.DataFrame, path: str | Path) -> None:
+    set_plot_style()
+    heat = active_set.groupby(["season", "week"])["celebrity_name"].nunique().unstack()
+    fig, ax = plt.subplots(figsize=(8.5, 8))
+    sns.heatmap(heat, cmap="mako", ax=ax, cbar_kws={"label": "Active contestants"})
+    ax.set_title("Reconstructed Active Set Size")
+    ax.set_xlabel("Week")
+    ax.set_ylabel("Season")
+    fig.tight_layout()
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
+
+
+def plot_baseline_comparison(baseline: pd.DataFrame, path: str | Path) -> None:
+    set_plot_style()
+    sample = baseline.sort_values("exact_match_rate", ascending=True)
+    fig, ax = plt.subplots(figsize=(7.5, 4.8))
+    colors = ["#6A4C93", "#1982C4", "#8AC926", "#FF595E"][: len(sample)]
+    ax.barh(sample["candidate_rule"], sample["exact_match_rate"], color=colors)
+    ax.set_xlim(0, 1)
+    ax.set_xlabel("Exact historical match rate")
+    ax.set_title("Baseline and Counterfactual Rule Accuracy")
+    for i, value in enumerate(sample["exact_match_rate"]):
+        ax.text(min(float(value) + 0.02, 0.97), i, f"{float(value):.2f}", va="center")
+    fig.tight_layout()
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
+
+
+def plot_fan_rescue_cases(fan_rescue_cases: pd.DataFrame, path: str | Path) -> None:
+    set_plot_style()
+    sample = fan_rescue_cases.sort_values("fan_rescue_gap", ascending=True)
+    fig, ax = plt.subplots(figsize=(8, 5.8))
+    ax.barh(sample["case_id"], sample["fan_rescue_gap"], color="#2A9D8F")
+    ax.set_xlabel("Judge rank minus estimated fan rank")
+    ax.set_title("Largest Estimated Fan-Rescue Cases")
+    fig.tight_layout()
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
+
+
+def plot_contestant_instability(instability: pd.DataFrame, path: str | Path) -> None:
+    set_plot_style()
+    sample = instability.copy()
+    sample["label"] = sample["celebrity_name"] + " S" + sample["season"].astype(str)
+    sample = sample.sort_values("max_controversy_index", ascending=True)
+    fig, ax = plt.subplots(figsize=(8, 5.8))
+    ax.barh(sample["label"], sample["max_controversy_index"], color="#E76F51")
+    ax.set_xlabel("Maximum judge-fan rank gap")
+    ax.set_title("Highest Contestant Instability")
+    fig.tight_layout()
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
+
+
+def plot_threshold_sensitivity(sensitivity: pd.DataFrame, path: str | Path) -> None:
+    set_plot_style()
+    plot_data = sensitivity.copy()
+    fig, ax = plt.subplots(figsize=(8, 4.8))
+    ax.plot(
+        plot_data["threshold_quantile"],
+        plot_data["gray_zone_trigger_rate"],
+        marker="o",
+        label="Gray-zone trigger",
+        color="#264653",
+    )
+    ax.plot(
+        plot_data["threshold_quantile"],
+        plot_data["proposed_changes_percent_rate"],
+        marker="s",
+        label="Changes pure percent",
+        color="#E76F51",
+    )
+    ax.plot(
+        plot_data["threshold_quantile"],
+        plot_data["proposed_matches_observed_rate"],
+        marker="^",
+        label="Matches observed set",
+        color="#2A9D8F",
+    )
+    ax.set_ylim(0, 1)
+    ax.set_xlabel("Positive margin quantile used as threshold")
+    ax.set_ylabel("Rate")
+    ax.set_title("Gray-Zone Threshold Sensitivity")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
