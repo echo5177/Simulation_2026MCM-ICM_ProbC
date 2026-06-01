@@ -134,7 +134,7 @@ we use the estimated support profiles for counterfactual simulations and a
 producer-facing voting recommendation. Figure~\ref{fig:workflow} summarizes the
 complete workflow.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.68\linewidth]{fig_1_overall_research_workflow.png}
   \caption{Overall workflow for hidden fan-support inference.}
@@ -177,7 +177,7 @@ prediction, we evaluate candidate rules with four criteria. These criteria
 also guide the recommendation section, where mathematical performance must be
 translated into a rule that producers can explain on air.
 
-\begin{table}[!htbp]
+\begin{table}[H]
   \centering
   \caption{Voting-system design criteria used throughout the paper.}
   \label{tab:criteria}
@@ -199,7 +199,7 @@ translated into a rule that producers can explain on air.
 
 \section{Notation and Assumptions}
 
-\begin{table}[!htbp]
+\begin{table}[H]
   \centering
   \caption{Core notation used in the modeling workflow.}
   \label{tab:notation}
@@ -271,7 +271,7 @@ competition should not be interpreted as poor performance by an active
 contestant. This distinction is important because the fan-vote constraints are
 constructed week by week from the active set.
 
-\begin{table}[!htbp]
+\begin{table}[H]
   \centering
   \caption{Data-processing decisions used before modeling.}
   \label{tab:data-decisions}
@@ -293,7 +293,7 @@ constructed week by week from the active set.
   \end{tabularx}
 \end{table}
 
-\begin{table}[!htbp]
+\begin{table}[H]
   \centering
   \caption{Core data audit metrics used by the modeling workflow.}
   \label{tab:data-audit-core}
@@ -332,7 +332,7 @@ no-elimination week. This reconstruction produced 2,777 active
 contestant-week rows and 261 modeled elimination weeks used by the fan-support
 inference model.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \begin{subfigure}{0.49\linewidth}
     \centering
@@ -573,6 +573,49 @@ intervals tell us how much freedom remains after the historical elimination is
 enforced, while the maximum-entropy vector gives a stable reference point for
 comparing rules.
 
+\subsection{Identifiability boundary}
+
+The hidden-vote problem has an important boundary: the data can identify a
+feasible region, but not a unique public-vote vector. For a week with $n$
+active contestants, the fan simplex has dimension $n-1$. If $r$ independent
+elimination inequalities are active at the solution, the locally identified
+face has dimension approximately
+\[
+  d_{\mathrm{face}}=(n-1)-r .
+\]
+Most weeks have fewer active constraints than contestants, so $d_{\mathrm{face}}$
+is positive. This explains why a perfect historical reconstruction does not
+mean the exact fan vote has been recovered. It means the observed elimination
+is compatible with at least one point inside a larger feasible polytope.
+
+We therefore report both point estimates and uncertainty widths. The point
+estimate answers ``what is the least concentrated support profile consistent
+with the outcome?'' The interval width answers a different question: ``how much
+room does the official record leave for alternative support profiles?'' A
+contestant with a wide interval should not be described as precisely popular
+or unpopular. The responsible conclusion is that the public evidence is weak
+for that contestant-week.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Interpretation of fan-support outputs.}
+  \label{tab:identifiability}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Output & Mathematical role & Interpretation \\
+    \midrule
+    Feasible interval & Projection of the polytope onto $F_i$. & Range of fan
+    shares consistent with the elimination. \\
+    Entropy estimate & Interior point maximizing $-\sum_iF_i\log F_i$. &
+    Conservative reference profile for simulations. \\
+    Interval width & $\overline F_i-\underline F_i$. & Degree of
+    non-identifiability for contestant $i$. \\
+    Bottom-two margin & Gap between the two lowest combined scores. & Practical
+    fragility of the elimination decision. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
 \subsection{Uncertainty as a model output}
 
 The average feasible interval width across modeled weeks is 0.862, which is
@@ -749,6 +792,44 @@ which means that voting-rule design is not a minor technicality. A rule change
 can alter which contestants are at risk even when the same hidden support
 estimate is used.
 
+The mechanism is simple. Under a percent rule, contestant $i$ beats contestant
+$j$ when
+\[
+  (P_i^J-P_j^J)+(F_i-F_j)>0 .
+\]
+Under a rank rule, the same comparison is based on ordinal positions,
+\[
+  (R_j^J-R_i^J)+(R_j^F-R_i^F)>0 ,
+\]
+where better ranks have smaller numeric values. These two inequalities can
+have different signs because rank conversion replaces score gaps with unit
+steps. A one-point judge-score difference and a ten-point judge-score
+difference can both become adjacent rank positions. This is why the rule
+switch is most consequential in crowded early weeks: many contestants create
+many adjacent ranks, and small perturbations can move several names across the
+bottom boundary.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Mechanisms that produce rank-versus-percent disagreement.}
+  \label{tab:rule-mechanisms}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Mechanism & What happens mathematically & Practical effect \\
+    \midrule
+    Score compression & Percent gaps are replaced by rank steps. & Large
+    judge-score advantages can be understated. \\
+    Crowded leaderboard & Many contestants have adjacent ranks. & One fan-rank
+    change can alter several bottom candidates. \\
+    Multi-elimination & More than one contestant crosses the elimination
+    boundary. & Rule differences become easier for viewers to notice. \\
+    Hidden fan uncertainty & Many feasible fan profiles satisfy the observed
+    outcome. & A deterministic rank result can look more precise than the data
+    justify. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.50\linewidth]{fig_8_rank_percent_difference_heatmap.png}
@@ -848,6 +929,36 @@ create a risk of elimination that judges alone would not predict. A producer
 who wants to defend the show needs both types of diagnostics: fan-rescue cases
 and judge-favored but audience-weaker cases.
 
+Table~\ref{tab:case-reading} summarizes how these cases should be read. The
+important point is that a controversial outcome is not automatically an unfair
+outcome. It becomes unfair-looking when the rule cannot explain whether the
+audience, judges, or a close combined margin drove the result. Our diagnostics
+separate those mechanisms before recommending a new rule.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Diagnostic reading of representative high-leverage cases.}
+  \label{tab:case-reading}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Case type & Model evidence & Rule-design implication \\
+    \midrule
+    Fan rescue & Low judge rank but high estimated fan rank, as in Vinny
+    Guadagnino's early Season 31 weeks. & The fan vote must remain powerful
+    enough to overturn the judge leaderboard. \\
+    Judge-favored risk & High judge rank but weak estimated fan rank, as in
+    Joanna Krupa's Season 9 pattern. & Eliminations can be defensible even when
+    judges strongly prefer the contestant. \\
+    Persistent controversy & Multi-week judge-fan disagreement, as in Bobby
+    Bones and Bristol Palin. & Producers need an audit trail, not a one-week
+    explanation after criticism appears. \\
+    Rule-switch exposure & Different eliminated sets under rank and percent
+    aggregation. & The official rule should use a score scale that viewers can
+    interpret directly. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
 \section{Controversial Contestants}
 
 The problem statement highlights cases where public popularity and judge scores
@@ -923,6 +1034,13 @@ opposite pattern: strong judge ranks combined with weaker inferred fan support.
 Both patterns are important to producers because viewer complaints can arise
 from either side of the judge-audience divide.
 
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.50\linewidth]{fig_16_contestant_instability.png}
+  \caption{Contestant-level instability scan.}
+  \label{fig:contestant-instability}
+\end{figure}
+
 \section{Professional Dancer and Celebrity Effects}
 
 We modeled three related effects: judge-score effects, fan-support effects, and
@@ -932,6 +1050,26 @@ estimated with a penalized Cox model using active-week duration and an
 elimination indicator. These models are exploratory rather than causal: the
 data are observational and contestants are not randomly assigned to industries
 or professional partners.
+
+For contestant $i$ in season $s$ and week $t$, the score and fan-support
+models are
+\[
+  J_{i,s,t}=\beta_0+\beta_1\mathrm{Age}_i+\boldsymbol{\beta}_2^\top
+  \mathrm{Industry}_i+\alpha_s+\varepsilon_{i,s,t},
+\]
+\[
+  \widehat F_{i,s,t}=\gamma_0+\gamma_1\mathrm{Age}_i+\boldsymbol{\gamma}_2^\top
+  \mathrm{Industry}_i+\alpha_s+u_{i,s,t}.
+\]
+The season term $\alpha_s$ absorbs broad era-level differences in casting,
+audience size, and scoring style. For survival, we use the proportional-hazard
+form
+\[
+  h_i(t\mid x_i)=h_0(t)\exp(\boldsymbol{\theta}^\top x_i),
+\]
+where $x_i$ contains the same contestant attributes. This common covariate
+structure makes the three effect estimates comparable even though they answer
+different questions.
 
 The strongest consistent result is that age is associated with weaker estimated
 fan support and shorter survival. In the fan-support model, celebrity age has a
@@ -961,6 +1099,13 @@ association patterns, not as causal claims.
     \bottomrule
   \end{tabular}
 \end{table}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.50\linewidth]{fig_11_effects_forest.png}
+  \caption{Exploratory effect coefficients with uncertainty intervals.}
+  \label{fig:effects-forest}
+\end{figure}
 
 \section{Proposed Voting System}
 
@@ -995,7 +1140,7 @@ where $B_t$ is the bottom-two set. The second line approximates a judge save by
 keeping the stronger judge-scored contestant when the combined margin is too
 small to treat as decisive.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.56\linewidth]{fig_10_proposed_system_flowchart.png}
   \caption{Proposed Percent + Gray-Zone Judge Save workflow.}
@@ -1010,7 +1155,31 @@ Third, judge discretion is limited to close bottom-two cases, which preserves
 fan influence while giving producers a defensible way to manage fragile
 eliminations.
 
-\begin{table}[!htbp]
+Table~\ref{tab:rule-scorecard} compares the main rule choices against the
+criteria introduced at the start of the paper. A pure rank rule is easy to
+explain but discards score magnitudes. A pure percent rule is transparent and
+audience-centered, but it still treats tiny hidden-vote margins as decisive.
+The proposed hybrid keeps the percent scale while adding an explicit safeguard
+only where the modeled decision is fragile.
+
+\begin{table}[H]
+  \centering
+  \caption{Rule-design scorecard.}
+  \label{tab:rule-scorecard}
+  \begin{tabularx}{0.98\linewidth}{lXXXX}
+    \toprule
+    Criterion & Rank rule & Percent rule & Bottom-two save & Proposed hybrid \\
+    \midrule
+    Uses score magnitude & Weak & Strong & Depends on trigger & Strong \\
+    Protects fan influence & Medium & Strong & Medium & Strong outside gray zone \\
+    Handles close calls & Weak & Weak & Strong & Strong \\
+    Viewer transparency & Medium & Strong & Medium & Strong with audit label \\
+    Reproducible audit path & Medium & Strong & Weak if discretionary & Strong \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
   \centering
   \caption{Operational protocol for the proposed voting system.}
   \label{tab:implementation}
@@ -1032,7 +1201,30 @@ eliminations.
   \end{tabularx}
 \end{table}
 
-\begin{table}[!htbp]
+\begin{table}[H]
+  \centering
+  \caption{Producer-facing risks and controls in the proposed rule.}
+  \label{tab:risk-controls}
+  \begin{tabularx}{0.96\linewidth}{lXX}
+    \toprule
+    Risk & Why it matters & Control in the proposed system \\
+    \midrule
+    Hidden-vote opacity & Viewers cannot verify exact public vote totals. &
+    Publish judge share, fan share, combined share, and bottom-two margin after
+    the voting window. \\
+    Close-call backlash & Very small margins can look arbitrary. & Label
+    close cases as gray-zone decisions and use the judge save only there. \\
+    Rank compression & Rank aggregation can erase large score gaps. & Use
+    percent shares so score magnitudes remain visible. \\
+    Excess judge control & A broad save power could weaken the audience vote. &
+    Restrict judge discretion to the bottom two and to margins below $\tau$. \\
+    Audit failure & Post-show explanations may appear improvised. & Archive
+    the decision path, threshold, and score table for every modeled week. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
   \centering
   \caption{Simulation summary for the proposed gray-zone system.}
   \label{tab:proposed}
@@ -1048,13 +1240,14 @@ eliminations.
   \end{tabular}
 \end{table}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.44\linewidth]{fig_12_new_system_dashboard.png}
   \caption{Simulation dashboard for the proposed system.}
   \label{fig:system-dashboard}
 \end{figure}
 
+\clearpage
 \section{Sensitivity Analysis}
 
 The proposed system depends on the gray-zone threshold $\tau$, so we test how
@@ -1111,6 +1304,46 @@ of historical eliminated sets. The threshold mainly controls how much explicit
 judge discretion producers want in close calls; it does not change the
 underlying evidence that close-call transparency is needed.
 
+\section{Quality Control and Reproducibility}
+
+We separated reproducibility checks from substantive interpretation. A model
+can be reproducible but still answer the wrong question, so every major output
+was tied to a specific check: data reconstruction, constraint feasibility,
+baseline comparison, rule counterfactuals, and recommendation stability. This
+mirrors the practical workflow a producer would need if the rule were audited
+after a controversial elimination.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Quality-control checks used before drawing conclusions.}
+  \label{tab:quality-control}
+  \begin{tabularx}{0.98\linewidth}{lXX}
+    \toprule
+    Check & Evidence in this paper & Reason for inclusion \\
+    \midrule
+    Data reconstruction & 2,777 active contestant-week records and 261 modeled
+    elimination weeks. & Confirms that the weekly competitive panel is usable. \\
+    Constraint feasibility & Historical modeled eliminations are feasible under
+    the percent-rule inequalities. & Confirms that the latent fan-support
+    problem is internally consistent. \\
+    Baseline benchmark & Judge-only baseline matches 36.4\% of historical
+    eliminated sets. & Shows that fan support is necessary, not decorative. \\
+    Rule counterfactual & Rank and percent rules differ in 26.4\% of weeks. &
+    Demonstrates that aggregation choice changes outcomes. \\
+    Uncertainty audit & Mean feasible fan-share width is 0.862. & Prevents
+    overclaiming exact public-vote recovery. \\
+    Recommendation stability & Threshold sensitivity preserves the main
+    conclusion across tested quantiles. & Shows that the gray-zone idea is not
+    a single-parameter artifact. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+All reported figures and tables are generated from the same processed data
+pipeline. The paper therefore treats visualizations as audit artifacts rather
+than illustrations added after the fact. If a number appears in the memo or
+recommendation, it is traceable to one of the diagnostics above.
+
 \section{Memo to DWTS Producers}
 
 \noindent\textbf{To:} DWTS Producers \\
@@ -1133,7 +1366,7 @@ Percent + Gray-Zone Judge Save system.
   not as a replacement for fan influence.
 \end{itemize}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.28\linewidth]{memo_producer_decision_card.png}
   \caption{Producer decision card.}
