@@ -104,7 +104,10 @@ The paper's broader lesson is that hidden public votes should be modeled as cons
 \setcounter{page}{1}
 \rhead{Page \thepage\ }
 
+{\small
+\renewcommand{\baselinestretch}{0.94}\selectfont
 \tableofcontents
+}
 \clearpage
 
 \section{Introduction}
@@ -1343,6 +1346,65 @@ All reported figures and tables are generated from the same processed data
 pipeline. The paper therefore treats visualizations as audit artifacts rather
 than illustrations added after the fact. If a number appears in the memo or
 recommendation, it is traceable to one of the diagnostics above.
+
+\section{Viewer Communication and Audit Package}
+
+A voting rule also needs a communication rule. The show should not reveal raw
+vote counts if the network treats them as confidential, but it can still reveal
+the decision path in a reproducible way. We propose that each elimination be
+stored as an audit tuple
+\[
+  \mathcal{A}_t=\{P_i^J,\ F_i,\ C_i^{\mathrm{pct}},\
+  C^{\mathrm{pct}}_{(2),t}-C^{\mathrm{pct}}_{(1),t},\ \tau_q,\ L_t\},
+\]
+where $L_t$ is the public decision label: clear percent decision or gray-zone
+judge save. This tuple is enough to explain the result without exposing raw
+ballot totals. It also makes the proposed system harder to criticize as an
+after-the-fact producer decision because the threshold and label are computed
+before the judge-save choice is announced.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Recommended public audit package after each elimination.}
+  \label{tab:audit-package}
+  \begin{tabularx}{0.98\linewidth}{lXX}
+    \toprule
+    Released item & Calculation & Purpose \\
+    \midrule
+    Judge percentage & $P_i^J=J_i/\sum_kJ_k$. & Shows how expert scoring
+    contributes on the same scale as fan voting. \\
+    Fan percentage rank & Rank induced by verified fan share $F_i$. & Confirms
+    that public voting affected the combined order. \\
+    Combined percentage & $C_i^{\mathrm{pct}}=P_i^J+F_i$. & Gives viewers the
+    direct rule used for the bottom-two comparison. \\
+    Bottom-two margin & $C^{\mathrm{pct}}_{(2),t}-C^{\mathrm{pct}}_{(1),t}$. &
+    Distinguishes clear eliminations from fragile close calls. \\
+    Decision label & Clear decision if margin $>\tau_q$; gray-zone judge save
+    otherwise. & Makes judge discretion conditional rather than open-ended. \\
+    Archived path & Scores, threshold, label, and save decision. & Allows a
+    later audit to reproduce the public explanation. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+The communication rule should be conservative. If the bottom-two margin is
+larger than $\tau_q$, producers should say that the combined percentage result
+was clear. If the margin is no larger than $\tau_q$, producers should say that
+the result entered the gray zone and that judges made the limited bottom-two
+save. The show should not claim that a contestant had an exact level of public
+support unless the raw vote share is actually released. This distinction is
+important because our model shows that hidden fan support is highly
+non-identifiable. Clear language prevents the same mistake a weak model would
+make: treating an estimated or confidential fan component as if it were a
+publicly verified exact number.
+
+This audit package also improves the fairness of controversial cases. In a
+fan-rescue case, the public can see that fan support changed the judge-only
+bottom set. In a judge-favored risk case, the public can see that high judge
+scores did not guarantee safety once fan share was included. In a gray-zone
+case, the public can see that the judges intervened only because the combined
+margin was small. Thus the same reporting structure explains the three most
+important kinds of viewer complaints.
 
 \section{Memo to DWTS Producers}
 
