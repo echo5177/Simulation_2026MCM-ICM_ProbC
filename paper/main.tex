@@ -1,0 +1,139 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MCM/ICM LaTeX Report
+%% 2026 MCM Problem C
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{left=1in,right=0.75in,top=1in,bottom=1in}
+
+\newcommand{\Problem}{C}
+\newcommand{\Team}{1111111}
+\newcommand{\figdir}{../figures}
+\newcommand{\tabledir}{../tables}
+
+\usepackage{newtxtext}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{newtxmath}
+\usepackage[pdftex]{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\lhead{Team \Team}
+\rhead{}
+\cfoot{}
+\setlength{\headheight}{14.5pt}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{1.2em}
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0.1em,topsep=0.2em}
+
+\captionsetup{font=small,labelfont=bf}
+
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+
+\begin{document}
+\pagenumbering{gobble}
+\graphicspath{{../}{../figures/concept/}{../figures/generated/}}
+\DeclareGraphicsExtensions{.pdf,.jpg,.jpeg,.png}
+
+\thispagestyle{empty}
+\vspace*{-16ex}
+\centerline{\begin{tabular}{*3{c}}
+  \parbox[t]{0.3\linewidth}{\begin{center}\textbf{Problem Chosen}\\ \Large \Problem\end{center}}
+  & \parbox[t]{0.3\linewidth}{\begin{center}\textbf{2026\\ MCM/ICM\\ Summary Sheet}\end{center}}
+  & \parbox[t]{0.3\linewidth}{\begin{center}\textbf{Team Control Number}\\ \Large \Team\end{center}} \\
+  \hline
+\end{tabular}}
+
+\begin{center}
+\Large \textbf{Data With the Stars: Inferring Hidden Fan Support Under Voting-Rule Constraints}
+\end{center}
+
+\noindent
+Dancing with the Stars combines expert evaluation with audience voting, but the fan-vote component is secret. This makes Problem C fundamentally different from a direct prediction problem: the observed eliminations do not reveal a unique set of fan votes. Our solution therefore treats fan support as a latent variable. Instead of pretending to know exact vote totals, we reconstruct weekly competitions, translate observed eliminations into feasible fan-support constraints, estimate maximum-entropy fan-share distributions, and use those estimates to compare voting rules and propose a producer-facing rule.
+
+\noindent
+Using the official data set of 421 contestants across 34 seasons, we rebuilt 2,777 active contestant-week records and modeled 261 elimination weeks. The resulting latent-support model exactly reproduced the observed modeled eliminations by construction and confirmed that the underlying fan-vote uncertainty is large. This non-identifiability is the central practical finding: many fan-support profiles can explain the same observed elimination. It means that a good voting system should not merely chase an estimated ``true'' fan vote, but should be robust to close and ambiguous cases.
+
+\noindent
+Our counterfactual simulation shows that rank and percent rules disagree in 26.4\% of modeled elimination weeks, while estimated fan support changes the judge-only bottom set in 63.6\% of modeled weeks. We also examine controversial contestants, professional-dancer and celebrity-category effects, and the institutional role of bottom-two judge saves. These results support a hybrid recommendation: use a percent-based combined score for transparency, but introduce a gray-zone judge save when the bottom-two combined margin is small. In our simulation, the gray-zone trigger activates in 61.7\% of modeled elimination weeks, making close calls explicit rather than hiding them inside opaque vote totals.
+
+\noindent
+For producers, the recommendation is simple: keep fan influence visible, avoid overclaiming exact fan support, and reserve judge discretion for statistically fragile bottom-two cases. The proposed system is more explainable than a pure rank system and more stable than treating a tiny combined-score gap as decisive.
+
+\clearpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\rhead{Page \thepage\ }
+
+\section{Introduction}
+
+\section{Data Audit and Preprocessing}
+
+\section{Voting Rule Formalization}
+
+\section{Fan Vote Estimation}
+
+\section{Model Validation and Consistency}
+
+\section{Rank vs. Percent Counterfactual Analysis}
+
+\section{Controversial Contestants}
+
+\section{Professional Dancer and Celebrity Effects}
+
+\section{Proposed Voting System}
+
+\section{Memo to DWTS Producers}
+
+\section{Strengths, Limitations, and Extensions}
+
+\begin{thebibliography}{9}
+
+\bibitem{comapProblemC}
+COMAP.
+\newblock 2026 MCM Problem C: Data With the Stars.
+\newblock Mathematical Contest in Modeling, 2026.
+
+\bibitem{comapInstructions}
+COMAP.
+\newblock Contest Rules, Registration and Instructions for MCM/ICM.
+\newblock \url{https://contest.comap.com/undergraduate/contests/mcm/instructions.php}, 2026.
+
+\bibitem{shannon1948}
+C. E. Shannon.
+\newblock A mathematical theory of communication.
+\newblock \emph{Bell System Technical Journal}, 27:379--423, 623--656, 1948.
+
+\bibitem{boyd2004}
+S. Boyd and L. Vandenberghe.
+\newblock \emph{Convex Optimization}.
+\newblock Cambridge University Press, 2004.
+
+\bibitem{diamond2016}
+S. Diamond and S. Boyd.
+\newblock CVXPY: A Python-embedded modeling language for convex optimization.
+\newblock \emph{Journal of Machine Learning Research}, 17(83):1--5, 2016.
+
+\bibitem{scipy2020}
+P. Virtanen et al.
+\newblock SciPy 1.0: Fundamental algorithms for scientific computing in Python.
+\newblock \emph{Nature Methods}, 17:261--272, 2020.
+
+\bibitem{statsmodels2010}
+S. Seabold and J. Perktold.
+\newblock Statsmodels: Econometric and statistical modeling with Python.
+\newblock Proceedings of the 9th Python in Science Conference, 2010.
+
+\end{thebibliography}
+
+\end{document}
