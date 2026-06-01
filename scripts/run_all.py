@@ -25,8 +25,12 @@ from mcm_c_dwts.data_loader import load_raw_data
 from mcm_c_dwts.diagnostics import (
     build_baseline_comparison,
     build_contestant_instability,
+    build_constraint_summary,
+    build_era_rule_summary,
+    build_event_type_summary,
     build_fan_rescue_cases,
     build_rule_switch_cases,
+    build_selected_effects_table,
     build_threshold_sensitivity,
 )
 from mcm_c_dwts.controversy import build_controversy_cases
@@ -98,6 +102,10 @@ def main() -> None:
     fan_rescue_cases = build_fan_rescue_cases(fan_estimates)
     contestant_instability = build_contestant_instability(fan_estimates)
     threshold_sensitivity = build_threshold_sensitivity(fan_estimates, validation)
+    constraint_summary = build_constraint_summary(validation)
+    event_type_summary = build_event_type_summary(counterfactuals, validation)
+    era_rule_summary = build_era_rule_summary(counterfactuals, validation)
+    selected_effects = build_selected_effects_table(effects)
 
     panel.to_csv(INTERIM_DIR / "long_panel.csv", index=False)
     active_set.to_csv(INTERIM_DIR / "active_set_by_week.csv", index=False)
@@ -118,6 +126,10 @@ def main() -> None:
     fan_rescue_cases.to_csv(PROCESSED_DIR / "top_fan_rescue_cases.csv", index=False)
     contestant_instability.to_csv(PROCESSED_DIR / "contestant_instability.csv", index=False)
     threshold_sensitivity.to_csv(PROCESSED_DIR / "threshold_sensitivity.csv", index=False)
+    constraint_summary.to_csv(PROCESSED_DIR / "constraint_summary.csv", index=False)
+    event_type_summary.to_csv(PROCESSED_DIR / "event_type_summary.csv", index=False)
+    era_rule_summary.to_csv(PROCESSED_DIR / "era_rule_summary.csv", index=False)
+    selected_effects.to_csv(PROCESSED_DIR / "selected_effects.csv", index=False)
     inference.model_issue_log.to_csv(PROCESSED_DIR / "model_issue_log.csv", index=False)
 
     export_latex_table(
@@ -231,6 +243,26 @@ def main() -> None:
         threshold_sensitivity,
         TABLES_DIR / "table_12_threshold_sensitivity.tex",
         caption="Gray-zone threshold sensitivity.",
+    )
+    export_latex_table(
+        constraint_summary,
+        TABLES_DIR / "table_13_constraint_summary.tex",
+        caption="Fan-support constraint-system diagnostics.",
+    )
+    export_latex_table(
+        event_type_summary,
+        TABLES_DIR / "table_14_event_type_summary.tex",
+        caption="Rule diagnostics by elimination-event type.",
+    )
+    export_latex_table(
+        era_rule_summary,
+        TABLES_DIR / "table_15_era_rule_summary.tex",
+        caption="Rule diagnostics by season era.",
+    )
+    export_latex_table(
+        selected_effects,
+        TABLES_DIR / "table_16_selected_effects.tex",
+        caption="Selected exploratory effect estimates.",
     )
     write_data_audit_report(
         raw,

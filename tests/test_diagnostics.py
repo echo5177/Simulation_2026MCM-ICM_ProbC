@@ -4,6 +4,7 @@ import pandas as pd
 
 from mcm_c_dwts.diagnostics import (
     build_baseline_comparison,
+    build_constraint_summary,
     build_threshold_sensitivity,
 )
 
@@ -69,3 +70,20 @@ def test_threshold_sensitivity_includes_no_gray_zone_baseline():
     assert result["threshold_label"].iloc[0] == "No gray zone"
     assert result["gray_zone_trigger_rate"].iloc[0] == 0.0
     assert result["modeled_weeks"].iloc[0] == 1
+
+
+def test_constraint_summary_counts_pairwise_inequalities():
+    validation = pd.DataFrame(
+        {
+            "active_count": [6, 5],
+            "eliminated_count": [1, 2],
+            "bottom_two_margin": [0.1, 0.2],
+        }
+    )
+
+    result = build_constraint_summary(validation)
+
+    total_constraints = result.loc[
+        result["diagnostic"] == "Total linear inequalities", "value"
+    ].iloc[0]
+    assert total_constraints == 11

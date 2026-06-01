@@ -248,3 +248,122 @@ def build_threshold_sensitivity(
             }
         )
     return pd.DataFrame(rows)
+
+
+def build_constraint_summary(validation: pd.DataFrame) -> pd.DataFrame:
+    diagnostics = validation.copy()
+    diagnostics["linear_constraints"] = diagnostics["eliminated_count"] * (
+        diagnostics["active_count"] - diagnostics["eliminated_count"]
+    )
+    rows = [
+        ("Modeled elimination weeks", len(diagnostics), "season-week events"),
+        ("Mean active contestants", diagnostics["active_count"].mean(), "contestants"),
+        ("Median active contestants", diagnostics["active_count"].median(), "contestants"),
+        ("Mean eliminated contestants", diagnostics["eliminated_count"].mean(), "contestants"),
+        ("Total linear inequalities", diagnostics["linear_constraints"].sum(), "constraints"),
+        ("Mean inequalities per week", diagnostics["linear_constraints"].mean(), "constraints"),
+        ("Maximum inequalities in a week", diagnostics["linear_constraints"].max(), "constraints"),
+        ("Median bottom-two margin", diagnostics["bottom_two_margin"].median(), "combined share"),
+    ]
+    return pd.DataFrame(rows, columns=["diagnostic", "value", "unit"])
+
+
+def build_event_type_summary(
+    counterfactuals: pd.DataFrame,
+    validation: pd.DataFrame,
+) -> pd.DataFrame:
+    diagnostics = counterfactuals.merge(
+        validation[
+            [
+                "season",
+                "week",
+                "mean_fan_share_width",
+                "bottom_two_margin",
+                "percent_reproduces_observed",
+            ]
+        ],
+        on=["season", "week"],
+        how="left",
+    )
+    diagnostics["linear_constraints"] = diagnostics["eliminated_count"] * (
+        diagnostics["active_count"] - diagnostics["eliminated_count"]
+    )
+    return (
+        diagnostics.groupby("event_type")
+        .agg(
+            weeks=("week", "count"),
+            mean_active=("active_count", "mean"),
+            mean_constraints=("linear_constraints", "mean"),
+            rank_percent_diff_rate=("rank_percent_different", "mean"),
+            fan_override_rate=("fan_override_judges", "mean"),
+            mean_width=("mean_fan_share_width", "mean"),
+            median_margin=("bottom_two_margin", "median"),
+        )
+        .reset_index()
+    )
+
+
+def build_era_rule_summary(
+    counterfactuals: pd.DataFrame,
+    validation: pd.DataFrame,
+) -> pd.DataFrame:
+    diagnostics = counterfactuals.merge(
+        validation[
+            [
+                "season",
+                "week",
+                "mean_fan_share_width",
+                "bottom_two_margin",
+            ]
+        ],
+        on=["season", "week"],
+        how="left",
+    )
+    bins = [0, 10, 20, 30, 40]
+    labels = ["S1-S10", "S11-S20", "S21-S30", "S31-S34"]
+    diagnostics["season_era"] = pd.cut(
+        diagnostics["season"],
+        bins=bins,
+        labels=labels,
+        right=True,
+    )
+    return (
+        diagnostics.groupby("season_era", observed=True)
+        .agg(
+            modeled_weeks=("week", "count"),
+            mean_active=("active_count", "mean"),
+            rank_percent_diff_rate=("rank_percent_different", "mean"),
+            fan_override_rate=("fan_override_judges", "mean"),
+            mean_width=("mean_fan_share_width", "mean"),
+            median_margin=("bottom_two_margin", "median"),
+        )
+        .reset_index()
+    )
+
+
+def build_selected_effects_table(effects: pd.DataFrame) -> pd.DataFrame:
+    selected_terms = [
+        ("judge_score_ols", "celebrity_age_during_season", "Judge score: age"),
+        ("fan_support_ols", "celebrity_age_during_season", "Fan support: age"),
+        ("survival_cox", "celebrity_age_during_season", "Survival hazard: age"),
+        ("judge_score_ols", "C(celebrity_industry)[T.Athlete]", "Judge score: athlete"),
+        ("judge_score_ols", "C(celebrity_industry)[T.Model]", "Judge score: model"),
+        ("fan_support_ols", "C(celebrity_industry)[T.TV Personality]", "Fan support: TV personality"),
+        ("fan_support_ols", "C(celebrity_industry)[T.Radio Personality]", "Fan support: radio personality"),
+    ]
+    rows = []
+    for model, term, label in selected_terms:
+        match = effects.loc[(effects["model"] == model) & (effects["term"] == term)]
+        if match.empty:
+            continue
+        row = match.iloc[0]
+        rows.append(
+            {
+                "effect": label,
+                "estimate": row.get("estimate"),
+                "conf_low": row.get("conf_low"),
+                "conf_high": row.get("conf_high"),
+                "p_value": row.get("p_value"),
+            }
+        )
+    return pd.DataFrame(rows)

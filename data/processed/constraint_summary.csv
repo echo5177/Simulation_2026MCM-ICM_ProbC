@@ -1,0 +1,9 @@
+diagnostic,value,unit
+Modeled elimination weeks,261.0,season-week events
+Mean active contestants,8.624521072796934,contestants
+Median active contestants,9.0,contestants
+Mean eliminated contestants,1.160919540229885,contestants
+Total linear inequalities,2252.0,constraints
+Mean inequalities per week,8.628352490421456,constraints
+Maximum inequalities in a week,30.0,constraints
+Median bottom-two margin,7.5288435846254664e-06,combined share
