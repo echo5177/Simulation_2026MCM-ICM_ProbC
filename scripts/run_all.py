@@ -207,6 +207,18 @@ def main() -> None:
 
     pd.DataFrame(
         [
+            (
+                "Fig. 1",
+                "figures/concept/fig_1_overall_research_workflow.png",
+                "AI-generated concept figure",
+                "1. Introduction",
+            ),
+            (
+                "Fig. 2",
+                "figures/concept/fig_2_voting_rule_mechanism.png",
+                "AI-generated concept figure",
+                "3. Voting Rule Formalization",
+            ),
             ("Fig. 3", rel(season_fig), "scripts/run_all.py", "2. Data Audit"),
             ("Fig. 4", rel(score_fig), "scripts/run_all.py", "2. Data Audit"),
             ("Fig. 5", rel(interval_fig), "scripts/run_all.py", "4. Fan Vote Estimation"),
@@ -214,8 +226,20 @@ def main() -> None:
             ("Fig. 7", rel(validation_fig), "scripts/run_all.py", "5. Validation"),
             ("Fig. 8", rel(rule_fig), "scripts/run_all.py", "6. Rank vs Percent"),
             ("Fig. 9", rel(controversy_fig), "scripts/run_all.py", "7. Controversial Cases"),
+            (
+                "Fig. 10",
+                "figures/concept/fig_10_proposed_system_flowchart.png",
+                "AI-generated concept figure",
+                "9. Proposed System",
+            ),
             ("Fig. 11", rel(effects_fig), "scripts/run_all.py", "8. Effects Model"),
             ("Fig. 12", rel(system_fig), "scripts/run_all.py", "9. Proposed System"),
+            (
+                "Memo Card",
+                "figures/concept/memo_producer_decision_card.png",
+                "AI-generated concept figure",
+                "Memo to Producers",
+            ),
         ],
         columns=["figure_id", "path", "source_script", "paper_location"],
     ).to_csv(REPORTS_DIR / "figure_manifest.csv", index=False)
