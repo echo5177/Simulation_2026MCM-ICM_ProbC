@@ -332,17 +332,266 @@ close bottom-two cases explicitly.
 
 \section{Model Validation and Consistency}
 
+The validation step asks a limited but essential question: after reconstructing
+the active set and solving for a feasible maximum-entropy support vector, does
+the model reproduce the observed elimination under the percent-rule
+constraints? The answer is yes for all 261 modeled elimination weeks. This
+100\% reproduction rate should not be misread as out-of-sample prediction. It
+is a consistency check showing that the reconstructed data, constraints, and
+optimization pipeline agree with the observed historical record.
+
+\begin{table}[H]
+  \centering
+  \caption{Validation and uncertainty metrics.}
+  \label{tab:validation}
+  \begin{tabular}{lr}
+    \toprule
+    Metric & Value \\
+    \midrule
+    Modeled elimination weeks & 261 \\
+    Percent-rule reproduction rate & 100.0\% \\
+    Observed elimination in modeled bottom two & 100.0\% \\
+    Mean feasible fan-share interval width & 0.862 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The more important validation result is the scale of uncertainty. The average
+interval width of 0.862 shows that observed eliminations alone leave the fan
+support profile highly underdetermined. In practical terms, a reported
+elimination may be consistent with a wide range of public-vote configurations.
+This strengthens the case for comparing voting systems through robust
+counterfactual behavior rather than through a single supposed true vote count.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{fig_7_validation_dashboard.png}
+  \caption{Validation dashboard. The model reproduces the observed modeled
+  eliminations, while the margin and interval-width panels show that close and
+  uncertain weeks are common.}
+  \label{fig:validation}
+\end{figure}
+
 \section{Rank vs. Percent Counterfactual Analysis}
+
+We next use the same maximum-entropy fan-support estimates to compare the rank
+and percent rules. This isolates the effect of the rule itself: the contestants,
+judge scores, and estimated fan support remain fixed, while only the rule used
+to combine them changes.
+
+Across 261 modeled elimination weeks, rank and percent rules produce different
+elimination sets in 26.4\% of weeks. Estimated fan support changes the
+judge-only bottom set in 63.6\% of weeks. These two metrics have different
+interpretations. The first measures institutional sensitivity to rule choice.
+The second measures how often the public component is strong enough to change
+what would have happened under judges alone.
+
+\begin{table}[H]
+  \centering
+  \caption{Counterfactual rule-comparison metrics.}
+  \label{tab:rule-comparison}
+  \begin{tabular}{lr}
+    \toprule
+    Metric & Value \\
+    \midrule
+    Modeled elimination weeks & 261 \\
+    Rank-percent outcome difference rate & 26.4\% \\
+    Fan override rate relative to judge-only bottom set & 63.6\% \\
+    Mean rank-percent eliminated-set overlap & 0.893 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The heatmap in Figure~\ref{fig:rank-percent} shows that rule disagreement is
+not confined to a single season. It appears throughout the history of the data,
+which means that voting-rule design is not a minor technicality. A rule change
+can alter which contestants are at risk even when the same hidden support
+estimate is used.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.83\linewidth]{fig_8_rank_percent_difference_heatmap.png}
+  \caption{Season-week map of rank-versus-percent differences. Dark cells mark
+  modeled weeks where the two rules select different eliminated sets.}
+  \label{fig:rank-percent}
+\end{figure}
 
 \section{Controversial Contestants}
 
+The problem statement highlights cases where public popularity and judge scores
+may appear to pull in different directions. We therefore tracked Jerry Rice,
+Billy Ray Cyrus, Bristol Palin, and Bobby Bones using a controversy index,
+\[
+  CI_{i,t}=|R^J_{i,t}-R^F_{i,t}|,
+\]
+where $R^J$ is judge rank and $R^F$ is the estimated fan rank. Large values
+indicate a large gap between expert evaluation and inferred public support.
+
+\begin{table}[H]
+  \centering
+  \caption{Summary of selected controversial contestants.}
+  \label{tab:controversy}
+  \begin{tabular}{lrrrrl}
+    \toprule
+    Contestant & Season & Weeks & Mean judge rank & Mean fan rank & Result \\
+    \midrule
+    Bristol Palin & 15 & 4 & 10.50 & 4.25 & Eliminated Week 4 \\
+    Bobby Bones & 27 & 7 & 7.29 & 4.86 & 1st Place \\
+    Bristol Palin & 11 & 9 & 6.22 & 3.89 & 3rd Place \\
+    Billy Ray Cyrus & 4 & 7 & 5.86 & 4.00 & Eliminated Week 8 \\
+    Jerry Rice & 2 & 7 & 4.86 & 4.14 & 2nd Place \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The pattern is clearest for Bristol Palin's Season 15 run and Bobby Bones's
+Season 27 win. In both cases, estimated fan ranks are substantially better than
+judge ranks over multiple weeks. This does not prove a specific vote total, but
+it does quantify the direction of the conflict: these contestants survived
+longer than judge rank alone would suggest because the feasible fan-support
+estimates consistently place them higher with viewers.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.94\linewidth]{fig_9_controversial_trajectories.png}
+  \caption{Judge rank versus estimated fan rank for selected controversial
+  contestants. Lower rank values are better.}
+  \label{fig:controversy}
+\end{figure}
+
 \section{Professional Dancer and Celebrity Effects}
+
+We modeled three related effects: judge-score effects, fan-support effects, and
+survival-time effects. Judge and fan effects were estimated with ordinary least
+squares using celebrity age and industry indicators. Survival effects were
+estimated with a penalized Cox model using active-week duration and an
+elimination indicator. These models are exploratory rather than causal: the
+data are observational and contestants are not randomly assigned to industries
+or professional partners.
+
+The strongest consistent result is that age is associated with weaker estimated
+fan support and shorter survival. In the fan-support model, celebrity age has a
+negative coefficient of $-0.00051$ per year. In the survival model, age has a
+positive hazard coefficient of $0.0327$, meaning older contestants tend to face
+earlier elimination after controlling for the included industry indicators. Some
+industry coefficients are also notable: for example, radio personalities and
+politicians receive lower judge-score estimates in the judge-score model, while
+social media personalities and TV personalities have lower estimated fan-share
+coefficients in the fan-support model. These findings should be interpreted as
+association patterns, not as causal claims.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{fig_11_effects_forest.png}
+  \caption{Largest coefficients from the exploratory judge-score, fan-support,
+  and survival models. Coefficients summarize associations, not causal effects.}
+  \label{fig:effects}
+\end{figure}
 
 \section{Proposed Voting System}
 
+The central design lesson is that close bottom-two cases should be treated as
+ambiguous rather than forced into a deterministic public-facing ranking. We
+therefore propose a hybrid system:
+\[
+  \text{Percent Rule} + \text{Gray-Zone Judge Save}.
+\]
+The system first converts judge scores and fan votes into percentages and adds
+them. If the combined-score gap between the lowest two contestants is larger
+than a threshold $\tau$, the lowest combined score is eliminated. If the margin
+is at or below $\tau$, the bottom two enter a judge-save decision. In our
+simulation, $\tau$ is set to 0.00354, the 25th percentile of positive modeled
+bottom-two combined-score margins.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.93\linewidth]{fig_10_proposed_system_flowchart.png}
+  \caption{Proposed Percent + Gray-Zone Judge Save system. The judge save is
+  activated only when the bottom-two combined-score margin is small.}
+  \label{fig:proposed-flow}
+\end{figure}
+
+The proposed system has three advantages. First, percent scoring is more
+transparent than rank aggregation because judge and fan shares are measured on
+the same scale. Second, the gray zone acknowledges that tiny margins are not
+substantively robust when fan support is hidden and highly non-identifiable.
+Third, judge discretion is limited to close bottom-two cases, which preserves
+fan influence while giving producers a defensible way to manage fragile
+eliminations.
+
+\begin{table}[H]
+  \centering
+  \caption{Simulation summary for the proposed gray-zone system.}
+  \label{tab:proposed}
+  \begin{tabular}{lr}
+    \toprule
+    Metric & Value \\
+    \midrule
+    Gray-zone threshold $\tau$ & 0.00354 \\
+    Gray-zone trigger rate & 61.7\% \\
+    Proposed system differs from pure percent rule & 46.0\% \\
+    Proposed elimination appears in observed set & 54.0\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\linewidth]{fig_12_new_system_dashboard.png}
+  \caption{Simulation dashboard for the proposed gray-zone system.}
+  \label{fig:system-dashboard}
+\end{figure}
+
 \section{Memo to DWTS Producers}
 
+\noindent\textbf{To:} DWTS Producers \\
+\textbf{Subject:} A transparent voting system for close eliminations
+
+\noindent
+The analysis suggests that fan votes should remain central to the show, but
+close bottom-two cases should not be treated as if the hidden fan vote were
+fully observable. We recommend replacing opaque rank aggregation with a
+Percent + Gray-Zone Judge Save system.
+
+\begin{itemize}
+  \item Convert judge scores and fan votes into percentages before combining
+  them. This makes the rule easier to explain to viewers.
+  \item Use the standard percent result when the bottom-two margin is clearly
+  separated.
+  \item When the bottom-two margin is inside the gray zone, ask judges to save
+  one contestant from the bottom two.
+  \item Publicly describe the judge-save condition as a close-call safeguard,
+  not as a replacement for fan influence.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.58\linewidth]{memo_producer_decision_card.png}
+  \caption{Producer decision card summarizing the recommended voting system.}
+  \label{fig:memo-card}
+\end{figure}
+
 \section{Strengths, Limitations, and Extensions}
+
+\textbf{Strengths.} The model respects the fact that fan votes are hidden. It
+does not invent labels or claim to recover exact vote totals. Every numerical
+result in the paper is generated from the same reproducible workflow, and the
+validation step confirms that the reconstructed constraints are internally
+consistent with the observed modeled eliminations.
+
+\textbf{Limitations.} The maximum-entropy fan profile is a conservative point
+estimate, not a direct observation. The bottom-two judge-save simulation is a
+policy model because detailed historical judge-save ballots are not fully
+available in the data. The professional-dancer and celebrity-effect regressions
+are observational associations and may reflect unmodeled casting, editing, or
+audience factors.
+
+\textbf{Extensions.} Future work could add verified external popularity
+signals, such as social media engagement or search interest, but only if those
+sources are logged and validated. Another extension would model the evolution
+of fan support across weeks with a state-space model. We did not use those
+extensions in the main workflow because the official data already support a
+complete and transparent constraint-based solution.
 
 \begin{thebibliography}{9}
 
