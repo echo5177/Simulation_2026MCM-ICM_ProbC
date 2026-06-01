@@ -1,3 +1,10 @@
 figure_id,path,source_script,paper_location
-Fig. 3,D:\documents\MCM&ICM\2026年\MCM_Automation\Simulation_2026MCM-ICM_ProbC\figures\generated\fig_3_season_structure.png,scripts/run_all.py,2. Data Audit
-Fig. 4,D:\documents\MCM&ICM\2026年\MCM_Automation\Simulation_2026MCM-ICM_ProbC\figures\generated\fig_4_judge_score_distribution.png,scripts/run_all.py,2. Data Audit
+Fig. 3,figures/generated/fig_3_season_structure.png,scripts/run_all.py,2. Data Audit
+Fig. 4,figures/generated/fig_4_judge_score_distribution.png,scripts/run_all.py,2. Data Audit
+Fig. 5,figures/generated/fig_5_fan_vote_feasible_intervals.png,scripts/run_all.py,4. Fan Vote Estimation
+Fig. 6,figures/generated/fig_6_fan_vote_uncertainty_heatmap.png,scripts/run_all.py,4-5. Uncertainty and Validation
+Fig. 7,figures/generated/fig_7_validation_dashboard.png,scripts/run_all.py,5. Validation
+Fig. 8,figures/generated/fig_8_rank_percent_difference_heatmap.png,scripts/run_all.py,6. Rank vs Percent
+Fig. 9,figures/generated/fig_9_controversial_trajectories.png,scripts/run_all.py,7. Controversial Cases
+Fig. 11,figures/generated/fig_11_effects_forest.png,scripts/run_all.py,8. Effects Model
+Fig. 12,figures/generated/fig_12_new_system_dashboard.png,scripts/run_all.py,9. Proposed System

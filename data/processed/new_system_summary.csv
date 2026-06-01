@@ -1,0 +1,5 @@
+metric,value,description
+gray_zone_tau,0.003539060107463035,25th percentile of modeled bottom-two combined-score margins.
+gray_zone_trigger_rate,0.6168582375478927,Share of modeled elimination weeks sent to judge save.
+proposed_changes_percent_rate,0.45977011494252873,Share of weeks where proposed system differs from pure percent rule.
+proposed_matches_observed_rate,0.5402298850574713,Share of weeks where proposed single elimination appears in observed eliminated set.

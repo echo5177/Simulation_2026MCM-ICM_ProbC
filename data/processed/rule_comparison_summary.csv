@@ -1,0 +1,5 @@
+metric,value,description
+modeled_elimination_weeks,261.0,Elimination weeks processed by the fan-support model.
+outcome_difference_rate,0.26436781609195403,Share of modeled weeks where rank and percent rules disagree.
+fan_override_rate,0.6360153256704981,Share of modeled weeks where fan support changes judge-only bottom set.
+mean_rank_percent_overlap,0.89272030651341,Average overlap between rank-rule and percent-rule eliminated sets.

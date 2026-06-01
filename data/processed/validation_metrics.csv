@@ -1,0 +1,262 @@
+season,week,next_week,event_type,active_count,eliminated_count,observed_eliminated,percent_predicted_bottom,percent_reproduces_observed,observed_in_bottom_two,mean_fan_share_width,max_fan_share_width,bottom_two_margin
+1,2,3,single_elimination,6,1,Trista Sutter,Trista Sutter,True,True,0.8145087235996327,0.9421487603305786,2.9281213564935626e-09
+1,3,4,single_elimination,5,1,Evander Holyfield,Evander Holyfield,True,True,0.8554716981132076,1.0,0.0754682478685268
+1,4,5,single_elimination,4,1,Rachel Hunter,Rachel Hunter,True,True,0.7336956521739131,0.9021739130434783,6.356525750206288e-09
+1,5,6,single_elimination,3,1,Joey McIntyre,Joey McIntyre,True,True,0.7861491628614917,1.0,0.013721739798512211
+2,1,2,single_elimination,10,1,Kenny Mayne,Kenny Mayne,True,True,0.9087179487179486,0.9948717948717949,2.38887671588639e-08
+2,2,3,single_elimination,9,1,Tatum O'Neal,Tatum O'Neal,True,True,0.8996913580246912,0.995,2.503866194936144e-08
+2,3,4,single_elimination,8,1,Giselle Fernandez,Giselle Fernandez,True,True,0.8382554945054945,0.9395604395604397,2.6919698137284342e-09
+2,4,5,single_elimination,7,1,Master P,Master P,True,True,0.8907259106174115,1.0,0.08228834778637911
+2,5,6,single_elimination,6,1,Tia Carrere,Tia Carrere,True,True,0.8646063281824872,1.0,0.006636900787723388
+2,6,7,single_elimination,5,1,George Hamilton,George Hamilton,True,True,0.8454135338345864,1.0,2.262218221282808e-05
+2,7,8,single_elimination,4,1,Lisa Rinna,Lisa Rinna,True,True,0.7659313725490196,0.9411764705882353,4.814706466849117e-09
+3,1,2,single_elimination,11,1,Tucker Carlson,Tucker Carlson,True,True,0.9204740371121161,1.0,0.014153388808215345
+3,2,3,single_elimination,10,1,Shanna Moakler,Shanna Moakler,True,True,0.8869565217391304,0.9739130434782609,1.377271352520637e-09
+3,3,4,single_elimination,9,1,Harry Hamlin,Harry Hamlin,True,True,0.8845947396672034,0.9806763285024155,3.8705549876283385e-09
+3,4,5,single_elimination,8,1,Vivica A. Fox,Vivica A. Fox,True,True,0.8645833333333334,0.9696969696969697,2.2798706811322234e-09
+3,5,6,multi_elimination,7,2,Sara Evans;Willa Ford,Sara Evans;Willa Ford,True,True,0.7428308339910549,0.9723756906077348,0.007532984116304597
+3,7,8,single_elimination,5,1,Jerry Springer,Jerry Springer,True,True,0.8459259259259259,1.0,0.029633090582391552
+3,8,9,single_elimination,4,1,Monique Coleman,Monique Coleman,True,True,0.8142201834862386,1.0,0.004565485590807272
+3,9,10,single_elimination,3,1,Joey Lawrence,Joey Lawrence,True,True,0.7777777777777777,1.0,2.4243580546756682e-05
+4,2,3,single_elimination,11,1,Paulina Porizkova,Paulina Porizkova,True,True,0.9029853263619497,0.983673469387755,6.69567168376517e-09
+4,3,4,single_elimination,10,1,Shandi Finnessey,Shandi Finnessey,True,True,0.8855963302752293,0.9724770642201835,2.7947364977798372e-09
+4,4,5,single_elimination,9,1,Leeza Gibbons,Leeza Gibbons,True,True,0.899545159194282,0.9947368421052631,2.3422708772535827e-08
+4,5,6,single_elimination,8,1,Clyde Drexler,Clyde Drexler,True,True,0.8970170454545454,1.0,0.02271579427269621
+4,6,7,single_elimination,7,1,Heather Mills,Heather Mills,True,True,0.8483793517406963,0.9647058823529412,6.260371221422645e-09
+4,7,8,single_elimination,6,1,John Ratzenberger,John Ratzenberger,True,True,0.8457389428263214,0.9773462783171522,5.951611536936241e-09
+4,8,9,single_elimination,5,1,Billy Ray Cyrus,Billy Ray Cyrus,True,True,0.8497211155378486,1.0,0.035829730716160024
+4,9,10,single_elimination,4,1,Ian Ziering,Ian Ziering,True,True,0.8138185654008439,1.0,0.004220092938815645
+5,1,2,single_elimination,12,1,Josie Maran,Josie Maran,True,True,0.9253674881106787,1.0,0.0077656383429184905
+5,2,3,single_elimination,11,1,Albert Reed,Albert Reed,True,True,0.8832210570178485,0.9621848739495799,4.682430637670265e-09
+5,3,4,single_elimination,10,1,Wayne Newton,Wayne Newton,True,True,0.912468619246862,1.0,0.008372007160479505
+5,4,5,single_elimination,9,1,Floyd Mayweather Jr. ,Floyd Mayweather Jr. ,True,True,0.8988603988603988,0.9957264957264957,1.53764268262524e-08
+5,5,6,single_elimination,8,1,Mark Cuban,Mark Cuban,True,True,0.8930590452261307,1.0,1.1273601705247271e-05
+5,6,7,single_elimination,7,1,Sabrina Bryan,Sabrina Bryan,True,True,0.8543083900226758,0.9722222222222222,4.870209568963446e-09
+5,7,8,single_elimination,6,1,Jane Seymour,Jane Seymour,True,True,0.8621794871794872,1.0,0.0032285485602345787
+5,8,9,single_elimination,5,1,Cameron Mathison,Cameron Mathison,True,True,0.8320912547528518,0.9885931558935361,4.755621568763857e-08
+5,9,10,single_elimination,4,1,Jennie Garth,Jennie Garth,True,True,0.8066239316239316,0.9914529914529915,4.294349353894944e-08
+6,2,3,multi_elimination,12,2,Monica Seles;Penn Jillette,Monica Seles;Penn Jillette,True,True,0.8490744016035845,0.9961089494163424,0.00586354532831268
+6,3,4,single_elimination,10,1,Steve Guttenberg,Steve Guttenberg,True,True,0.9028947368421052,0.9912280701754386,4.0180170024495254e-09
+6,4,5,single_elimination,9,1,Adam Carolla,Adam Carolla,True,True,0.9041975308641975,1.0,0.013352598972252522
+6,5,6,single_elimination,8,1,Priscilla Presley,Priscilla Presley,True,True,0.8928571428571428,1.0,0.0051054155268273615
+6,6,7,single_elimination,7,1,Marlee Matlin,Marlee Matlin,True,True,0.8812925170068028,1.0,0.01667145750724086
+6,7,8,single_elimination,6,1,Shannon Elizabeth,Shannon Elizabeth,True,True,0.8478964401294498,0.9838187702265372,1.1315522963073477e-08
+6,8,9,single_elimination,5,1,Mario,Mario,True,True,0.828314606741573,0.9850187265917603,4.3087890810866725e-08
+6,9,10,single_elimination,4,1,Marissa Jaret Winokur,Marissa Jaret Winokur,True,True,0.8159090909090909,1.0,0.013609426299976135
+7,1,2,multi_elimination,13,2,Jeffrey Ross;Ted McGinley,Jeffrey Ross;Ted McGinley,True,True,0.849956756206756,0.9861111111111112,0.02099388755594571
+7,2,3,multi_elimination,11,2,Kim Kardashian;Misty May-Treanor,Kim Kardashian;Misty May-Treanor,True,True,0.7855203619909502,0.9366515837104072,0.002333044110467586
+7,4,5,single_elimination,9,1,Rocco DiSpirito,Rocco DiSpirito,True,True,0.9037280301648118,1.0,0.00984853987776188
+7,5,6,single_elimination,8,1,Toni Braxton,Toni Braxton,True,True,0.883173076923077,0.9897435897435898,5.1547068141699626e-08
+7,6,7,single_elimination,7,1,Cloris Leachman,Cloris Leachman,True,True,0.8845663265306122,1.0,0.03750723210005938
+7,7,8,single_elimination,6,1,Susan Lucci,Susan Lucci,True,True,0.8333333333333334,0.9659863945578231,1.2503123369977942e-08
+7,8,9,single_elimination,5,1,Maurice Greene,Maurice Greene,True,True,0.8423529411764706,1.0,1.7476895528001357e-05
+7,9,10,single_elimination,4,1,Cody Linley,Cody Linley,True,True,0.8177860696517413,1.0,0.014921133237971618
+8,2,3,single_elimination,13,1,Belinda Carlisle,Belinda Carlisle,True,True,0.9087864240259016,0.9773584905660377,2.2511046637863075e-09
+8,3,4,single_elimination,12,1,Denise Richards,Denise Richards,True,True,0.9000437445319335,0.9724409448818898,2.454408509766637e-09
+8,4,5,multi_elimination,11,2,Holly Madison;Steve Wozniak,Steve Wozniak;Holly Madison,True,True,0.8395942900075131,0.9958677685950413,0.014488438584039337
+8,5,6,single_elimination,9,1,David Alan Grier,David Alan Grier,True,True,0.8723104056437391,0.9666666666666667,2.901030804469684e-09
+8,6,7,single_elimination,8,1,Steve-O,Steve-O,True,True,0.895497311827957,1.0,0.010746044540827754
+8,7,8,single_elimination,7,1,Lawrence Taylor,Lawrence Taylor,True,True,0.881475667189953,1.0,0.016478918864877234
+8,8,9,single_elimination,6,1,Chuck Wicks,Chuck Wicks,True,True,0.8482905982905983,0.983974358974359,7.658753631289983e-09
+8,9,10,single_elimination,5,1,Lil' Kim,Lil' Kim,True,True,0.823071161048689,0.9775280898876404,8.836078757568089e-09
+8,10,11,single_elimination,4,1,Ty Murray,Ty Murray,True,True,0.8202054794520548,1.0,0.03194408393415227
+9,1,2,multi_elimination,16,2,Ashley Hamiliton;Macy Gray,Macy Gray;Ashley Hamiliton,True,True,0.885426937643104,1.0,1.256579021197135e-06
+9,2,3,single_elimination,14,1,Kathy Ireland,Kathy Ireland,True,True,0.9344023323615159,1.0,7.0580219085625284e-06
+9,3,4,multi_elimination,13,2,Debi Mazar;Tom DeLay,Tom DeLay;Debi Mazar,True,True,0.8516199562711189,0.9883720930232558,0.0021516995188018972
+9,4,5,single_elimination,11,1,Chuck Liddell,Chuck Liddell,True,True,0.9117205108940646,0.9917355371900827,1.8937752310765887e-08
+9,5,6,single_elimination,10,1,Natalie Coughlin,Natalie Coughlin,True,True,0.907190082644628,0.9958677685950413,9.073754525523725e-09
+9,6,7,multi_elimination,9,2,Louie Vito;Melissa Joan Hart,Melissa Joan Hart;Louie Vito,True,True,0.8042728534658603,0.9923068964469492,7.06603386912974e-11
+9,7,8,multi_elimination,7,2,Mark Dacascos;Michael Irvin,Mark Dacascos;Michael Irvin,True,True,0.7667887667887668,1.0,0.011401585359597566
+9,8,9,single_elimination,5,1,Aaron Carter,Aaron Carter,True,True,0.8418320610687022,1.0,1.961991759474868e-05
+9,9,10,single_elimination,4,1,Joanna Krupa,Joanna Krupa,True,True,0.7882790768968266,0.9687473925691619,3.5709104784231727e-08
+10,2,3,single_elimination,11,1,Shannen Doherty,Shannen Doherty,True,True,0.8429752066115703,0.9181818181818182,2.7909984046115e-09
+10,3,4,single_elimination,10,1,Buzz Aldrin,Buzz Aldrin,True,True,0.9135960591133004,1.0,0.009851404884304915
+10,4,5,single_elimination,9,1,Aiden Turner,Aiden Turner,True,True,0.9013011214269075,0.9973045822102427,6.991832618430394e-08
+10,5,6,single_elimination,8,1,Kate Gosselin,Kate Gosselin,True,True,0.8954118497109826,1.0,0.017326216905999614
+10,6,7,single_elimination,7,1,Jake Pavelka,Jake Pavelka,True,True,0.8808710198101728,1.0,0.004795802006432703
+10,7,8,single_elimination,6,1,Pamela Anderson,Pamela Anderson,True,True,0.8561986423722759,0.9935691318327975,2.007987903729358e-08
+10,8,9,single_elimination,5,1,Niecy Nash,Niecy Nash,True,True,0.8460079051383399,1.0,0.00788859756029342
+10,9,10,single_elimination,4,1,Chad Ochocinco,Chad Ochocinco,True,True,0.8174778761061947,1.0,0.017703529314855138
+11,1,2,single_elimination,12,1,David Hasselhoff,David Hasselhoff,True,True,0.9250489476260402,1.0,5.9861742748856805e-06
+11,2,3,single_elimination,11,1,Michael Bolton,Michael Bolton,True,True,0.920683594480386,1.0,0.02716305140534786
+11,3,4,single_elimination,10,1,Margaret Cho,Margaret Cho,True,True,0.9118552036199095,1.0,0.004526433055635909
+11,4,5,single_elimination,9,1,The Situation,The Situation,True,True,0.90488999241327,1.0,0.011189184930816803
+11,5,6,single_elimination,8,1,Florence Henderson,Florence Henderson,True,True,0.8725961538461537,0.978021978021978,8.771460724421587e-09
+11,6,7,single_elimination,7,1,Audrina Patridge,Audrina Patridge,True,True,0.7889207197062688,0.898553280131865,3.0670930240006555e-09
+11,7,8,single_elimination,6,1,Rick Fox,Rick Fox,True,True,0.849320543565148,0.985611510791367,2.0925935984017485e-08
+11,8,9,single_elimination,5,1,Kurt Warner,Kurt Warner,True,True,0.8407547169811321,0.9962264150943396,6.996467033504317e-08
+11,9,10,single_elimination,4,1,Brandy,Brandy,True,True,0.7993421052631579,0.9824561403508771,2.855995157036162e-08
+12,2,3,single_elimination,11,1,Mike Catherwood,Mike Catherwood,True,True,0.9184649525558616,1.0,1.095459574751434e-05
+12,3,4,single_elimination,10,1,Wendy Williams,Wendy Williams,True,True,0.9129906542056074,1.0,0.023360591214259013
+12,4,5,single_elimination,9,1,Sugar Ray Leonard,Sugar Ray Leonard,True,True,0.8893084022533861,0.9854368932038835,4.123893893037689e-09
+12,5,6,single_elimination,8,1,Petra Nemcova,Petra Nemcova,True,True,0.8920747422680413,1.0,1.088528051990112e-05
+12,6,7,single_elimination,7,1,Chris Jericho,Chris Jericho,True,True,0.880498866213152,1.0,0.011128010624133988
+12,7,8,single_elimination,6,1,Kendra Wilkinson,Kendra Wilkinson,True,True,0.8575007368110815,0.9946949602122015,9.002791884205052e-08
+12,8,9,single_elimination,5,1,Romeo,Romeo,True,True,0.8215384615384614,0.9769230769230769,6.493042659094783e-09
+12,9,10,single_elimination,4,1,Ralph Macchio,Ralph Macchio,True,True,0.823936170212766,1.0,0.02554792311137516
+13,1,2,single_elimination,12,1,Metta World Peace (Ron),Metta World Peace (Ron),True,True,0.925179211469534,1.0,0.004612137448281456
+13,2,3,single_elimination,11,1,Elisabetta Canalis,Elisabetta Canalis,True,True,0.8681391987547713,0.9461883408071747,4.613968679345604e-09
+13,3,4,single_elimination,10,1,Kristin Cavallari,Kristin Cavallari,True,True,0.8718987341772152,0.9578059071729959,1.4335733156123354e-09
+13,4,5,single_elimination,9,1,Chynna Phillips,Chynna Phillips,True,True,0.8981629157067754,0.9952153110047847,9.214570495519325e-09
+13,5,6,single_elimination,8,1,Carson Kressley,Carson Kressley,True,True,0.8936170212765957,1.0,0.01065188613265855
+13,6,7,single_elimination,7,1,Chaz Bono,Chaz Bono,True,True,0.8816080649127122,1.0,0.00603405790829209
+13,7,8,single_elimination,6,1,David Arquette,David Arquette,True,True,0.8536215396283656,0.9897610921501707,1.5893959259827284e-08
+13,8,9,single_elimination,5,1,Nancy Grace,Nancy Grace,True,True,0.846023166023166,1.0,0.027051469495945557
+13,9,10,single_elimination,4,1,Hope Solo,Hope Solo,True,True,0.8233124401368782,1.0,0.029521580886639587
+14,2,3,single_elimination,12,1,Martina Navratilova,Martina Navratilova,True,True,0.9252891367203634,1.0,0.007435487207104907
+14,3,4,single_elimination,11,1,Jack Wagner,Jack Wagner,True,True,0.917827626918536,1.0,8.737718377171966e-06
+14,4,5,single_elimination,10,1,Sherri Sheperd,Sherri Sheperd,True,True,0.9071244635193134,0.9957081545064378,3.621437452694387e-08
+14,5,6,single_elimination,9,1,Gavin DeGraw,Gavin DeGraw,True,True,0.9041556437389772,1.0,0.008934771597139901
+14,6,7,single_elimination,8,1,Gladys Knight,Gladys Knight,True,True,0.8946220614745855,1.0,0.015501524831825014
+14,7,8,single_elimination,7,1,Jaleel White,Jaleel White,True,True,0.8687649446699661,0.9891008174386922,1.5050913737546523e-08
+14,8,9,multi_elimination,6,2,Melissa Gilbert;Roshon Fegan,Melissa Gilbert;Roshon Fegan,True,True,0.7243628950050969,0.9847094801223242,0.010773935697848624
+14,9,10,single_elimination,4,1,Maria Menounos,Maria Menounos,True,True,0.7913043478260869,0.9739130434782609,3.592780384309435e-08
+15,1,2,single_elimination,13,1,Pamela Anderson,Pamela Anderson,True,True,0.9301817948361278,1.0,0.007221596943812247
+15,2,3,single_elimination,12,1,Joey Fatone,Joey Fatone,True,True,0.9021739130434782,0.9764492753623188,2.308488539215503e-09
+15,3,4,multi_elimination,11,2,Drew Lachey;Helio Castroneves,Drew Lachey;Helio Castroneves,True,True,0.8220241988227599,0.9820143884892086,0.00010059371397086458
+15,4,5,single_elimination,9,1,Bristol Palin,Bristol Palin,True,True,0.8969913407445806,0.9937791601866252,1.118749731743307e-08
+15,6,7,single_elimination,8,1,Sabrina Bryan,Sabrina Bryan,True,True,0.8354535398230087,0.9380530973451326,9.643086940069878e-09
+15,8,9,multi_elimination,7,2,Gilles Marini;Kirstie Alley,Kirstie Alley;Gilles Marini,True,True,0.7543510297944568,0.9868971594370461,0.014994787371593876
+15,9,10,multi_elimination,5,2,Apolo Anton Ohno;Emmitt Smith,Emmitt Smith;Apolo Anton Ohno,True,True,0.69501573407603,0.9893616794929351,0.006170187903644986
+16,2,3,single_elimination,12,1,Dorothy Hamill,Dorothy Hamill,True,True,0.9254326047358834,1.0,0.0040833527493173705
+16,3,4,single_elimination,11,1,Wynonna Judd,Wynonna Judd,True,True,0.9198171169034098,1.0,0.00425234046482964
+16,4,5,single_elimination,10,1,Lisa Vanderpump,Lisa Vanderpump,True,True,0.9119642857142857,1.0,1.4120511574455819e-05
+16,5,6,single_elimination,9,1,D. L. Hughley,D. L. Hughley,True,True,0.9040108689231496,1.0,1.4599925362845934e-05
+16,6,7,single_elimination,8,1,Victor Ortiz,Victor Ortiz,True,True,0.892987400530504,1.0,0.007958780088972273
+16,7,8,single_elimination,7,1,Andy Dick,Andy Dick,True,True,0.8847604259094942,1.0,0.03804815281004742
+16,8,9,single_elimination,6,1,Sean Lowe,Sean Lowe,True,True,0.8663808503036798,1.0,0.019271306851525782
+16,9,10,single_elimination,5,1,Ingo Rademacher,Ingo Rademacher,True,True,0.8438297872340426,1.0,0.014188898566014518
+17,2,3,single_elimination,12,1,Keyshawn Johnson,Keyshawn Johnson,True,True,0.9214703425229741,0.9962406015037594,2.439254309649641e-08
+17,3,4,single_elimination,11,1,Bill Nye,Bill Nye,True,True,0.9199157348889969,1.0,7.5288435846254664e-06
+17,4,5,single_elimination,10,1,Valerie Harper,Valerie Harper,True,True,0.9124050632911394,1.0,0.01265712923353629
+17,5,6,single_elimination,9,1,Christina Milian,Christina Milian,True,True,0.8360388757551876,0.927659574468085,1.4757938204823517e-09
+17,7,8,single_elimination,8,1,"Nicole ""Snooki"" Polizzi","Nicole ""Snooki"" Polizzi",True,True,0.8811371331828444,0.9887133182844244,2.0058409877510286e-08
+17,8,9,single_elimination,7,1,Brant Daugherty,Brant Daugherty,True,True,0.8555484693877551,0.9739583333333334,7.082293917992644e-09
+17,9,10,single_elimination,6,1,Elizabeth Berkley Lauren,Elizabeth Berkley Lauren,True,True,0.7984126984126986,0.926984126984127,2.576919289065671e-09
+17,10,11,single_elimination,5,1,Leah Remini,Leah Remini,True,True,0.8314285714285715,0.9857142857142858,1.777145303138994e-08
+18,1,2,single_elimination,12,1,Diana Nyad,Diana Nyad,True,True,0.9143341815097542,0.9885496183206107,1.5008163989360668e-08
+18,2,3,multi_elimination,11,2,Billy Dee Williams;Sean Avery,Billy Dee Williams;Sean Avery,True,True,0.8397913561847989,1.0,0.024583723790738587
+18,5,6,single_elimination,9,1,Cody Simpson,Cody Simpson,True,True,0.8852848707921172,0.9813664596273292,3.5999153102928005e-09
+18,6,7,single_elimination,8,1,Drew Carey,Drew Carey,True,True,0.8920656028368794,1.0,1.08670063719285e-05
+18,7,8,single_elimination,7,1,NeNe Leakes,NeNe Leakes,True,True,0.8793256433007987,1.0,0.007887716179806159
+18,8,9,single_elimination,6,1,Danica McKellar,Danica McKellar,True,True,0.8387413962635203,0.9734513274336283,2.7796485668751814e-08
+18,9,10,single_elimination,5,1,Charlie White,Charlie White,True,True,0.8318324607329842,0.9895287958115183,1.205177369012489e-08
+19,1,2,single_elimination,13,1,Lolo Jones,Lolo Jones,True,True,0.925399249220589,0.9946236559139785,1.7521636030970456e-08
+19,2,3,single_elimination,12,1,Tavis Smiley,Tavis Smiley,True,True,0.9139809699201963,0.988950276243094,5.90993903815118e-09
+19,3,4,single_elimination,11,1,Randy Couture,Randy Couture,True,True,0.9189239809893942,1.0,0.005682511008679586
+19,4,5,single_elimination,10,1,Betsey Johnson,Betsey Johnson,True,True,0.8828125,0.96875,3.0281167573420475e-09
+19,6,7,single_elimination,9,1,Jonathan Bennett,Jonathan Bennett,True,True,0.871107740277251,0.9658703071672355,4.282551729906103e-09
+19,7,8,single_elimination,8,1,Antonio Sabato Jr.,Antonio Sabato Jr.,True,True,0.8869076402321083,0.9941972920696325,1.9481652402397742e-08
+19,8,9,single_elimination,7,1,Michael Waltrip,Michael Waltrip,True,True,0.8835582620144832,1.0,0.01612860150816764
+19,9,10,single_elimination,6,1,Lea Thompson,Lea Thompson,True,True,0.836318795430945,0.969626168224299,3.3314105918336168e-09
+19,10,11,single_elimination,5,1,Tommy Chong,Tommy Chong,True,True,0.8460273972602741,1.0,0.03287712211074789
+20,2,3,single_elimination,12,1,Redfoo,Redfoo,True,True,0.8412183797630481,0.9106628242074927,4.655183155621856e-09
+20,3,4,single_elimination,11,1,Charlotte McKinney,Charlotte McKinney,True,True,0.9192300583529164,1.0,1.0948241641994816e-05
+20,4,5,single_elimination,10,1,Michael Sam,Michael Sam,True,True,0.8969230769230769,0.9846153846153846,9.02841013061817e-09
+20,5,6,single_elimination,9,1,Suzanne Somers,Suzanne Somers,True,True,0.8837412206081228,0.9787985865724381,4.9925412692886084e-09
+20,6,7,single_elimination,8,1,Patti LaBelle,Patti LaBelle,True,True,0.8896863957597173,0.9982332155477032,7.657252520942848e-08
+20,7,8,single_elimination,7,1,Willow Shields,Willow Shields,True,True,0.8051582837859554,0.9173228346456694,5.2895577917766445e-09
+20,8,9,multi_elimination,6,2,Chris Soules;Robert Herjavec,Robert Herjavec;Chris Soules,True,True,0.7388494877856581,0.9976359338061466,0.003548826703178909
+20,9,10,single_elimination,4,1,Nastia Liukin,Nastia Liukin,True,True,0.7969745222929936,0.9808917197452229,1.8317687644486824e-08
+21,2,3,multi_elimination,13,3,Chaka Khan;Kim Zolciak-Biermann;Victor Espinoza,Chaka Khan;Kim Zolciak-Biermann;Victor Espinoza,True,True,0.7880252834042114,0.9926062846580407,0.010547315489273817
+21,4,5,single_elimination,10,1,Gary Busey,Gary Busey,True,True,0.9132203389830508,1.0,0.00847436937146212
+21,6,7,single_elimination,9,1,Paula Deen,Paula Deen,True,True,0.9050605451031437,1.0,0.019165312350304275
+21,7,8,single_elimination,8,1,Hayes Grier,Hayes Grier,True,True,0.8745757918552037,0.9819004524886878,1.0223709268064596e-08
+21,8,9,single_elimination,7,1,Andy Grammer,Andy Grammer,True,True,0.880286227689364,1.0,0.005145404419456323
+21,9,10,multi_elimination,6,2,Alexa PenaVega;Tamar Braxton,Tamar Braxton;Alexa PenaVega,True,True,0.6932117527862208,0.9392097264437691,0.018537755642949016
+22,2,3,single_elimination,12,1,Geraldo Rivera,Geraldo Rivera,True,True,0.9259651600753296,1.0,0.008472860586648173
+22,3,4,single_elimination,11,1,Mischa Barton,Mischa Barton,True,True,0.9187153467935976,1.0,0.008433064000257201
+22,4,5,single_elimination,10,1,Marla Maples,Marla Maples,True,True,0.8971159874608151,0.9843260188087775,3.975894780072764e-09
+22,6,7,single_elimination,9,1,Doug Flutie,Doug Flutie,True,True,0.9033012454451514,1.0,0.013235113395422937
+22,7,8,multi_elimination,8,2,Kim Fields;Von Miller,Kim Fields;Von Miller,True,True,0.7849632843791723,0.9976635514018691,5.661890400965319e-10
+22,8,9,single_elimination,6,1,Jodie Sweetin,Jodie Sweetin,True,True,0.8050624589086127,0.9349112426035504,1.066277066641419e-08
+22,9,10,multi_elimination,5,2,Antonio Brown;Wanya Morris,Antonio Brown;Wanya Morris,True,True,0.6831010452961672,0.9721254355400697,0.009376790230955223
+23,2,3,single_elimination,13,1,Jake T. Austin,Jake T. Austin,True,True,0.9244217321140398,0.9943181818181819,3.1531833810660714e-09
+23,3,4,single_elimination,12,1,Rick Perry,Rick Perry,True,True,0.9246581196581197,1.0,1.2095599466799278e-05
+23,4,5,multi_elimination,11,2,Babyface;Vanilla Ice,Babyface;Vanilla Ice,True,True,0.8294322535701846,0.9885057471264368,0.01536430158351379
+23,6,7,single_elimination,9,1,Amber Rose,Amber Rose,True,True,0.9033798826148554,1.0,0.006561207875614039
+23,7,8,single_elimination,8,1,Maureen McCormick,Maureen McCormick,True,True,0.8881011796733213,0.9963702359346642,3.5464145536900915e-08
+23,8,9,single_elimination,7,1,Ryan Lochte,Ryan Lochte,True,True,0.8581581490455743,0.9751243533575655,7.423364145608957e-09
+23,9,10,single_elimination,6,1,Marilu Henner,Marilu Henner,True,True,0.862457170827215,1.0,2.5712411012124292e-05
+23,10,11,single_elimination,5,1,Terra Jole,Terra Jole,True,True,0.8199317406143345,0.9761092150170649,7.522530209858047e-09
+24,2,3,single_elimination,12,1,Chris Kattan,Chris Kattan,True,True,0.9249661246612466,1.0,1.5893895168844763e-05
+24,3,4,single_elimination,11,1,Charo,Charo,True,True,0.9186934277843369,1.0,1.3597251378449915e-05
+24,4,5,single_elimination,10,1,Mr. T,Mr. T,True,True,0.9114110429447854,1.0,0.006126475979963103
+24,5,6,single_elimination,9,1,Erika Jayne,Erika Jayne,True,True,0.8872644574398961,0.9835526315789475,8.152379354919859e-09
+24,6,7,single_elimination,8,1,Heather Morris,Heather Morris,True,True,0.8012314126394052,0.8996282527881041,1.0361223545807263e-08
+24,7,8,multi_elimination,7,2,Nancy Kerrigan;Nick Viall,Nick Viall;Nancy Kerrigan,True,True,0.7380011293054771,0.9644268774703557,1.1807861255430652e-07
+24,8,9,single_elimination,5,1,Bonner Bolton,Bonner Bolton,True,True,0.8467621776504298,1.0,0.020061047698885726
+24,9,10,single_elimination,4,1,Simone Biles,Simone Biles,True,True,0.766914191419142,0.943894389438944,8.413406193952255e-09
+25,2,3,multi_elimination,13,2,Barbara Corcoran;Debbie Gibson,Barbara Corcoran;Debbie Gibson,True,True,0.8448999203112547,0.9817184643510055,0.009162185451438626
+25,4,5,single_elimination,11,1,Derek Fisher,Derek Fisher,True,True,0.9145497240096367,0.996309963099631,2.3986501451744857e-08
+25,5,6,single_elimination,10,1,Sasha Pieterse,Sasha Pieterse,True,True,0.9039080459770117,0.9923371647509579,1.1210790185067765e-08
+25,6,7,single_elimination,9,1,Nick Lachey,Nick Lachey,True,True,0.9041394335511982,1.0,0.013055207228583221
+25,7,8,multi_elimination,8,2,Nikki Bella;Vanessa Lachey,Nikki Bella;Vanessa Lachey,True,True,0.7735880398671096,0.9813953488372092,0.00785226606947731
+25,8,9,single_elimination,6,1,Terrell Owens,Terrell Owens,True,True,0.8430954916577921,0.9776357827476039,8.663634476491211e-09
+25,9,10,single_elimination,5,1,Victoria Arlen,Victoria Arlen,True,True,0.8,0.951851851851852,1.2144337757646895e-09
+26,1,2,multi_elimination,10,2,Jamie Anderson;Johnny Damon,Johnny Damon;Jamie Anderson,True,True,0.8172486772486772,0.9904761904761905,0.000104548087737244
+26,2,3,multi_elimination,8,2,Arike Ogunbowale;Kareem Abdul-Jabbar,Kareem Abdul-Jabbar;Arike Ogunbowale,True,True,0.7561415220293726,0.9588785046728974,0.011993355717277415
+26,3,4,multi_elimination,6,3,Chris Mazdzer;Jennie Finch Daigle;Mirai Nagasu,Jennie Finch Daigle;Chris Mazdzer;Mirai Nagasu,True,True,0.6350710900473934,1.0,0.01895332112702991
+27,1,2,single_elimination,13,1,Nikki Glaser,Nikki Glaser,True,True,0.9169625246548324,0.9862745098039216,2.9058912498491907e-09
+27,2,3,single_elimination,12,1,Danelle Umstead,Danelle Umstead,True,True,0.9214674471143973,0.9963031423290203,2.7931214452436848e-08
+27,3,4,single_elimination,11,1,Nancy McKeon,Nancy McKeon,True,True,0.9014668659083285,0.981549815498155,7.415364433605021e-09
+27,4,5,single_elimination,10,1,Tinashe,Tinashe,True,True,0.7885344827586207,0.8663793103448276,7.10605713161172e-10
+27,6,7,single_elimination,9,1,Mary Lou Retton,Mary Lou Retton,True,True,0.867000916491455,0.9606986899563319,1.725938447716402e-09
+27,7,8,multi_elimination,8,2,DeMarcus Ware;John Schneider,DeMarcus Ware;John Schneider,True,True,0.7724958949096881,0.9816091954022989,1.2874357552261628e-08
+27,8,9,multi_elimination,6,2,Joe Amabile;Juan Pablo Di Pace,Joe Amabile;Juan Pablo Di Pace,True,True,0.684472049689441,0.9254658385093167,0.021789951164093546
+28,2,3,multi_elimination,12,2,Mary Wilson;Ray Lewis,Mary Wilson;Ray Lewis,True,True,0.8397675383976754,0.9863013698630136,2.993022496511344e-12
+28,4,5,single_elimination,10,1,Lamar Odom,Lamar Odom,True,True,0.9129078014184397,1.0,0.003535804575557744
+28,6,7,single_elimination,9,1,Sailor Brinkley-Cook,Sailor Brinkley-Cook,True,True,0.8419428200129954,0.9342105263157894,2.1340929023949684e-09
+28,7,8,single_elimination,8,1,Karamo Brown,Karamo Brown,True,True,0.8737623762376238,0.9801980198019802,4.3829167517550616e-09
+28,8,9,single_elimination,7,1,Kate Flannery,Kate Flannery,True,True,0.8431866398346496,0.9585511235279732,5.930733959491619e-09
+28,9,10,single_elimination,6,1,Sean Spicer,Sean Spicer,True,True,0.8689048760991206,1.0,0.047955987015843304
+28,10,11,single_elimination,5,1,James Van Der Beek,James Van Der Beek,True,True,0.8429090909090909,1.0,0.0109215187856882
+29,2,3,single_elimination,15,1,Charles Oakley,Charles Oakley,True,True,0.9385592185592185,1.0,1.3754381890412892e-05
+29,3,4,single_elimination,14,1,Carole Baskin,Carole Baskin,True,True,0.935725179751616,1.0,0.010682625069665982
+29,4,5,single_elimination,13,1,Anne Heche,Anne Heche,True,True,0.9295445163065914,1.0,9.57257164027614e-06
+29,5,6,single_elimination,12,1,Jesse Metcalfe,Jesse Metcalfe,True,True,0.925038714672861,1.0,1.3504897124427817e-05
+29,6,7,single_elimination,11,1,Veron Davis,Veron Davis,True,True,0.9083199703959542,0.9888059701492538,1.1823715007075464e-08
+29,7,8,multi_elimination,10,2,Jeannie Mai;Monica Aldama,Monica Aldama;Jeannie Mai,True,True,0.8212820512820513,0.9961538461538462,0.009635749599840149
+29,8,9,single_elimination,8,1,Chrishell Stause,Chrishell Stause,True,True,0.8792221359858305,0.9864855612352454,4.270357178981499e-09
+29,9,10,single_elimination,7,1,AJ McLean,AJ McLean,True,True,0.8750141588828412,0.9948196676462908,3.0712534127008695e-08
+29,10,11,multi_elimination,6,2,Johnny Weir;Skai Jackson,Skai Jackson;Johnny Weir,True,True,0.732567049808429,0.9971264367816092,1.946169910782558e-07
+30,2,3,single_elimination,15,1,Martin Kove,Martin Kove,True,True,0.9396248196248196,1.0,0.01818121421496864
+30,3,4,single_elimination,14,1,Christine Chiu,Christine Chiu,True,True,0.9056978496096425,0.9697986577181208,6.010996478345021e-09
+30,4,5,multi_elimination,13,2,Brian Austin Green;Matt James,Brian Austin Green;Matt James,True,True,0.8609035848244481,1.0,0.005992310368347464
+30,5,6,single_elimination,11,1,Melanie C,Melanie C,True,True,0.874616292798111,0.9532467532467532,4.185180924043408e-09
+30,6,7,single_elimination,10,1,Kenya Moore,Kenya Moore,True,True,0.9112087912087912,1.0,0.005505513988157212
+30,7,8,single_elimination,9,1,"Mike ""The Miz"" Mizanin","Mike ""The Miz"" Mizanin",True,True,0.9027069883338997,1.0,0.0061105936440450925
+30,8,9,multi_elimination,8,2,Jimmie Allen;Olivia Jade,Jimmie Allen;Olivia Jade,True,True,0.7874536178107606,0.9967532467532467,0.011360996177966487
+30,9,10,multi_elimination,6,2,Melora Hardin;Suni Lee,Melora Hardin;Suni Lee,True,True,0.7290560471976401,0.9911504424778761,0.002264650018768133
+31,1,2,single_elimination,16,1,Jason Lewis,Jason Lewis,True,True,0.9399132853403143,0.9973821989528796,1.4560031208477042e-08
+31,2,3,single_elimination,15,1,Teresa Giudice,Teresa Giudice,True,True,0.9339697950377562,0.9951456310679612,1.033872876199382e-08
+31,3,4,single_elimination,14,1,Cheryl Ladd,Cheryl Ladd,True,True,0.9322175520332204,0.9975186104218362,8.555208902416567e-09
+31,4,5,single_elimination,13,1,Sam Champion,Sam Champion,True,True,0.9302208110838505,1.0,0.0073351711161513955
+31,5,6,multi_elimination,12,2,Joseph Baena;Selma Blair,Joseph Baena;Selma Blair,True,True,0.7917637917637919,0.9319955406911928,5.742292153074202e-05
+31,6,7,single_elimination,10,1,Jessie James Decker,Jessie James Decker,True,True,0.9002898550724637,0.9884057971014493,1.0035348468884209e-08
+31,7,8,single_elimination,9,1,Jordin Sparks,Jordin Sparks,True,True,0.8936109688797862,0.9907834101382489,1.3644321922301472e-08
+31,8,9,multi_elimination,8,2,Heidi D'Amelio;Vinny Guadagnino,Vinny Guadagnino;Heidi D'Amelio,True,True,0.7923111919927206,1.0,0.019118504492459998
+31,9,10,multi_elimination,6,2,Daniel Durant;Trevor Donovan,Trevor Donovan;Daniel Durant,True,True,0.7390909090909091,1.0,0.009070337242088722
+32,1,2,single_elimination,14,1,Matt Walsh,Matt Walsh,True,True,0.9350649350649352,1.0,9.958712828730953e-06
+32,2,3,single_elimination,13,1,Jamie Lynn Spears,Jamie Lynn Spears,True,True,0.9025906220476357,0.9705882352941178,2.158764111914735e-09
+32,3,4,single_elimination,12,1,Tyson Beckford,Tyson Beckford,True,True,0.9253955968352253,1.0,0.006193354877942592
+32,4,5,single_elimination,11,1,Adrian Peterson,Adrian Peterson,True,True,0.8873622589531681,0.9666666666666668,1.7432778359749435e-08
+32,5,6,single_elimination,10,1,Mira Sorvino,Mira Sorvino,True,True,0.8920833333333335,0.9791666666666667,2.0044925441720096e-09
+32,6,7,single_elimination,9,1,Mauricio Umansky,Mauricio Umansky,True,True,0.8828694118549191,0.9782608695652174,5.707738282012542e-09
+32,7,8,single_elimination,8,1,Lele Pons,Lele Pons,True,True,0.8559397163120568,0.9609929078014184,1.97568870707876e-08
+32,8,9,single_elimination,7,1,Barry Williams,Barry Williams,True,True,0.8477050899411147,0.9644268774703557,9.360655861545553e-09
+32,9,10,single_elimination,6,1,Harry Jowsey,Harry Jowsey,True,True,0.8662644544997486,1.0,0.009041723470756935
+33,2,3,multi_elimination,13,2,Anna Delvey;Tori Spelling,Anna Delvey;Tori Spelling,True,True,0.8339296362552175,0.9689922480620154,2.1344601836004173e-08
+33,3,4,multi_elimination,11,2,Eric Roberts;Reginald VelJohnson,Reginald VelJohnson;Eric Roberts,True,True,0.8407089765580331,1.0,0.006279968179921935
+33,4,5,single_elimination,9,1,Brooks Nader,Brooks Nader,True,True,0.892416225749559,0.9897959183673469,1.4048939622757217e-08
+33,5,6,single_elimination,8,1,Phaedra Parks,Phaedra Parks,True,True,0.8913985148514851,1.0,9.651197488635965e-06
+33,6,7,single_elimination,7,1,Jenn Tran,Jenn Tran,True,True,0.8223697245888647,0.9368932038834952,7.014746228328761e-09
+33,7,8,single_elimination,6,1,Dwight Howard ,Dwight Howard ,True,True,0.8638888888888889,1.0,0.009386237191462643
+34,2,3,multi_elimination,14,2,Baron Davis;Corey Feldman,Corey Feldman;Baron Davis,True,True,0.8638232271325794,0.9928057553956835,0.007284016004393018
+34,3,4,single_elimination,12,1,Lauren Jauregui,Lauren Jauregui,True,True,0.9247189796800691,1.0,1.0305756024758805e-05
+34,4,5,single_elimination,11,1,Hilaria Baldwin,Hilaria Baldwin,True,True,0.8805318581711543,0.9596774193548387,4.392629926464053e-09
+34,6,7,single_elimination,10,1,Scott Hoying,Scott Hoying,True,True,0.9091176470588234,0.9970588235294118,9.909510101380192e-09
+34,7,8,single_elimination,9,1,Jen Affleck,Jen Affleck,True,True,0.8834597649858695,0.9789156626506025,3.1710445935750897e-09
+34,8,9,single_elimination,8,1,Danielle Fishel,Danielle Fishel,True,True,0.8822035655058044,0.9900497512437811,6.4715456882247224e-09
+34,9,10,single_elimination,7,1,Andy Richter,Andy Richter,True,True,0.882615268329554,1.0,0.025927780329572492
+34,10,11,single_elimination,6,1,Whitney Leavitt,Whitney Leavitt,True,True,0.8486757105943151,0.9854651162790697,4.1261170036221984e-08
