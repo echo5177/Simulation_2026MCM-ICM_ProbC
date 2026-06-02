@@ -3,6 +3,13 @@ from __future__ import annotations
 import pandas as pd
 
 from mcm_workflow_kit.data_auditor import audit_csv_file, build_data_audit
+from mcm_workflow_kit.result_checker import (
+    check_key_results_in_text,
+    check_table_numbers,
+    missing_table_numbers,
+    parse_latex_graphics,
+    scan_placeholders,
+)
 
 
 def test_data_auditor_summarizes_csv(tmp_path):
@@ -39,3 +46,46 @@ def test_build_data_audit_uses_project_relative_paths(tmp_path):
 
     assert result.files[0]["path"] == "data/raw/data.csv"
     assert result.files[0]["rows"] == 2
+
+
+def test_parse_latex_graphics_handles_options():
+    text = r"""
+    \includegraphics[width=0.5\linewidth]{figures/generated/fig_1.png}
+    \includegraphics{fig_2.png}
+    """
+
+    assert parse_latex_graphics(text) == [
+        "figures/generated/fig_1.png",
+        "fig_2.png",
+    ]
+
+
+def test_placeholder_scanner_is_case_insensitive():
+    assert scan_placeholders("This still has a todo marker.", ["TODO"]) == ["TODO"]
+
+
+def test_key_result_checker_matches_numeric_variants(tmp_path):
+    path = tmp_path / "key_results.csv"
+    pd.DataFrame(
+        [
+            {"metric": "rate", "value": 0.7356321839},
+            {"metric": "rows", "value": 421.0},
+        ]
+    ).to_csv(path, index=False)
+
+    result = check_key_results_in_text(
+        path,
+        "The exact-match rate is 73.56%. The data has 421 rows.",
+    )
+
+    assert [row["status"] for row in result] == ["found", "found"]
+
+
+def test_table_number_checker_finds_gaps(tmp_path):
+    (tmp_path / "table_1_data.tex").write_text("", encoding="utf-8")
+    (tmp_path / "table_3_results.tex").write_text("", encoding="utf-8")
+
+    numbers = check_table_numbers(tmp_path)
+
+    assert numbers == [1, 3]
+    assert missing_table_numbers(numbers) == [2]
