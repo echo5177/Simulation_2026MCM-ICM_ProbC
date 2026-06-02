@@ -1,0 +1,44 @@
+{
+  "project_pipeline_command": [
+    "conda",
+    "--no-plugins",
+    "run",
+    "-n",
+    "mcm",
+    "python",
+    "scripts/run_all.py"
+  ],
+  "raw_data_files": [
+    "data/raw/2026_MCM_Problem_C_Data.csv"
+  ],
+  "paper_tex": "paper/main.tex",
+  "paper_pdf": "paper/main.pdf",
+  "latex_log": "paper/main.log",
+  "key_results": "reports/key_results.csv",
+  "figure_manifest": "reports/figure_manifest.csv",
+  "figures_dirs": [
+    "figures/concept",
+    "figures/generated"
+  ],
+  "tables_dir": "tables",
+  "workflow_reports_dir": "reports/workflow",
+  "page_target": 25,
+  "page_hard_limit": 26,
+  "placeholder_patterns": [
+    "TODO",
+    "TBD",
+    "placeholder",
+    "need calculate",
+    "1111111"
+  ],
+  "release_artifacts": [
+    "paper/main.pdf",
+    "paper/main.tex",
+    "reports",
+    "figures",
+    "tables",
+    "data/processed",
+    "environment.yml",
+    "requirements-lock.txt"
+  ]
+}

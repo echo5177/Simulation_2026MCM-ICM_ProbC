@@ -25,6 +25,8 @@ Thumbs.db
 # Generated outputs
 outputs/
 results/
+release/
+MCM_Workflow_Automation_Kit/runs/
 *.log
 
 # LaTeX build artifacts
