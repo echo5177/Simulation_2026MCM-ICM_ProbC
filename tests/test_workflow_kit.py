@@ -15,6 +15,7 @@ from mcm_workflow_kit.paper_qa import (
     parse_pdfinfo_pages,
     scan_latex_log,
 )
+from mcm_workflow_kit.orchestrator import NodeRun, WorkflowRun, render_workflow_summary
 
 
 def test_data_auditor_summarizes_csv(tmp_path):
@@ -117,3 +118,28 @@ def test_required_tex_sections():
     )
 
     assert messages == []
+
+
+def test_workflow_summary_renders_node_statuses():
+    run = WorkflowRun(
+        mode="check",
+        project_root=".",
+        run_dir="runs/test",
+        started_at="start",
+        finished_at="finish",
+        status="pass",
+        nodes=[
+            NodeRun(
+                name="data_auditor",
+                status="pass",
+                started_at="start",
+                finished_at="finish",
+                duration_seconds=0.5,
+                detail="ok",
+            )
+        ],
+    )
+
+    lines = render_workflow_summary(run)
+
+    assert "| data_auditor | pass | 0.500s | ok |" in lines
