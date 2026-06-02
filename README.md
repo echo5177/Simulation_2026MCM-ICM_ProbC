@@ -19,3 +19,24 @@ pytest
 
 The workflow writes audited intermediate data, figures, tables, and result logs
 under `data/`, `figures/`, `tables/`, and `reports/`.
+
+## Workflow Automation Kit
+
+This repository now includes a reusable local-first kit under
+`MCM_Workflow_Automation_Kit/`. It checks existing project artifacts without
+replacing the problem-specific modeling pipeline.
+
+Run deterministic workflow checks:
+
+```powershell
+python MCM_Workflow_Automation_Kit/run_workflow.py --project-root . --mode check
+```
+
+Create a release packet:
+
+```powershell
+python MCM_Workflow_Automation_Kit/scripts/create_release_packet.py --project-root .
+```
+
+Workflow reports are written under `reports/workflow/`. Transient run logs are
+kept under `MCM_Workflow_Automation_Kit/runs/` and ignored by Git.

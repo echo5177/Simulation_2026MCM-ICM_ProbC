@@ -108,6 +108,7 @@ def test_latex_log_scanner_classifies_messages():
     messages = scan_latex_log(
         "LaTeX Warning: Reference `x' undefined.\n"
         "Overfull \\hbox in paragraph\n"
+        "Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files\n"
         "! LaTeX Error: File `missing.sty' not found.\n"
     )
 

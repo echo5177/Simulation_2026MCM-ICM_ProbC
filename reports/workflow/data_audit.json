@@ -1,0 +1,835 @@
+{
+  "files": [
+    {
+      "path": "data/raw/2026_MCM_Problem_C_Data.csv",
+      "rows": 421,
+      "columns": 53,
+      "column_names": [
+        "celebrity_name",
+        "ballroom_partner",
+        "celebrity_industry",
+        "celebrity_homestate",
+        "celebrity_homecountry/region",
+        "celebrity_age_during_season",
+        "season",
+        "results",
+        "placement",
+        "week1_judge1_score",
+        "week1_judge2_score",
+        "week1_judge3_score",
+        "week1_judge4_score",
+        "week2_judge1_score",
+        "week2_judge2_score",
+        "week2_judge3_score",
+        "week2_judge4_score",
+        "week3_judge1_score",
+        "week3_judge2_score",
+        "week3_judge3_score",
+        "week3_judge4_score",
+        "week4_judge1_score",
+        "week4_judge2_score",
+        "week4_judge3_score",
+        "week4_judge4_score",
+        "week5_judge1_score",
+        "week5_judge2_score",
+        "week5_judge3_score",
+        "week5_judge4_score",
+        "week6_judge1_score",
+        "week6_judge2_score",
+        "week6_judge3_score",
+        "week6_judge4_score",
+        "week7_judge1_score",
+        "week7_judge2_score",
+        "week7_judge3_score",
+        "week7_judge4_score",
+        "week8_judge1_score",
+        "week8_judge2_score",
+        "week8_judge3_score",
+        "week8_judge4_score",
+        "week9_judge1_score",
+        "week9_judge2_score",
+        "week9_judge3_score",
+        "week9_judge4_score",
+        "week10_judge1_score",
+        "week10_judge2_score",
+        "week10_judge3_score",
+        "week10_judge4_score",
+        "week11_judge1_score",
+        "week11_judge2_score",
+        "week11_judge3_score",
+        "week11_judge4_score"
+      ],
+      "dtypes": {
+        "celebrity_name": "object",
+        "ballroom_partner": "object",
+        "celebrity_industry": "object",
+        "celebrity_homestate": "object",
+        "celebrity_homecountry/region": "object",
+        "celebrity_age_during_season": "int64",
+        "season": "int64",
+        "results": "object",
+        "placement": "int64",
+        "week1_judge1_score": "float64",
+        "week1_judge2_score": "float64",
+        "week1_judge3_score": "float64",
+        "week1_judge4_score": "float64",
+        "week2_judge1_score": "float64",
+        "week2_judge2_score": "float64",
+        "week2_judge3_score": "float64",
+        "week2_judge4_score": "float64",
+        "week3_judge1_score": "float64",
+        "week3_judge2_score": "float64",
+        "week3_judge3_score": "float64",
+        "week3_judge4_score": "float64",
+        "week4_judge1_score": "float64",
+        "week4_judge2_score": "float64",
+        "week4_judge3_score": "float64",
+        "week4_judge4_score": "float64",
+        "week5_judge1_score": "float64",
+        "week5_judge2_score": "float64",
+        "week5_judge3_score": "float64",
+        "week5_judge4_score": "float64",
+        "week6_judge1_score": "float64",
+        "week6_judge2_score": "float64",
+        "week6_judge3_score": "float64",
+        "week6_judge4_score": "float64",
+        "week7_judge1_score": "float64",
+        "week7_judge2_score": "float64",
+        "week7_judge3_score": "float64",
+        "week7_judge4_score": "float64",
+        "week8_judge1_score": "float64",
+        "week8_judge2_score": "float64",
+        "week8_judge3_score": "float64",
+        "week8_judge4_score": "float64",
+        "week9_judge1_score": "float64",
+        "week9_judge2_score": "float64",
+        "week9_judge3_score": "float64",
+        "week9_judge4_score": "float64",
+        "week10_judge1_score": "float64",
+        "week10_judge2_score": "float64",
+        "week10_judge3_score": "float64",
+        "week10_judge4_score": "float64",
+        "week11_judge1_score": "float64",
+        "week11_judge2_score": "float64",
+        "week11_judge3_score": "float64",
+        "week11_judge4_score": "float64"
+      },
+      "missing_values": 4797,
+      "missing_by_column": {
+        "celebrity_name": 0,
+        "ballroom_partner": 0,
+        "celebrity_industry": 0,
+        "celebrity_homestate": 56,
+        "celebrity_homecountry/region": 0,
+        "celebrity_age_during_season": 0,
+        "season": 0,
+        "results": 0,
+        "placement": 0,
+        "week1_judge1_score": 0,
+        "week1_judge2_score": 0,
+        "week1_judge3_score": 14,
+        "week1_judge4_score": 340,
+        "week2_judge1_score": 0,
+        "week2_judge2_score": 0,
+        "week2_judge3_score": 0,
+        "week2_judge4_score": 330,
+        "week3_judge1_score": 0,
+        "week3_judge2_score": 0,
+        "week3_judge3_score": 0,
+        "week3_judge4_score": 293,
+        "week4_judge1_score": 0,
+        "week4_judge2_score": 0,
+        "week4_judge3_score": 0,
+        "week4_judge4_score": 291,
+        "week5_judge1_score": 10,
+        "week5_judge2_score": 10,
+        "week5_judge3_score": 10,
+        "week5_judge4_score": 302,
+        "week6_judge1_score": 10,
+        "week6_judge2_score": 10,
+        "week6_judge3_score": 10,
+        "week6_judge4_score": 274,
+        "week7_judge1_score": 16,
+        "week7_judge2_score": 16,
+        "week7_judge3_score": 16,
+        "week7_judge4_score": 277,
+        "week8_judge1_score": 16,
+        "week8_judge2_score": 16,
+        "week8_judge3_score": 16,
+        "week8_judge4_score": 313,
+        "week9_judge1_score": 26,
+        "week9_judge2_score": 26,
+        "week9_judge3_score": 26,
+        "week9_judge4_score": 288,
+        "week10_judge1_score": 52,
+        "week10_judge2_score": 52,
+        "week10_judge3_score": 52,
+        "week10_judge4_score": 328,
+        "week11_judge1_score": 302,
+        "week11_judge2_score": 302,
+        "week11_judge3_score": 302,
+        "week11_judge4_score": 395
+      },
+      "duplicate_rows": 0,
+      "numeric_summary": {
+        "celebrity_age_during_season": {
+          "count": 421,
+          "mean": 38.78622327790974,
+          "std": 13.765273776099791,
+          "min": 14,
+          "q1": 29.0,
+          "median": 36.0,
+          "q3": 47.0,
+          "max": 82,
+          "iqr_outliers": 7
+        },
+        "season": {
+          "count": 421,
+          "mean": 18.280285035629454,
+          "std": 9.730037728820754,
+          "min": 1,
+          "q1": 10.0,
+          "median": 18.0,
+          "q3": 27.0,
+          "max": 34,
+          "iqr_outliers": 0
+        },
+        "placement": {
+          "count": 421,
+          "mean": 6.814726840855107,
+          "std": 3.7586562611513337,
+          "min": 1,
+          "q1": 4.0,
+          "median": 7.0,
+          "q3": 10.0,
+          "max": 16,
+          "iqr_outliers": 0
+        },
+        "week1_judge1_score": {
+          "count": 421,
+          "mean": 6.627868883610452,
+          "std": 1.2212050969688926,
+          "min": 4.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 7.0,
+          "max": 11.3333,
+          "iqr_outliers": 33
+        },
+        "week1_judge2_score": {
+          "count": 421,
+          "mean": 6.323830878859858,
+          "std": 1.2826820514235906,
+          "min": 3.0,
+          "q1": 5.0,
+          "median": 6.0,
+          "q3": 7.0,
+          "max": 11.3333,
+          "iqr_outliers": 3
+        },
+        "week1_judge3_score": {
+          "count": 407,
+          "mean": 6.52047371007371,
+          "std": 1.3132145064581655,
+          "min": 3.0,
+          "q1": 6.0,
+          "median": 6.5,
+          "q3": 7.0,
+          "max": 11.3333,
+          "iqr_outliers": 42
+        },
+        "week1_judge4_score": {
+          "count": 81,
+          "mean": 6.54320987654321,
+          "std": 1.1731302433665391,
+          "min": 3.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 7.0,
+          "max": 9.0,
+          "iqr_outliers": 5
+        },
+        "week2_judge1_score": {
+          "count": 421,
+          "mean": 6.74228028503563,
+          "std": 1.7541022740763792,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.0,
+          "iqr_outliers": 17
+        },
+        "week2_judge2_score": {
+          "count": 421,
+          "mean": 6.502375296912114,
+          "std": 1.7589889037679494,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 7.5,
+          "max": 10.0,
+          "iqr_outliers": 20
+        },
+        "week2_judge3_score": {
+          "count": 421,
+          "mean": 6.706650831353919,
+          "std": 1.771481339815573,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.0,
+          "iqr_outliers": 17
+        },
+        "week2_judge4_score": {
+          "count": 91,
+          "mean": 6.818681318681318,
+          "std": 1.7974001031064648,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 9.5,
+          "iqr_outliers": 4
+        },
+        "week3_judge1_score": {
+          "count": 421,
+          "mean": 6.385589548693587,
+          "std": 2.8381447351403386,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.5,
+          "iqr_outliers": 61
+        },
+        "week3_judge2_score": {
+          "count": 421,
+          "mean": 6.187252256532067,
+          "std": 2.8092999536956165,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.5,
+          "iqr_outliers": 61
+        },
+        "week3_judge3_score": {
+          "count": 421,
+          "mean": 6.377276009501188,
+          "std": 2.8745797023000565,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.0,
+          "iqr_outliers": 61
+        },
+        "week3_judge4_score": {
+          "count": 128,
+          "mean": 6.2421875,
+          "std": 2.9921053440284786,
+          "min": 0.0,
+          "q1": 6.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.5,
+          "iqr_outliers": 21
+        },
+        "week4_judge1_score": {
+          "count": 421,
+          "mean": 6.046318289786223,
+          "std": 3.43436650890641,
+          "min": 0.0,
+          "q1": 5.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.0,
+          "iqr_outliers": 95
+        },
+        "week4_judge2_score": {
+          "count": 421,
+          "mean": 5.931116389548694,
+          "std": 3.3688002581450798,
+          "min": 0.0,
+          "q1": 5.0,
+          "median": 7.0,
+          "q3": 8.0,
+          "max": 10.0,
+          "iqr_outliers": 95
+        },
+        "week4_judge3_score": {
+          "count": 421,
+          "mean": 6.0866983372921615,
+          "std": 3.4752819380964084,
+          "min": 0.0,
+          "q1": 5.0,
+          "median": 8.0,
+          "q3": 8.0,
+          "max": 10.0,
+          "iqr_outliers": 95
+        },
+        "week4_judge4_score": {
+          "count": 130,
+          "mean": 6.45,
+          "std": 3.454493759117672,
+          "min": 0.0,
+          "q1": 6.125,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 10.0,
+          "iqr_outliers": 27
+        },
+        "week5_judge1_score": {
+          "count": 411,
+          "mean": 5.755474452554744,
+          "std": 3.8865054001718824,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 10.375,
+          "iqr_outliers": 0
+        },
+        "week5_judge2_score": {
+          "count": 411,
+          "mean": 5.659367396593674,
+          "std": 3.823676300694843,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 10.375,
+          "iqr_outliers": 0
+        },
+        "week5_judge3_score": {
+          "count": 411,
+          "mean": 5.790754257907542,
+          "std": 3.9171989794164936,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 10.375,
+          "iqr_outliers": 0
+        },
+        "week5_judge4_score": {
+          "count": 119,
+          "mean": 6.1533613445378155,
+          "std": 3.8964155686448336,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 10.875,
+          "iqr_outliers": 0
+        },
+        "week6_judge1_score": {
+          "count": 411,
+          "mean": 5.570353771289537,
+          "std": 4.341991204999921,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 13.3333,
+          "iqr_outliers": 0
+        },
+        "week6_judge2_score": {
+          "count": 411,
+          "mean": 5.485195620437956,
+          "std": 4.281163551285901,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 12.3333,
+          "iqr_outliers": 0
+        },
+        "week6_judge3_score": {
+          "count": 411,
+          "mean": 5.542373236009732,
+          "std": 4.347477509877618,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 13.3333,
+          "iqr_outliers": 0
+        },
+        "week6_judge4_score": {
+          "count": 147,
+          "mean": 5.886054421768708,
+          "std": 4.206488718573216,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 11.0,
+          "iqr_outliers": 0
+        },
+        "week7_judge1_score": {
+          "count": 405,
+          "mean": 4.991563209876543,
+          "std": 4.469495383759794,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 13.3333,
+          "iqr_outliers": 0
+        },
+        "week7_judge2_score": {
+          "count": 405,
+          "mean": 4.922427407407407,
+          "std": 4.400406762084207,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 7.5,
+          "q3": 9.0,
+          "max": 12.8333,
+          "iqr_outliers": 0
+        },
+        "week7_judge3_score": {
+          "count": 405,
+          "mean": 4.98785950617284,
+          "std": 4.462027239898229,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 12.8333,
+          "iqr_outliers": 0
+        },
+        "week7_judge4_score": {
+          "count": 144,
+          "mean": 5.217013888888889,
+          "std": 4.479288636058236,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 8.0,
+          "q3": 9.0,
+          "max": 11.25,
+          "iqr_outliers": 0
+        },
+        "week8_judge1_score": {
+          "count": 405,
+          "mean": 4.271465679012346,
+          "std": 4.577178403439532,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 11.6666,
+          "iqr_outliers": 0
+        },
+        "week8_judge2_score": {
+          "count": 405,
+          "mean": 4.225786419753086,
+          "std": 4.528019959731943,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 11.6666,
+          "iqr_outliers": 0
+        },
+        "week8_judge3_score": {
+          "count": 405,
+          "mean": 4.316595555555556,
+          "std": 4.623985249881199,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 11.6666,
+          "iqr_outliers": 0
+        },
+        "week8_judge4_score": {
+          "count": 108,
+          "mean": 4.726851851851852,
+          "std": 4.740895977495793,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 6.375,
+          "q3": 9.5,
+          "max": 11.25,
+          "iqr_outliers": 0
+        },
+        "week9_judge1_score": {
+          "count": 395,
+          "mean": 3.5840349367088606,
+          "std": 4.563828245987998,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 12.0,
+          "iqr_outliers": 0
+        },
+        "week9_judge2_score": {
+          "count": 395,
+          "mean": 3.5705326582278483,
+          "std": 4.5492036901125585,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 12.0,
+          "iqr_outliers": 0
+        },
+        "week9_judge3_score": {
+          "count": 395,
+          "mean": 3.6173683544303805,
+          "std": 4.608712128483896,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 12.5,
+          "iqr_outliers": 0
+        },
+        "week9_judge4_score": {
+          "count": 133,
+          "mean": 3.911654135338346,
+          "std": 4.6471312722247875,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 10.75,
+          "iqr_outliers": 0
+        },
+        "week10_judge1_score": {
+          "count": 369,
+          "mean": 2.800810027100271,
+          "std": 4.341816688158049,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 10.5,
+          "iqr_outliers": 0
+        },
+        "week10_judge2_score": {
+          "count": 369,
+          "mean": 2.787258265582656,
+          "std": 4.322460696403061,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 10.5,
+          "iqr_outliers": 0
+        },
+        "week10_judge3_score": {
+          "count": 369,
+          "mean": 2.820230623306233,
+          "std": 4.37317148712761,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 11.0,
+          "iqr_outliers": 0
+        },
+        "week10_judge4_score": {
+          "count": 93,
+          "mean": 2.860215053763441,
+          "std": 4.398224438806958,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.0,
+          "max": 10.0,
+          "iqr_outliers": 0
+        },
+        "week11_judge1_score": {
+          "count": 119,
+          "mean": 3.0111983193277316,
+          "std": 4.507752999564406,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.5,
+          "max": 10.4444,
+          "iqr_outliers": 0
+        },
+        "week11_judge2_score": {
+          "count": 119,
+          "mean": 3.0308075630252103,
+          "std": 4.536087182732394,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.5,
+          "max": 10.4444,
+          "iqr_outliers": 0
+        },
+        "week11_judge3_score": {
+          "count": 119,
+          "mean": 3.0308075630252103,
+          "std": 4.53624289927397,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.5,
+          "max": 10.4444,
+          "iqr_outliers": 0
+        },
+        "week11_judge4_score": {
+          "count": 26,
+          "mean": 2.9807615384615387,
+          "std": 4.563205205122989,
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 9.375,
+          "max": 10.0,
+          "iqr_outliers": 0
+        }
+      },
+      "group_counts": {
+        "season": [
+          {
+            "season": 1,
+            "rows": 6
+          },
+          {
+            "season": 2,
+            "rows": 10
+          },
+          {
+            "season": 3,
+            "rows": 11
+          },
+          {
+            "season": 4,
+            "rows": 11
+          },
+          {
+            "season": 5,
+            "rows": 12
+          },
+          {
+            "season": 6,
+            "rows": 12
+          },
+          {
+            "season": 7,
+            "rows": 13
+          },
+          {
+            "season": 8,
+            "rows": 13
+          },
+          {
+            "season": 9,
+            "rows": 16
+          },
+          {
+            "season": 10,
+            "rows": 11
+          },
+          {
+            "season": 11,
+            "rows": 12
+          },
+          {
+            "season": 12,
+            "rows": 11
+          },
+          {
+            "season": 13,
+            "rows": 12
+          },
+          {
+            "season": 14,
+            "rows": 12
+          },
+          {
+            "season": 15,
+            "rows": 13
+          },
+          {
+            "season": 16,
+            "rows": 12
+          },
+          {
+            "season": 17,
+            "rows": 12
+          },
+          {
+            "season": 18,
+            "rows": 12
+          },
+          {
+            "season": 19,
+            "rows": 13
+          },
+          {
+            "season": 20,
+            "rows": 12
+          },
+          {
+            "season": 21,
+            "rows": 13
+          },
+          {
+            "season": 22,
+            "rows": 12
+          },
+          {
+            "season": 23,
+            "rows": 13
+          },
+          {
+            "season": 24,
+            "rows": 12
+          },
+          {
+            "season": 25,
+            "rows": 13
+          },
+          {
+            "season": 26,
+            "rows": 10
+          },
+          {
+            "season": 27,
+            "rows": 13
+          },
+          {
+            "season": 28,
+            "rows": 12
+          },
+          {
+            "season": 29,
+            "rows": 15
+          },
+          {
+            "season": 30,
+            "rows": 15
+          },
+          {
+            "season": 31,
+            "rows": 16
+          },
+          {
+            "season": 32,
+            "rows": 14
+          },
+          {
+            "season": 33,
+            "rows": 13
+          },
+          {
+            "season": 34,
+            "rows": 14
+          }
+        ]
+      }
+    }
+  ]
+}

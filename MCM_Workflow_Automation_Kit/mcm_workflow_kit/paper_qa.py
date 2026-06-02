@@ -21,7 +21,8 @@ LATEX_WARNING_PATTERNS = [
     "Overfull",
     "Undefined references",
     "Label(s) may have changed",
-    "Rerun",
+    "Rerun to get",
+    "Rerun LaTeX",
 ]
 
 
@@ -60,6 +61,8 @@ def run_pdfinfo(pdf_path: str | Path) -> tuple[int | None, str]:
 def scan_latex_log(log_text: str) -> list[CheckMessage]:
     messages: list[CheckMessage] = []
     for line in log_text.splitlines():
+        if line.startswith("Package: rerunfilecheck"):
+            continue
         if any(pattern in line for pattern in LATEX_FAILURE_PATTERNS):
             messages.append(CheckMessage("fail", line.strip()))
         elif any(pattern in line for pattern in LATEX_WARNING_PATTERNS):
