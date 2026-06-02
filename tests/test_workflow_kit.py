@@ -10,6 +10,11 @@ from mcm_workflow_kit.result_checker import (
     parse_latex_graphics,
     scan_placeholders,
 )
+from mcm_workflow_kit.paper_qa import (
+    check_required_tex_sections,
+    parse_pdfinfo_pages,
+    scan_latex_log,
+)
 
 
 def test_data_auditor_summarizes_csv(tmp_path):
@@ -89,3 +94,26 @@ def test_table_number_checker_finds_gaps(tmp_path):
 
     assert numbers == [1, 3]
     assert missing_table_numbers(numbers) == [2]
+
+
+def test_parse_pdfinfo_pages():
+    assert parse_pdfinfo_pages("Title:\nPages:           26\n") == 26
+    assert parse_pdfinfo_pages("Title:\n") is None
+
+
+def test_latex_log_scanner_classifies_messages():
+    messages = scan_latex_log(
+        "LaTeX Warning: Reference `x' undefined.\n"
+        "Overfull \\hbox in paragraph\n"
+        "! LaTeX Error: File `missing.sty' not found.\n"
+    )
+
+    assert [message.level for message in messages] == ["warn", "warn", "fail"]
+
+
+def test_required_tex_sections():
+    messages = check_required_tex_sections(
+        r"\large \textbf{Summary}\tableofcontents References"
+    )
+
+    assert messages == []
