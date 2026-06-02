@@ -16,6 +16,8 @@ from mcm_workflow_kit.paper_qa import (
     scan_latex_log,
 )
 from mcm_workflow_kit.orchestrator import NodeRun, WorkflowRun, render_workflow_summary
+from mcm_workflow_kit.config import WorkflowConfig
+from mcm_workflow_kit.release_packet import create_release_packet
 
 
 def test_data_auditor_summarizes_csv(tmp_path):
@@ -143,3 +145,46 @@ def test_workflow_summary_renders_node_statuses():
     lines = render_workflow_summary(run)
 
     assert "| data_auditor | pass | 0.500s | ok |" in lines
+
+
+def test_release_packet_copies_configured_artifacts(tmp_path):
+    (tmp_path / "paper").mkdir()
+    (tmp_path / "paper" / "main.pdf").write_text("pdf", encoding="utf-8")
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "key_results.csv").write_text(
+        "metric,value\nx,1\n",
+        encoding="utf-8",
+    )
+
+    config = WorkflowConfig(
+        project_pipeline_command=[],
+        raw_data_files=[],
+        paper_tex="paper/main.tex",
+        paper_pdf="paper/main.pdf",
+        latex_log="paper/main.log",
+        key_results="reports/key_results.csv",
+        figure_manifest="reports/figure_manifest.csv",
+        figures_dirs=[],
+        tables_dir="tables",
+        workflow_reports_dir="reports/workflow",
+        page_target=25,
+        page_hard_limit=26,
+        placeholder_patterns=[],
+        release_artifacts=[
+            "paper/main.pdf",
+            "reports",
+            "missing.txt",
+        ],
+    )
+
+    packet = create_release_packet(tmp_path, config, timestamp="test-release")
+
+    assert (packet.release_dir / "paper" / "main.pdf").exists()
+    assert (packet.release_dir / "reports" / "key_results.csv").exists()
+    assert (packet.release_dir / "release_manifest.csv").exists()
+    assert (packet.release_dir / "final_checklist.md").exists()
+    assert [entry.status for entry in packet.entries] == [
+        "copied",
+        "copied",
+        "missing",
+    ]
