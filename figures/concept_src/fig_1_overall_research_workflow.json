@@ -1,0 +1,172 @@
+{
+  "title": "End-to-End Workflow for Hidden Fan-Support Inference",
+  "subtitle": "Every paper claim is linked back to data, model outputs, counterfactual checks, and release QA.",
+  "stages": [
+    {
+      "id": "inputs",
+      "label": "1. Inputs",
+      "color": "#2F5D62"
+    },
+    {
+      "id": "reconstruct",
+      "label": "2. Reconstruction",
+      "color": "#3D6FB6"
+    },
+    {
+      "id": "model",
+      "label": "3. Fan Model",
+      "color": "#8F5A9F"
+    },
+    {
+      "id": "evaluate",
+      "label": "4. Rule Tests",
+      "color": "#C26D2D"
+    },
+    {
+      "id": "deliver",
+      "label": "5. Delivery QA",
+      "color": "#4D6B3C"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "brief",
+      "stage": "inputs",
+      "row": 0,
+      "title": "Problem brief",
+      "body": "Rules, public eliminations, modeling tasks",
+      "artifact": "data/raw/*.pdf",
+      "badge": "brief"
+    },
+    {
+      "id": "raw",
+      "stage": "inputs",
+      "row": 1,
+      "title": "Official data",
+      "body": "421 rows, 53 columns, 34 seasons",
+      "artifact": "data/raw/*.csv",
+      "badge": "data"
+    },
+    {
+      "id": "panel",
+      "stage": "reconstruct",
+      "row": 0,
+      "title": "Long panel",
+      "body": "Contestant-week records and active sets",
+      "artifact": "data/interim/long_panel.csv",
+      "badge": "panel"
+    },
+    {
+      "id": "events",
+      "stage": "reconstruct",
+      "row": 1,
+      "title": "Elimination events",
+      "body": "Modeled weeks, bottom sets, judge totals",
+      "artifact": "data/interim/elimination_events.csv",
+      "badge": "events"
+    },
+    {
+      "id": "constraints",
+      "stage": "model",
+      "row": 0,
+      "title": "Fan intervals",
+      "body": "Rules translated into inequality constraints",
+      "artifact": "fan_constraints.py",
+      "badge": "model"
+    },
+    {
+      "id": "entropy",
+      "stage": "model",
+      "row": 1,
+      "title": "Entropy estimate",
+      "body": "Point estimate with uncertainty preserved",
+      "artifact": "fan_vote_estimates.csv",
+      "badge": "estimate"
+    },
+    {
+      "id": "validation",
+      "stage": "evaluate",
+      "row": 0,
+      "title": "Validation",
+      "body": "Observed outcomes, baselines, issue log",
+      "artifact": "validation_metrics.csv",
+      "badge": "validate"
+    },
+    {
+      "id": "counterfactuals",
+      "stage": "evaluate",
+      "row": 1,
+      "title": "Rule simulations",
+      "body": "Rank vs percent, rescues, gray-zone rule",
+      "artifact": "rule_counterfactuals.csv",
+      "badge": "rules"
+    },
+    {
+      "id": "paper",
+      "stage": "deliver",
+      "row": 0,
+      "title": "Paper outputs",
+      "body": "Figures, LaTeX tables, key result registry",
+      "artifact": "figures/ tables/ reports/",
+      "badge": "outputs"
+    },
+    {
+      "id": "qa",
+      "stage": "deliver",
+      "row": 1,
+      "title": "QA gate",
+      "body": "Data audit, result consistency, paper QA",
+      "artifact": "reports/workflow/",
+      "badge": "qa gate"
+    }
+  ],
+  "edges": [
+    {
+      "from": "brief",
+      "to": "panel",
+      "label": "scope"
+    },
+    {
+      "from": "raw",
+      "to": "events",
+      "label": "reshape"
+    },
+    {
+      "from": "panel",
+      "to": "constraints",
+      "label": "active set"
+    },
+    {
+      "from": "events",
+      "to": "entropy",
+      "label": "events"
+    },
+    {
+      "from": "constraints",
+      "to": "validation",
+      "label": "uncertainty"
+    },
+    {
+      "from": "entropy",
+      "to": "counterfactuals",
+      "label": "latent support"
+    },
+    {
+      "from": "validation",
+      "to": "paper",
+      "label": "metrics"
+    },
+    {
+      "from": "counterfactuals",
+      "to": "qa",
+      "label": "recommendations"
+    },
+    {
+      "from": "qa",
+      "to": "brief",
+      "label": "audit trail",
+      "kind": "feedback"
+    }
+  ],
+  "footer": "Automation principle: AI assists reasoning and coding; deterministic scripts generate artifacts; Kit gates check traceability."
+}

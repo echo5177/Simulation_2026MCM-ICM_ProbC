@@ -11,6 +11,7 @@ if str(SRC) not in sys.path:
 
 import pandas as pd
 
+from render_workflow_figure import render_workflow_figure
 from mcm_c_dwts.config import (
     GENERATED_FIGURES_DIR,
     INTERIM_DIR,
@@ -76,6 +77,7 @@ def rel(path: Path) -> str:
 
 def main() -> None:
     ensure_directories()
+    render_workflow_figure()
 
     raw = load_raw_data()
     panel = build_long_panel(raw)
@@ -354,7 +356,7 @@ def main() -> None:
             (
                 "Fig. 1",
                 "figures/concept/fig_1_overall_research_workflow.png",
-                "AI-generated concept figure",
+                "scripts/render_workflow_figure.py + figures/concept_src/fig_1_overall_research_workflow.json",
                 "1. Introduction",
             ),
             (

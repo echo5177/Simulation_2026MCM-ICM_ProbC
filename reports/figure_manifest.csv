@@ -1,5 +1,5 @@
 figure_id,path,source_script,paper_location
-Fig. 1,figures/concept/fig_1_overall_research_workflow.png,AI-generated concept figure,1. Introduction
+Fig. 1,figures/concept/fig_1_overall_research_workflow.png,scripts/render_workflow_figure.py + figures/concept_src/fig_1_overall_research_workflow.json,1. Introduction
 Fig. 2,figures/concept/fig_2_voting_rule_mechanism.png,AI-generated concept figure,3. Voting Rule Formalization
 Fig. 3,figures/generated/fig_3_season_structure.png,scripts/run_all.py,2. Data Audit
 Fig. 4,figures/generated/fig_4_judge_score_distribution.png,scripts/run_all.py,2. Data Audit
