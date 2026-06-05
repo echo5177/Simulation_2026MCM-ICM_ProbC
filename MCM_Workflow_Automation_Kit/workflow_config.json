@@ -28,8 +28,21 @@
     "TODO",
     "TBD",
     "placeholder",
-    "need calculate",
+    "need calculate"
+  ],
+  "team_control_number_placeholders": [
     "1111111"
+  ],
+  "diagram_sources": [
+    {
+      "figure_id": "Fig. 1",
+      "png": "figures/concept/fig_1_overall_research_workflow.png",
+      "svg": "figures/concept_src/fig_1_overall_research_workflow.svg",
+      "json": "figures/concept_src/fig_1_overall_research_workflow.json",
+      "expected_source": "scripts/render_workflow_figure.py",
+      "min_width": 1600,
+      "min_height": 700
+    }
   ],
   "release_artifacts": [
     "paper/main.pdf",

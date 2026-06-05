@@ -11,9 +11,11 @@ from typing import Callable
 
 from .config import KIT_ROOT, WorkflowConfig, load_config, resolve_project_path
 from .data_auditor import write_data_audit_outputs
+from .diagram_checker import write_diagram_qa_report
 from .paper_qa import write_paper_qa_report
 from .reporting import write_markdown_report
 from .result_checker import write_result_check_report
+from .v1_gate import write_v1_gate_report
 
 
 @dataclass
@@ -186,8 +188,22 @@ def run_workflow(
     )
     nodes.append(
         run_callable_node(
+            "diagram_checker",
+            lambda: write_diagram_qa_report(root, config),
+            run_dir,
+        )
+    )
+    nodes.append(
+        run_callable_node(
             "paper_qa",
             lambda: write_paper_qa_report(root, config),
+            run_dir,
+        )
+    )
+    nodes.append(
+        run_callable_node(
+            "v1_gate",
+            lambda: write_v1_gate_report(root, config, nodes),
             run_dir,
         )
     )

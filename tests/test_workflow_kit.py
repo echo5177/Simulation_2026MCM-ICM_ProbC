@@ -15,9 +15,11 @@ from mcm_workflow_kit.paper_qa import (
     parse_pdfinfo_pages,
     scan_latex_log,
 )
+from mcm_workflow_kit.diagram_checker import read_png_dimensions, run_diagram_checks
 from mcm_workflow_kit.orchestrator import NodeRun, WorkflowRun, render_workflow_summary
 from mcm_workflow_kit.config import WorkflowConfig
 from mcm_workflow_kit.release_packet import create_release_packet
+from mcm_workflow_kit.v1_gate import run_v1_gate
 
 
 def test_data_auditor_summarizes_csv(tmp_path):
@@ -123,6 +125,127 @@ def test_required_tex_sections():
     assert messages == []
 
 
+def test_png_dimension_reader_uses_png_header(tmp_path):
+    png_path = tmp_path / "sample.png"
+    png_path.write_bytes(
+        b"\x89PNG\r\n\x1a\n"
+        + b"\x00\x00\x00\rIHDR"
+        + (200).to_bytes(4, "big")
+        + (120).to_bytes(4, "big")
+    )
+
+    assert read_png_dimensions(png_path) == (200, 120)
+
+
+def test_diagram_checker_requires_structured_sources(tmp_path):
+    figure_dir = tmp_path / "figures" / "concept"
+    source_dir = tmp_path / "figures" / "concept_src"
+    report_dir = tmp_path / "reports"
+    figure_dir.mkdir(parents=True)
+    source_dir.mkdir(parents=True)
+    report_dir.mkdir()
+    (figure_dir / "fig.png").write_bytes(
+        b"\x89PNG\r\n\x1a\n"
+        + b"\x00\x00\x00\rIHDR"
+        + (200).to_bytes(4, "big")
+        + (120).to_bytes(4, "big")
+    )
+    (source_dir / "fig.svg").write_text("<svg></svg>", encoding="utf-8")
+    (source_dir / "fig.json").write_text("{}", encoding="utf-8")
+    (report_dir / "figure_manifest.csv").write_text(
+        "figure_id,path,source_script,paper_location\n"
+        "Fig. 1,figures/concept/fig.png,scripts/render_workflow_figure.py,Intro\n",
+        encoding="utf-8",
+    )
+
+    config = WorkflowConfig(
+        project_pipeline_command=[],
+        raw_data_files=[],
+        paper_tex="paper/main.tex",
+        paper_pdf="paper/main.pdf",
+        latex_log="paper/main.log",
+        key_results="reports/key_results.csv",
+        figure_manifest="reports/figure_manifest.csv",
+        figures_dirs=[],
+        tables_dir="tables",
+        workflow_reports_dir="reports/workflow",
+        page_target=25,
+        page_hard_limit=26,
+        placeholder_patterns=[],
+        release_artifacts=[],
+        diagram_sources=[
+            {
+                "figure_id": "Fig. 1",
+                "png": "figures/concept/fig.png",
+                "svg": "figures/concept_src/fig.svg",
+                "json": "figures/concept_src/fig.json",
+                "expected_source": "scripts/render_workflow_figure.py",
+                "min_width": 100,
+                "min_height": 100,
+            }
+        ],
+    )
+
+    result = run_diagram_checks(tmp_path, config)
+
+    assert result.status == "pass"
+    assert result.diagram_checks[0]["dimensions"] == "200x120"
+
+
+def test_diagram_checker_warns_on_ai_generated_manifest_source(tmp_path):
+    figure_dir = tmp_path / "figures" / "concept"
+    source_dir = tmp_path / "figures" / "concept_src"
+    report_dir = tmp_path / "reports"
+    figure_dir.mkdir(parents=True)
+    source_dir.mkdir(parents=True)
+    report_dir.mkdir()
+    (figure_dir / "fig.png").write_bytes(
+        b"\x89PNG\r\n\x1a\n"
+        + b"\x00\x00\x00\rIHDR"
+        + (200).to_bytes(4, "big")
+        + (120).to_bytes(4, "big")
+    )
+    (source_dir / "fig.svg").write_text("<svg></svg>", encoding="utf-8")
+    (source_dir / "fig.json").write_text("{}", encoding="utf-8")
+    (report_dir / "figure_manifest.csv").write_text(
+        "figure_id,path,source_script,paper_location\n"
+        "Fig. 1,figures/concept/fig.png,AI-generated concept figure,Intro\n",
+        encoding="utf-8",
+    )
+
+    config = WorkflowConfig(
+        project_pipeline_command=[],
+        raw_data_files=[],
+        paper_tex="paper/main.tex",
+        paper_pdf="paper/main.pdf",
+        latex_log="paper/main.log",
+        key_results="reports/key_results.csv",
+        figure_manifest="reports/figure_manifest.csv",
+        figures_dirs=[],
+        tables_dir="tables",
+        workflow_reports_dir="reports/workflow",
+        page_target=25,
+        page_hard_limit=26,
+        placeholder_patterns=[],
+        release_artifacts=[],
+        diagram_sources=[
+            {
+                "figure_id": "Fig. 1",
+                "png": "figures/concept/fig.png",
+                "svg": "figures/concept_src/fig.svg",
+                "json": "figures/concept_src/fig.json",
+                "min_width": 100,
+                "min_height": 100,
+            }
+        ],
+    )
+
+    result = run_diagram_checks(tmp_path, config)
+
+    assert result.status == "warn"
+    assert "AI-generated" in result.messages[0].message
+
+
 def test_workflow_summary_renders_node_statuses():
     run = WorkflowRun(
         mode="check",
@@ -146,6 +269,50 @@ def test_workflow_summary_renders_node_statuses():
     lines = render_workflow_summary(run)
 
     assert "| data_auditor | pass | 0.500s | ok |" in lines
+
+
+def test_v1_gate_classifies_warned_nodes_and_team_placeholder(tmp_path):
+    (tmp_path / "paper").mkdir()
+    (tmp_path / "paper" / "main.tex").write_text(
+        r"\newcommand{\Team}{1111111}",
+        encoding="utf-8",
+    )
+
+    config = WorkflowConfig(
+        project_pipeline_command=[],
+        raw_data_files=[],
+        paper_tex="paper/main.tex",
+        paper_pdf="paper/main.pdf",
+        latex_log="paper/main.log",
+        key_results="reports/key_results.csv",
+        figure_manifest="reports/figure_manifest.csv",
+        figures_dirs=[],
+        tables_dir="tables",
+        workflow_reports_dir="reports/workflow",
+        page_target=25,
+        page_hard_limit=26,
+        placeholder_patterns=[],
+        release_artifacts=[],
+        team_control_number_placeholders=["1111111"],
+    )
+    nodes = [
+        NodeRun(
+            name="paper_qa",
+            status="warn",
+            started_at="start",
+            finished_at="finish",
+            duration_seconds=0.1,
+            detail="page target warning",
+        )
+    ]
+
+    result = run_v1_gate(tmp_path, config, nodes)
+
+    assert result.status == "warn"
+    assert "paper_qa" in result.messages[0].message
+    assert result.known_warnings == [
+        "Team control number placeholder remains pending: 1111111"
+    ]
 
 
 def test_release_packet_copies_configured_artifacts(tmp_path):

@@ -1,13 +1,13 @@
 # Result Consistency Report
 
-- Status: warn
+- Status: pass
 - Figure manifest rows: 18
 - LaTeX figure references: 18
 - Table files detected: 16
 
 ## Messages
 
-- WARN: Placeholder patterns found in paper: 1111111
+- PASS: All result consistency checks passed.
 
 ## Key Result Checks
 

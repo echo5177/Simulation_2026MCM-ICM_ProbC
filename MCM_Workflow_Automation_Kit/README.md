@@ -35,8 +35,12 @@ python MCM_Workflow_Automation_Kit/scripts/create_release_packet.py --project-ro
   audit reports.
 - `result_checker`: compares the paper against `key_results.csv`,
   `figure_manifest.csv`, figure files, and table files.
+- `diagram_checker`: verifies structured diagram source files, rendered PNGs,
+  and manifest provenance for high-information concept figures.
 - `paper_reviewer`: performs deterministic PDF/LaTeX QA and stores reviewer
   prompts for later AI review loops.
+- `v1_gate`: summarizes node statuses and classifies known warnings for the
+  reusable Kit v1.0 quality gate.
 - `create_release_packet`: copies configured final artifacts into
   `release/<timestamp>/`.
 
@@ -48,7 +52,9 @@ The command writes:
 reports/workflow/data_audit.json
 reports/workflow/data_audit_report.md
 reports/workflow/result_consistency_report.md
+reports/workflow/diagram_qa_report.md
 reports/workflow/paper_qa_report.md
+reports/workflow/v1_gate_report.md
 reports/workflow/workflow_run_summary.md
 ```
 

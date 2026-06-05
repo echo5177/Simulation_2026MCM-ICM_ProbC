@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 from pathlib import Path
 from typing import Any
@@ -26,6 +26,8 @@ class WorkflowConfig:
     page_hard_limit: int
     placeholder_patterns: list[str]
     release_artifacts: list[str]
+    team_control_number_placeholders: list[str] = field(default_factory=list)
+    diagram_sources: list[dict[str, Any]] = field(default_factory=list)
 
     @classmethod
     def from_mapping(cls, data: dict[str, Any]) -> "WorkflowConfig":
@@ -48,6 +50,10 @@ class WorkflowConfig:
             page_hard_limit=int(data.get("page_hard_limit", 25)),
             placeholder_patterns=list(data.get("placeholder_patterns", [])),
             release_artifacts=list(data.get("release_artifacts", [])),
+            team_control_number_placeholders=list(
+                data.get("team_control_number_placeholders", [])
+            ),
+            diagram_sources=list(data.get("diagram_sources", [])),
         )
 
 
