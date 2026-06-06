@@ -28,6 +28,11 @@ class WorkflowConfig:
     release_artifacts: list[str]
     team_control_number_placeholders: list[str] = field(default_factory=list)
     diagram_sources: list[dict[str, Any]] = field(default_factory=list)
+    data_source_manifest: str = "reports/data_source_manifest.csv"
+    external_data_needs: str = "reports/external_data_needs.md"
+    external_data_dir: str = "data/raw/external"
+    external_data_required: bool = False
+    source_manifest_required: bool = False
 
     @classmethod
     def from_mapping(cls, data: dict[str, Any]) -> "WorkflowConfig":
@@ -54,6 +59,15 @@ class WorkflowConfig:
                 data.get("team_control_number_placeholders", [])
             ),
             diagram_sources=list(data.get("diagram_sources", [])),
+            data_source_manifest=str(
+                data.get("data_source_manifest", "reports/data_source_manifest.csv")
+            ),
+            external_data_needs=str(
+                data.get("external_data_needs", "reports/external_data_needs.md")
+            ),
+            external_data_dir=str(data.get("external_data_dir", "data/raw/external")),
+            external_data_required=bool(data.get("external_data_required", False)),
+            source_manifest_required=bool(data.get("source_manifest_required", False)),
         )
 
 

@@ -16,6 +16,7 @@
 
 | Node | Status | Detail |
 | --- | --- | --- |
+| source_checker | pass | source_checker completed with status pass. |
 | data_auditor | pass | data_auditor completed with status pass. |
 | result_checker | pass | result_checker completed with status pass. |
 | diagram_checker | pass | diagram_checker completed with status pass. |

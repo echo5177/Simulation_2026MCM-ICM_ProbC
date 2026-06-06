@@ -11,6 +11,11 @@
   "raw_data_files": [
     "data/raw/2026_MCM_Problem_C_Data.csv"
   ],
+  "data_source_manifest": "reports/data_source_manifest.csv",
+  "external_data_needs": "reports/external_data_needs.md",
+  "external_data_dir": "data/raw/external",
+  "external_data_required": false,
+  "source_manifest_required": true,
   "paper_tex": "paper/main.tex",
   "paper_pdf": "paper/main.pdf",
   "latex_log": "paper/main.log",

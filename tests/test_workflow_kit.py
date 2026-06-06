@@ -19,7 +19,29 @@ from mcm_workflow_kit.diagram_checker import read_png_dimensions, run_diagram_ch
 from mcm_workflow_kit.orchestrator import NodeRun, WorkflowRun, render_workflow_summary
 from mcm_workflow_kit.config import WorkflowConfig
 from mcm_workflow_kit.release_packet import create_release_packet
+from mcm_workflow_kit.source_checker import calculate_sha256, run_source_checks
 from mcm_workflow_kit.v1_gate import run_v1_gate
+
+
+def make_config(**overrides):
+    defaults = {
+        "project_pipeline_command": [],
+        "raw_data_files": [],
+        "paper_tex": "paper/main.tex",
+        "paper_pdf": "paper/main.pdf",
+        "latex_log": "paper/main.log",
+        "key_results": "reports/key_results.csv",
+        "figure_manifest": "reports/figure_manifest.csv",
+        "figures_dirs": [],
+        "tables_dir": "tables",
+        "workflow_reports_dir": "reports/workflow",
+        "page_target": 25,
+        "page_hard_limit": 26,
+        "placeholder_patterns": [],
+        "release_artifacts": [],
+    }
+    defaults.update(overrides)
+    return WorkflowConfig(**defaults)
 
 
 def test_data_auditor_summarizes_csv(tmp_path):
@@ -56,6 +78,74 @@ def test_build_data_audit_uses_project_relative_paths(tmp_path):
 
     assert result.files[0]["path"] == "data/raw/data.csv"
     assert result.files[0]["rows"] == 2
+
+
+def test_source_checker_validates_manifest_and_hash(tmp_path):
+    data_dir = tmp_path / "data" / "raw" / "external"
+    reports_dir = tmp_path / "reports"
+    data_dir.mkdir(parents=True)
+    reports_dir.mkdir()
+    data_path = data_dir / "source.csv"
+    data_path.write_text("value\n1\n", encoding="utf-8")
+    expected_hash = calculate_sha256(data_path)
+    (reports_dir / "external_data_needs.md").write_text(
+        "# External Data Needs\n\nOfficial test source declared.\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "data_source_manifest.csv").write_text(
+        "source_id,dataset_name,source_type,publisher,url,access_date,"
+        "license_or_terms,retrieval_method,local_path,sha256,why_needed,"
+        "paper_usage,citation_key\n"
+        "test_source,Test Source,external,Test Publisher,"
+        "https://example.com/source.csv,2026-06-06,Public test terms,"
+        "web_download,data/raw/external/source.csv,"
+        f"{expected_hash},Validate source checker,Model input,test_source\n",
+        encoding="utf-8",
+    )
+    config = make_config(
+        data_source_manifest="reports/data_source_manifest.csv",
+        external_data_needs="reports/external_data_needs.md",
+        source_manifest_required=True,
+        external_data_required=True,
+    )
+
+    result = run_source_checks(tmp_path, config)
+
+    assert result.status == "pass"
+    assert result.external_sources == 1
+    assert result.source_rows[0]["hash_status"] == "match"
+
+
+def test_source_checker_fails_on_hash_mismatch(tmp_path):
+    data_dir = tmp_path / "data" / "raw" / "external"
+    reports_dir = tmp_path / "reports"
+    data_dir.mkdir(parents=True)
+    reports_dir.mkdir()
+    (data_dir / "source.csv").write_text("value\n1\n", encoding="utf-8")
+    (reports_dir / "external_data_needs.md").write_text(
+        "# External Data Needs\n\nOfficial test source declared.\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "data_source_manifest.csv").write_text(
+        "source_id,dataset_name,source_type,publisher,url,access_date,"
+        "license_or_terms,retrieval_method,local_path,sha256,why_needed,"
+        "paper_usage,citation_key\n"
+        "test_source,Test Source,external,Test Publisher,"
+        "https://example.com/source.csv,2026-06-06,Public test terms,"
+        "web_download,data/raw/external/source.csv,deadbeef,"
+        "Validate source checker,Model input,test_source\n",
+        encoding="utf-8",
+    )
+    config = make_config(
+        data_source_manifest="reports/data_source_manifest.csv",
+        external_data_needs="reports/external_data_needs.md",
+        source_manifest_required=True,
+    )
+
+    result = run_source_checks(tmp_path, config)
+
+    assert result.status == "fail"
+    assert any("sha256 mismatch" in message.message for message in result.messages)
 
 
 def test_parse_latex_graphics_handles_options():

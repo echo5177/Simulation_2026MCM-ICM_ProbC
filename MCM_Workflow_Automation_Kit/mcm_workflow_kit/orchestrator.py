@@ -15,6 +15,7 @@ from .diagram_checker import write_diagram_qa_report
 from .paper_qa import write_paper_qa_report
 from .reporting import write_markdown_report
 from .result_checker import write_result_check_report
+from .source_checker import write_source_vetting_report
 from .v1_gate import write_v1_gate_report
 
 
@@ -172,6 +173,13 @@ def run_workflow(
             )
         )
 
+    nodes.append(
+        run_callable_node(
+            "source_checker",
+            lambda: write_source_vetting_report(root, config),
+            run_dir,
+        )
+    )
     nodes.append(
         run_callable_node(
             "data_auditor",
