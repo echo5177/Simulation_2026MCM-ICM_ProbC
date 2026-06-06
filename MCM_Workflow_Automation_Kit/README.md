@@ -3,8 +3,8 @@
 Local-first automation kit for reusable MCM/ICM project checks.
 
 The kit does not replace Codex or human modeling judgment. It provides
-deterministic workflow nodes for data audit, result consistency checks, paper
-QA, run logging, and release packet creation.
+deterministic workflow nodes for source provenance, data audit, result
+consistency checks, paper QA, run logging, and release packet creation.
 
 ## Quick Start
 
@@ -25,12 +25,16 @@ python MCM_Workflow_Automation_Kit/scripts/create_release_packet.py --project-ro
 
 - Keep project-specific modeling code in the project repository.
 - Keep reusable checks in this kit.
+- Let Codex search for public data when needed, then record accepted sources in
+  `reports/data_source_manifest.csv`.
 - Write reports under `reports/workflow/`.
 - Write transient state and logs under `MCM_Workflow_Automation_Kit/runs/`.
 - Keep all text outputs UTF-8 encoded for Windows compatibility.
 
 ## Nodes
 
+- `source_checker`: validates source manifest schema, metadata, local files, and
+  SHA-256 hashes before modeling begins.
 - `data_auditor`: profiles configured raw CSV files and writes JSON/Markdown
   audit reports.
 - `result_checker`: compares the paper against `key_results.csv`,
@@ -50,6 +54,7 @@ The command writes:
 
 ```text
 reports/workflow/data_audit.json
+reports/workflow/source_vetting_report.md
 reports/workflow/data_audit_report.md
 reports/workflow/result_consistency_report.md
 reports/workflow/diagram_qa_report.md
@@ -60,3 +65,16 @@ reports/workflow/workflow_run_summary.md
 
 Node execution logs and `state.json` are written under
 `MCM_Workflow_Automation_Kit/runs/<timestamp>/`.
+
+## External Data
+
+When a problem requires public external data, use:
+
+```powershell
+python scripts/fetch_external_data.py --dry-run
+python scripts/fetch_external_data.py --update-hashes
+python MCM_Workflow_Automation_Kit/run_workflow.py --project-root . --mode check
+```
+
+See `docs/External_Data_Acquisition_Workflow.md` for the Codex web-search
+boundary and the required evidence trail.
